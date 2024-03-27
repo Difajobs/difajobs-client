@@ -8,31 +8,33 @@ import {
   Typography,
 } from "@mui/material";
 import styles from "../RegisterForm.module.scss";
-import difaJobsLogo from "../../../assets/images/difajobs-dark.webp";
 import googleLogo from "../../../assets/images/google.svg";
 
 export default function UserForm() {
   return (
     <>
       <Box className={styles.formContainer}>
-        <img
-          src={difaJobsLogo}
-          alt="Difa Jobs Logo"
-          className={styles.difaJobsLogo}
-        />
         <Box className={styles.inputBox}>
           <Typography className={styles.inputLabel}>Email</Typography>
-          <TextField className={styles.inputField} />
+          <TextField className={styles.inputField} type="email" size="small" />
         </Box>
         <Box className={styles.inputBox}>
           <Typography className={styles.inputLabel}>Kata Sandi</Typography>
-          <TextField className={styles.inputField} />
+          <TextField
+            className={styles.inputField}
+            type="password"
+            size="small"
+          />
         </Box>
         <Box className={styles.inputBox}>
           <Typography className={styles.inputLabel}>
             Konfirmasi Kata Sandi
           </Typography>
-          <TextField className={styles.inputField} />
+          <TextField
+            className={styles.inputField}
+            type="password"
+            size="small"
+          />
         </Box>
         <Box className={styles.inputBox}>
           <Typography className={styles.inputLabel}>
@@ -42,6 +44,7 @@ export default function UserForm() {
             labelId="demo-simple-select-label" //nama belum di fix
             id="demo-simple-select" //nama belum di fix
             label="role" //nama belum di fix
+            size="small"
           >
             <MenuItem>Pencari Kerja</MenuItem>
             <MenuItem>Perusahaan</MenuItem>
@@ -57,7 +60,7 @@ export default function UserForm() {
               className={styles.googleLogo}
             />
             <Typography className={styles.googleText}>
-              Masuk dengan Google
+              Daftar dengan Google
             </Typography>
           </Button>
         </Box>
