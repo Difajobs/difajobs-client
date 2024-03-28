@@ -4,26 +4,49 @@ import {
   Divider,
   MenuItem,
   Select,
+  SelectChangeEvent,
   TextField,
   Typography,
 } from "@mui/material";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom with a different name to avoid conflict
 import styles from "../RegisterForm.module.scss";
 import googleLogo from "../../../assets/images/google.svg";
+// import { ChangeEvent } from "react";
 
-export default function UserForm() {
+interface UserFormProps {
+  email: string;
+  password: string;
+  confirmPass: string;
+  // handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  role: string;
+  handleRoleChange: (e: SelectChangeEvent) => void;
+  handleNext: () => void;
+}
+
+const roles = [{ value: "Pencari Kerja" }, { value: "Perusahaan" }];
+
+export default function UserForm({
+  email,
+  password,
+  confirmPass,
+  role,
+  handleRoleChange,
+  // handleInputChange,
+  handleNext,
+}: UserFormProps) {
   return (
     <>
       <Box className={styles.formContainer}>
         <Box className={styles.inputBox}>
           <Typography className={styles.inputLabel}>Email</Typography>
-          <TextField className={styles.inputField} type="email" size="small" />
+          <TextField className={styles.inputField} value={email} type="email" />
         </Box>
         <Box className={styles.inputBox}>
           <Typography className={styles.inputLabel}>Kata Sandi</Typography>
           <TextField
             className={styles.inputField}
+            value={password}
             type="password"
-            size="small"
           />
         </Box>
         <Box className={styles.inputBox}>
@@ -32,8 +55,8 @@ export default function UserForm() {
           </Typography>
           <TextField
             className={styles.inputField}
+            value={confirmPass}
             type="password"
-            size="small"
           />
         </Box>
         <Box className={styles.inputBox}>
@@ -41,17 +64,23 @@ export default function UserForm() {
             Apa yang anda cari?
           </Typography>
           <Select
-            labelId="demo-simple-select-label" //nama belum di fix
-            id="demo-simple-select" //nama belum di fix
-            label="role" //nama belum di fix
-            size="small"
+            className={styles.inputField}
+            value={role}
+            onChange={handleRoleChange}
+            labelId="role-label"
+            id="role"
           >
-            <MenuItem>Pencari Kerja</MenuItem>
-            <MenuItem>Perusahaan</MenuItem>
+            {roles.map((role) => (
+              <MenuItem key={role.value} value={role.value}>
+                {role.value}
+              </MenuItem>
+            ))}
           </Select>
         </Box>
         <Box className={styles.buttonBox}>
-          <Button className={styles.button}>Selanjutnya</Button>
+          <Button className={styles.button} onClick={handleNext}>
+            Selanjutnya
+          </Button>
           <Divider className={styles.divider} />
           <Button className={styles.googleButton}>
             <img
@@ -63,6 +92,12 @@ export default function UserForm() {
               Daftar dengan Google
             </Typography>
           </Button>
+          <Typography className={styles.loginText}>
+            Sudah punya akun?{" "}
+            <Link to="/login" className={styles.registerLink}>
+              Masuk disini
+            </Link>
+          </Typography>
         </Box>
       </Box>
     </>

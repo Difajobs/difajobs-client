@@ -3,13 +3,16 @@ import JobseekerForm from "./JobseekerForm";
 import CompanyForm from "./CompanyForm";
 import GoogleForm from "./GoogleForm";
 import UserForm from "./UserForm";
-import { Button } from "@mui/material";
+import { Button, SelectChangeEvent } from "@mui/material";
 
 // const steps = ["User Form", "Jobseeker Form", "Company Form", "Google Form"];
 
 export default function RegisterForm() {
   const [activeStep, setActiveStep] = useState(0);
-  //   const [isLoading, setIsloading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
+  const [role, setRole] = useState("");
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -19,16 +22,35 @@ export default function RegisterForm() {
     setActiveStep(activeStep - 1);
   };
 
+  const handleRoleChange = (event: SelectChangeEvent) => {
+    setRole(event.target.value);
+  };
+
   function getStepContent(step: number) {
     switch (step) {
       case 0:
-        return <UserForm />;
+        return (
+          <UserForm
+            email={email}
+            password={password}
+            confirmPass={confirmPass}
+            role={role}
+            handleRoleChange={handleRoleChange}
+            handleNext={handleNext}
+          />
+        ); //handleNext belum di adjust per-role
       case 1:
         return <JobseekerForm />;
       case 2:
         return <CompanyForm />;
       case 3:
-        return <GoogleForm />;
+        return (
+          <GoogleForm
+            role={role}
+            handleRoleChange={handleRoleChange}
+            handleNext={handleBack}
+          />
+        ); //handleBack belum di adjust per-role
       default:
         throw new Error("Unknown step");
     }

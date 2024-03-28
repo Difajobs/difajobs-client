@@ -1,7 +1,26 @@
-import { Box, Button, MenuItem, Select, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  Typography,
+} from "@mui/material";
 import styles from "../RegisterForm.module.scss";
 
-export default function GoogleForm() {
+interface GoogleForm {
+  role: string;
+  handleRoleChange: (e: SelectChangeEvent) => void;
+  handleNext: () => void;
+}
+
+const roles = [{ value: "Pencari Kerja" }, { value: "Perusahaan" }];
+
+export default function GoogleForm({
+  role,
+  handleRoleChange,
+  handleNext,
+}: GoogleForm) {
   return (
     <>
       <Box className={styles.formContainer}>
@@ -10,17 +29,24 @@ export default function GoogleForm() {
             Apa yang anda cari?
           </Typography>
           <Select
+            className={styles.inputField}
+            defaultValue={"Pencari Kerja"}
+            value={role}
+            onChange={handleRoleChange}
             labelId="demo-simple-select-label" //nama belum di fix
             id="demo-simple-select" //nama belum di fix
-            label="role" //nama belum di fix
-            size="small"
           >
-            <MenuItem>Pencari Kerja</MenuItem>
-            <MenuItem>Perusahaan</MenuItem>
+            {roles.map((role) => (
+              <MenuItem key={role.value} value={role.value}>
+                {role.value}
+              </MenuItem>
+            ))}
           </Select>
         </Box>
         <Box className={styles.buttonBox}>
-          <Button className={styles.button}>Selanjutnya</Button>
+          <Button className={styles.button} onClick={handleNext}>
+            Selanjutnya
+          </Button>
         </Box>
       </Box>
     </>
