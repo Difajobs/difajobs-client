@@ -1,0 +1,66 @@
+$color1 : #166079;
+$color2 : #ffffff;
+$color3 : #003d50;
+
+.root {
+    background-color: $color1 ;
+
+    .container{
+        max-width: 800px;
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        right: 0;
+        margin: 0 auto 16px;
+    }
+
+    .container2{
+        max-width: 800px;
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        right: 0;
+        margin: 0 auto 16px;
+        margin-top: 12px;
+    }
+
+    .imeage{
+        margin-right: auto;
+        justify-content: left;
+        display: flex;
+    }
+
+    .header{
+        padding: 10px;
+    }
+
+    .beranda {
+        color: $color2;
+        
+    }
+
+    .akun {
+        color: $color2;
+        margin-left: 17px;
+    }
+
+    .akun:hover,
+    .beranda:hover
+    {
+        color: darken($color3, 10%);
+    }
+
+    .NotificationsIcon{
+        color: $color2;
+        margin-left: 17px;
+    }
+   
+}
