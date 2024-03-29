@@ -1,0 +1,19 @@
+$color1 : #166079;
+$hover1 : #104152;
+$color2 : #ffff;
+$color3: #9C9C9C;
+
+.uploadButton {
+    width: 100%;
+    height: 52px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    color: $color1;
+    background-color: $color2;
+    border-color: $color3;
+    box-shadow: none;
+
+    &:hover {
+        border-color: $color1;
+    }    
+}
