@@ -13,6 +13,9 @@ export default function RegisterForm() {
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
   const [role, setRole] = useState("");
+  const [namaLengkap, setNamaLengkap] = useState("");
+  const [nomorTelepon, setNomorTelepon] = useState("");
+  const [kota, setKota] = useState("");
 
   const handleNext = () => {
     if (role == "Job Seeker") {
@@ -34,6 +37,24 @@ export default function RegisterForm() {
     setRole(event.target.value);
   };
 
+  const handleRegisterJobseeker = async () => {
+    //belum try catch, belum direfactor, belum hit 2 endpoint
+    const response = await fetch("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        confirmPass: confirmPass,
+        role: role,
+      }),
+    });
+    const data = await response.json();
+    console.log(data);
+  };
+
   function getStepContent(step: number) {
     switch (step) {
       case 0:
@@ -48,7 +69,14 @@ export default function RegisterForm() {
           />
         ); //handleNext belum di adjust per-role
       case 1:
-        return <JobseekerForm />;
+        return (
+          <JobseekerForm
+            namaLengkap={namaLengkap}
+            nomorTelepon={nomorTelepon}
+            kota={kota}
+            handleRegister={handleRegisterJobseeker}
+          />
+        );
       case 2:
         return <CompanyForm />;
       case 3:
