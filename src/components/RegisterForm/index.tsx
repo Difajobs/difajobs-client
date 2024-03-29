@@ -14,6 +14,8 @@ export default function RegisterForm() {
   const [confirmPass, setConfirmPass] = useState("");
   const [role, setRole] = useState("");
   const [namaLengkap, setNamaLengkap] = useState("");
+  const [gender, setGender] = useState("");
+  const [dob, setDob] = useState("");
   const [nomorTelepon, setNomorTelepon] = useState("");
   const [kota, setKota] = useState("");
 
@@ -48,6 +50,9 @@ export default function RegisterForm() {
       case "namaLengkap":
         setNamaLengkap(value);
         break;
+      case "dob":
+        setDob(value);
+        break;
       case "nomorTelepon":
         setNomorTelepon(value);
         break;
@@ -59,6 +64,10 @@ export default function RegisterForm() {
 
   const handleRoleChange = (event: SelectChangeEvent) => {
     setRole(event.target.value);
+  };
+
+  const handleGenderChange = (event: SelectChangeEvent) => {
+    setGender(event.target.value);
   };
 
   const handleRegisterJobseeker = async () => {
@@ -97,8 +106,11 @@ export default function RegisterForm() {
         return (
           <JobseekerForm
             namaLengkap={namaLengkap}
+            gender={gender}
+            dob={dob}
             nomorTelepon={nomorTelepon}
             kota={kota}
+            handleGenderChange={handleGenderChange}
             handleRegister={handleRegisterJobseeker}
           />
         );
