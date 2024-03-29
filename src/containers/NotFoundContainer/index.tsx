@@ -19,7 +19,7 @@ export default function NotFoundPage() {
 
   useEffect(() => {
     if (countdown === 0) {
-      navigate('/dashboard');
+      navigate('/beranda');
     }
   }, [countdown, navigate]);
 
