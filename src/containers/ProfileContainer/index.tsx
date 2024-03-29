@@ -1,12 +1,23 @@
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import styles from './ProfileContainer.module.scss'
-import { Header } from "../../components";
+import { Header, ProfilePicture } from "../../components";
 
 export default function ProfileContainer() {
   return (
     <>
-      <Box className={styles.root}>
+      <Box>
         <Header />
+        <Box style={{ maxHeight: '100vh', overflowY: 'auto', scrollbarWidth: 'none' }} className={styles.root}>
+            <Grid xs={6} md={4}> 
+              <Box className={styles.profile} style={{ marginTop: '6rem' }}>
+              <ProfilePicture 
+              name="John Doe"
+              email="johndoe@email.com"
+              location="East Java, Indonesia"
+              />
+              </Box>
+            </Grid>
+        </Box>
       </Box>
     </>
   )

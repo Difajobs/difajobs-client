@@ -1,0 +1,19 @@
+$color1 : #F1F1F1;
+
+.root{
+    max-width: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    right: 0;
+    margin: 0 auto 16px;
+    background-color: $color1 ;
+
+    .profile{
+        
+    }
+}
