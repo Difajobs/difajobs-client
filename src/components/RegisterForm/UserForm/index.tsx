@@ -11,12 +11,13 @@ import {
 import { Link } from "react-router-dom";
 import styles from "../RegisterForm.module.scss";
 import googleLogo from "../../../assets/images/google.svg";
+import { ChangeEvent, useState } from "react";
 
 interface UserFormProps {
   email: string;
   password: string;
   confirmPass: string;
-  // handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   role: string;
   handleRoleChange: (e: SelectChangeEvent) => void;
   handleNext: () => void;
@@ -30,9 +31,41 @@ export default function UserForm({
   confirmPass,
   role,
   handleRoleChange,
-  // handleInputChange,
+  handleInputChange,
   handleNext,
 }: UserFormProps) {
+  const [clicked, setClicked] = useState(false);
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (clicked && !emailRegex.test(email)) {
+      return "Email tidak valid.";
+    }
+    return undefined;
+  };
+
+  const validatePassword = (password: string) => {
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
+    if (clicked && (password.length < 6 || !passwordRegex.test(password))) {
+      return password.length < 6
+        ? "Kata Sandi minimal 6 karakter."
+        : "Kata Sandi harus mengandung huruf dan angka.";
+    }
+    return undefined;
+  };
+
+  const validateConfirmPass = (confirmPass: string) => {
+    if (clicked && confirmPass !== password) {
+      return "Kata Sandi tidak sama.";
+    }
+    return undefined;
+  };
+
+  const handleInputClicked = (e: ChangeEvent<HTMLInputElement>) => {
+    handleInputChange(e);
+    setClicked(true);
+  };
+
   return (
     <>
       <Box className={styles.formContainer}>
@@ -41,8 +74,14 @@ export default function UserForm({
           <TextField
             className={styles.inputField}
             value={email}
+            onChange={handleInputClicked}
+            name="email"
+            id="email"
             type="email"
             variant="outlined"
+            required
+            error={!!validateEmail(email)}
+            helperText={validateEmail(email)}
             InputProps={{ style: { borderRadius: "20px", height: "52px" } }}
           />
         </Box>
@@ -51,8 +90,14 @@ export default function UserForm({
           <TextField
             className={styles.inputField}
             value={password}
+            onChange={handleInputClicked}
+            name="password"
+            id="password"
             type="password"
             variant="outlined"
+            required
+            error={!!validatePassword(password)}
+            helperText={validatePassword(password)}
             InputProps={{ style: { borderRadius: "20px", height: "52px" } }}
           />
         </Box>
@@ -63,8 +108,14 @@ export default function UserForm({
           <TextField
             className={styles.inputField}
             value={confirmPass}
+            onChange={handleInputClicked}
+            name="confirmPass"
+            id="confirmPass"
             type="password"
             variant="outlined"
+            required
+            error={!!validateConfirmPass(confirmPass)}
+            helperText={validateConfirmPass(confirmPass)}
             InputProps={{ style: { borderRadius: "20px", height: "52px" } }}
           />
         </Box>
@@ -76,8 +127,9 @@ export default function UserForm({
             className={styles.selectField}
             value={role}
             onChange={handleRoleChange}
-            labelId="role-label"
+            name="role"
             id="role"
+            required
           >
             {roles.map((role) => (
               <MenuItem key={role.value} value={role.value}>

@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import JobseekerForm from "./JobseekerForm";
 import CompanyForm from "./CompanyForm";
 import GoogleForm from "./GoogleForm";
 import UserForm from "./UserForm";
-import { Button, SelectChangeEvent } from "@mui/material";
+import { Box, Button, SelectChangeEvent } from "@mui/material";
 
 // const steps = ["User Form", "Jobseeker Form", "Company Form", "Google Form"];
 
@@ -31,6 +31,30 @@ export default function RegisterForm() {
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
+  };
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    switch (name) {
+      case "email":
+        setEmail(value);
+        break;
+      case "password":
+        setPassword(value);
+        break;
+      case "confirmPass":
+        setConfirmPass(value);
+        break;
+      case "namaLengkap":
+        setNamaLengkap(value);
+        break;
+      case "nomorTelepon":
+        setNomorTelepon(value);
+        break;
+      case "kota":
+        setKota(value);
+        break;
+    }
   };
 
   const handleRoleChange = (event: SelectChangeEvent) => {
@@ -66,6 +90,7 @@ export default function RegisterForm() {
             role={role}
             handleRoleChange={handleRoleChange}
             handleNext={handleNext}
+            handleInputChange={handleInputChange}
           />
         ); //handleNext belum di adjust per-role
       case 1:
@@ -94,8 +119,11 @@ export default function RegisterForm() {
   return (
     <>
       {getStepContent(activeStep)}
-      <Button onClick={handleSelanjutnya}>Selanjutnya</Button>
-      <Button onClick={handleBack}>Kembali</Button>
+      <Box sx={{ display: "flex" }}>
+        {/* temporary next and back button */}
+        <Button onClick={handleSelanjutnya}>Selanjutnya</Button>
+        <Button onClick={handleBack}>Kembali</Button>
+      </Box>
     </>
   );
 }
