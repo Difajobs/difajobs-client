@@ -8,10 +8,9 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom with a different name to avoid conflict
+import { Link } from "react-router-dom";
 import styles from "../RegisterForm.module.scss";
 import googleLogo from "../../../assets/images/google.svg";
-// import { ChangeEvent } from "react";
 
 interface UserFormProps {
   email: string;
@@ -23,7 +22,7 @@ interface UserFormProps {
   handleNext: () => void;
 }
 
-const roles = [{ value: "Pencari Kerja" }, { value: "Perusahaan" }];
+const roles = [{ value: "Job Seeker" }, { value: "Recruiter" }];
 
 export default function UserForm({
   email,
@@ -39,7 +38,13 @@ export default function UserForm({
       <Box className={styles.formContainer}>
         <Box className={styles.inputBox}>
           <Typography className={styles.inputLabel}>Email</Typography>
-          <TextField className={styles.inputField} value={email} type="email" />
+          <TextField
+            className={styles.inputField}
+            value={email}
+            type="email"
+            variant="outlined"
+            InputProps={{ style: { borderRadius: "20px", height: "52px" } }}
+          />
         </Box>
         <Box className={styles.inputBox}>
           <Typography className={styles.inputLabel}>Kata Sandi</Typography>
@@ -47,6 +52,8 @@ export default function UserForm({
             className={styles.inputField}
             value={password}
             type="password"
+            variant="outlined"
+            InputProps={{ style: { borderRadius: "20px", height: "52px" } }}
           />
         </Box>
         <Box className={styles.inputBox}>
@@ -57,6 +64,8 @@ export default function UserForm({
             className={styles.inputField}
             value={confirmPass}
             type="password"
+            variant="outlined"
+            InputProps={{ style: { borderRadius: "20px", height: "52px" } }}
           />
         </Box>
         <Box className={styles.inputBox}>
@@ -64,7 +73,7 @@ export default function UserForm({
             Apa yang anda cari?
           </Typography>
           <Select
-            className={styles.inputField}
+            className={styles.selectField}
             value={role}
             onChange={handleRoleChange}
             labelId="role-label"

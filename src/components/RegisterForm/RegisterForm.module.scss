@@ -16,13 +16,19 @@ $color3: #9C9C9C;
       width: 100%;
 
       .inputLabel {
-        margin-bottom: 5px;
+        margin-left: 6px;
       }
       
       .inputField {
         width: 100%;
+        margin-bottom: 15px;
+      }
+
+      .selectField {
+        width: 100%;
         border-radius: 20px;
-        margin-bottom: 10px;
+        height: 52px;
+        margin-bottom: 15px;
       }
     }
   }

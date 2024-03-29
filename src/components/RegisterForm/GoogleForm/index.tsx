@@ -29,7 +29,7 @@ export default function GoogleForm({
             Apa yang anda cari?
           </Typography>
           <Select
-            className={styles.inputField}
+            className={styles.selectField}
             defaultValue={"Pencari Kerja"}
             value={role}
             onChange={handleRoleChange}

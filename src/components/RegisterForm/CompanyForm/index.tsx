@@ -30,19 +30,31 @@ export default function RegisterForm() {
       <Box className={styles.formContainer}>
         <Box className={styles.inputBox}>
           <Typography className={styles.inputLabel}>Nama Perusahaan</Typography>
-          <TextField className={styles.inputField} size="small" />
+          <TextField
+            className={styles.inputField}
+            variant="outlined"
+            InputProps={{ style: { borderRadius: "20px", height: "52px" } }}
+          />
         </Box>
         <Box className={styles.inputBox}>
           <Typography className={styles.inputLabel}>
             Kota / Kabupaten
           </Typography>
-          <TextField className={styles.inputField} size="small" />
+          <TextField
+            className={styles.inputField}
+            variant="outlined"
+            InputProps={{ style: { borderRadius: "20px", height: "52px" } }}
+          />
         </Box>
         <Box className={styles.inputBox}>
           <Typography className={styles.inputLabel}>
             Deskripsi Perusahaan
           </Typography>
-          <TextField className={styles.inputField} size="small" />
+          <TextField
+            className={styles.inputField}
+            variant="outlined"
+            InputProps={{ style: { borderRadius: "20px", height: "52px" } }}
+          />
         </Box>
         <Box className={styles.inputBox}>
           <Typography className={styles.inputLabel}>Logo Perusahaan</Typography>

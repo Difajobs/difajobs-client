@@ -15,6 +15,14 @@ export default function RegisterForm() {
   const [role, setRole] = useState("");
 
   const handleNext = () => {
+    if (role == "Job Seeker") {
+      setActiveStep(activeStep + 1);
+    } else {
+      setActiveStep(activeStep + 2);
+    }
+  };
+
+  const handleSelanjutnya = () => {
     setActiveStep(activeStep + 1);
   };
 
@@ -58,7 +66,7 @@ export default function RegisterForm() {
   return (
     <>
       {getStepContent(activeStep)}
-      <Button onClick={handleNext}>Selanjutnya</Button>
+      <Button onClick={handleSelanjutnya}>Selanjutnya</Button>
       <Button onClick={handleBack}>Kembali</Button>
     </>
   );
