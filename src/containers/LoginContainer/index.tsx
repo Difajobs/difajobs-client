@@ -19,13 +19,21 @@ export default function LoginContainer() {
             <Typography className={styles.inputLabel}>
               Email
             </Typography>
-            <TextField className={styles.inputField} />
+            <TextField
+              className={styles.inputField}
+              variant="outlined"
+              InputProps={{ style: { borderRadius: '20px', height: '52px' } }}
+            />
           </Box>
           <Box className={styles.inputBox}>
             <Typography className={styles.inputLabel}>
               Password
             </Typography>
-            <TextField className={styles.inputField} />
+            <TextField
+              className={styles.inputField}
+              variant="outlined"
+              InputProps={{ style: { borderRadius: '20px', height: '52px' } }}
+            />
           </Box>
           <Box className={styles.buttonBox}>
             <Button className={styles.button}>
