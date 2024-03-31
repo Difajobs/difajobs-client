@@ -1,0 +1,48 @@
+$color1: #166079;
+$color2: #F1F1F1;
+
+.footerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $color1;
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $color1;
+    height: 110px;
+    width: 900px;
+    margin: 0px 20px;
+
+    .copyrightText {
+      color: $color2;
+    }
+
+    .buttonContainer {
+      .iconButton {
+        color: $color2;
+        margin-left: 5px;
+
+        &:hover {
+          background-color: #103f4e;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width:'425px') {
+  .footerContainer {
+    .footer {
+      margin: 0px 0px 0px 10px;
+
+      .buttonContainer {
+        .iconButton {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
