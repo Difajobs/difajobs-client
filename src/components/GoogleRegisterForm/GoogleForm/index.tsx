@@ -14,7 +14,7 @@ interface GoogleForm {
   handleNext: () => void;
 }
 
-const roles = [{ value: "Pencari Kerja" }, { value: "Perusahaan" }];
+const roles = [{ value: "Job Seeker" }, { value: "Recruiter" }];
 
 export default function GoogleForm({
   role,
@@ -44,7 +44,11 @@ export default function GoogleForm({
           </Select>
         </Box>
         <Box className={styles.buttonBox}>
-          <Button className={styles.button} onClick={handleNext}>
+          <Button
+            className={styles.button}
+            onClick={handleNext}
+            disabled={!role}
+          >
             Selanjutnya
           </Button>
         </Box>
