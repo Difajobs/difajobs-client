@@ -1,11 +1,10 @@
 import { ChangeEvent, useState } from "react";
 import JobseekerForm from "./JobseekerForm";
 import CompanyForm from "./CompanyForm";
-import GoogleForm from "./GoogleForm";
 import UserForm from "./UserForm";
 import { Box, Button, SelectChangeEvent } from "@mui/material";
 
-// const steps = ["User Form", "Jobseeker Form", "Company Form", "Google Form"];
+// const steps = ["User Form", "Jobseeker Form", "Company Form"];
 
 export default function RegisterForm() {
   const [activeStep, setActiveStep] = useState(0);
@@ -127,16 +126,8 @@ export default function RegisterForm() {
             deskripsi={deskripsi}
             handleInputChange={handleInputChange}
             handleRegister={handleRegisterJobseeker}
-          />
+          /> //handleRegister belum diadjust
         );
-      case 3:
-        return (
-          <GoogleForm
-            role={role}
-            handleRoleChange={handleRoleChange}
-            handleNext={handleBack}
-          />
-        ); //handleBack belum di adjust per-role
       default:
         throw new Error("Unknown step");
     }
