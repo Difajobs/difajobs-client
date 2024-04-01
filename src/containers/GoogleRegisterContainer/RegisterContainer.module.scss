@@ -1,0 +1,50 @@
+$color1 : #166079;
+$hover1 : #104152;
+$color2 : #ffff;
+$color3: #9C9C9C;
+
+.registerContainer {
+  display: flex;
+  height: 100vh;
+
+  .logoBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: $color1 ;
+
+    .logoText {
+      font-size: 50px;
+      color: $color2;
+    }
+  }
+
+  .formContainer {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    min-width: 320px;
+    width: 40%;
+
+    .difaJobsLogo {
+      height: 120px;
+      width: auto;
+      margin: 100px 0px 20px 0px;
+    }
+  }
+}
+
+@media screen and (max-width:640px) {
+  .registerContainer {
+    .logoBox {
+      display: none;
+    }
+
+    .formContainer {
+      width: 100%;
+    }
+  }
+}
