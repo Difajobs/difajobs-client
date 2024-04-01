@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from "react";
 import JobseekerForm from "./JobseekerForm";
 import CompanyForm from "./CompanyForm";
 import UserForm from "./UserForm";
+import DisabilityForm from "./DisabilityForm";
 import { Box, Button, SelectChangeEvent } from "@mui/material";
 
 // const steps = ["User Form", "Jobseeker Form", "Company Form"];
@@ -18,6 +19,7 @@ export default function RegisterForm() {
   const [nomorTelepon, setNomorTelepon] = useState("");
   const [kota, setKota] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
+  const [disabilitas, setDisabilitas] = useState<number[]>([]);
 
   const handleNext = () => {
     if (role == "job seeker") {
@@ -81,6 +83,17 @@ export default function RegisterForm() {
     setGender(event.target.value);
   };
 
+  const handleDisability = (value: number, checked: boolean) => {
+    if (checked) {
+      setDisabilitas((prev) => [...prev, value]);
+    } else {
+      setDisabilitas((prev) =>
+        prev.filter((disability) => disability !== value)
+      );
+    }
+  };
+  console.log(disabilitas);
+
   const handleRegisterJobseeker = async () => {
     //belum try catch, belum direfactor, belum hit 2 endpoint
     const response = await fetch("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", {
@@ -121,8 +134,10 @@ export default function RegisterForm() {
             dob={dob}
             nomorTelepon={nomorTelepon}
             kota={kota}
+            disabilitas={disabilitas}
             handleInputChange={handleInputChange}
             handleGenderChange={handleGenderChange}
+            handleDisability={handleDisability}
             handleRegister={handleRegisterJobseeker}
             handleBack={handleBack}
           />
@@ -138,6 +153,8 @@ export default function RegisterForm() {
             handleBack={handleBack}
           /> //handleRegister belum diadjust
         );
+      case 3:
+        return <DisabilityForm handleNext={handleRegisterJobseeker} />;
       default:
         throw new Error("Unknown step");
     }

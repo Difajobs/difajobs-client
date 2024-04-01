@@ -36,6 +36,50 @@ $color3: #9C9C9C;
         border-radius: 20px;
         height: 52px;
       }
+
+      .disabilityContainer {
+        margin-top: 10px;
+        width: 100%;
+
+        .formBox {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin: 0 10px
+        }
+        .disabilityIcon {
+          font-size: 2rem;
+        }
+      }
+    }
+
+    .inputBox2 {
+      max-width: 350px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      .inputLabel {
+        margin-left: 6px;
+      }
+      
+      .inputField {
+        width: 100%;
+        margin-bottom: 15px;
+      }
+
+      .selectField {
+        width: 100%;
+        border-radius: 20px;
+        height: 52px;
+        margin-bottom: 15px;
+      }
+
+      .selectFieldGender {
+        width: 100%;
+        border-radius: 20px;
+        height: 52px;
+      }
     }
   }
 
