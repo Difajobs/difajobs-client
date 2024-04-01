@@ -95,9 +95,9 @@ export default function JobseekerForm({
         </Box>
         <Box className={styles.inputBox}>
           <Typography className={styles.inputLabel}>Jenis Kelamin</Typography>
-          <FormControl className={styles.selectField}>
+          <FormControl sx={{ width: "100%", mb: "15px" }}>
             <Select
-              className={styles.selectField}
+              className={styles.selectFieldGender}
               value={gender}
               onChange={handleGenderChange}
               name="gender"
