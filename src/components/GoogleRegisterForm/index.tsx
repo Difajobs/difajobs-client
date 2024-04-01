@@ -6,7 +6,7 @@ import { Box, Button, SelectChangeEvent } from "@mui/material";
 
 // const steps = ["User Form", "Jobseeker Form", "Company Form"];
 
-export default function RegisterForm() {
+export default function GoogleRegisterForm() {
   const [activeStep, setActiveStep] = useState(0);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
