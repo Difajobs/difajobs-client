@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Divider,
   FormControl,
   FormHelperText,
   MenuItem,
@@ -21,6 +22,7 @@ interface JobseekerFormProps {
   handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleGenderChange: (e: SelectChangeEvent) => void;
   handleRegister: () => void;
+  handleBack: () => void;
 }
 
 const genders = [{ value: "Laki-laki" }, { value: "Perempuan" }];
@@ -34,6 +36,7 @@ export default function JobseekerForm({
   handleInputChange,
   handleGenderChange,
   handleRegister,
+  handleBack,
 }: JobseekerFormProps) {
   const [clicked, setClicked] = useState(false);
 
@@ -159,7 +162,11 @@ export default function JobseekerForm({
             InputProps={{ style: { borderRadius: "20px", height: "52px" } }}
           />
         </Box>
-        <Box className={styles.buttonBox}>
+        <Divider className={styles.divider2} />
+        <Box className={styles.buttonBox2}>
+          <Button className={styles.backButton} onClick={handleBack}>
+            Kembali
+          </Button>
           <Button
             className={styles.button}
             type="submit"

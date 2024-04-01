@@ -23,7 +23,10 @@ interface UserFormProps {
   handleNext: () => void;
 }
 
-const roles = [{ value: "Job Seeker" }, { value: "Recruiter" }];
+const roles = [
+  { key: "Job Seeker", value: "job seeker" },
+  { key: "Recruiter", value: "recruiter" },
+];
 
 export default function UserForm({
   email,
@@ -132,8 +135,8 @@ export default function UserForm({
             required
           >
             {roles.map((role) => (
-              <MenuItem key={role.value} value={role.value}>
-                {role.value}
+              <MenuItem key={role.key} value={role.value}>
+                {role.key}
               </MenuItem>
             ))}
           </Select>

@@ -20,10 +20,18 @@ export default function RegisterForm() {
   const [deskripsi, setDeskripsi] = useState("");
 
   const handleNext = () => {
-    if (role == "Job Seeker") {
+    if (role == "job seeker") {
       setActiveStep(activeStep + 1);
     } else {
       setActiveStep(activeStep + 2);
+    }
+  };
+
+  const handleBack = () => {
+    if (role == "job seeker") {
+      setActiveStep(activeStep - 1);
+    } else {
+      setActiveStep(activeStep - 2);
     }
   };
 
@@ -31,7 +39,7 @@ export default function RegisterForm() {
     setActiveStep(activeStep + 1);
   };
 
-  const handleBack = () => {
+  const handleBack2 = () => {
     setActiveStep(activeStep - 1);
   };
 
@@ -116,6 +124,7 @@ export default function RegisterForm() {
             handleInputChange={handleInputChange}
             handleGenderChange={handleGenderChange}
             handleRegister={handleRegisterJobseeker}
+            handleBack={handleBack}
           />
         );
       case 2:
@@ -126,6 +135,7 @@ export default function RegisterForm() {
             deskripsi={deskripsi}
             handleInputChange={handleInputChange}
             handleRegister={handleRegisterJobseeker}
+            handleBack={handleBack}
           /> //handleRegister belum diadjust
         );
       default:
@@ -138,7 +148,7 @@ export default function RegisterForm() {
       <Box sx={{ display: "flex" }}>
         {/* temporary next and back button */}
         <Button onClick={handleSelanjutnya}>Selanjutnya</Button>
-        <Button onClick={handleBack}>Kembali</Button>
+        <Button onClick={handleBack2}>Kembali</Button>
       </Box>
     </>
   );

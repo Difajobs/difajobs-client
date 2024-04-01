@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, Divider, TextField, Typography } from "@mui/material";
 import styles from "../RegisterForm.module.scss";
 import UploadButton from "../../UploadButton";
 import { ChangeEvent, useState } from "react";
@@ -9,6 +9,7 @@ interface RegisterFormProps {
   deskripsi: string;
   handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleRegister: () => void;
+  handleBack: () => void;
 }
 
 export default function RegisterForm({
@@ -17,6 +18,7 @@ export default function RegisterForm({
   deskripsi,
   handleInputChange,
   handleRegister,
+  handleBack,
 }: RegisterFormProps) {
   const [clicked, setClicked] = useState(false);
 
@@ -113,7 +115,11 @@ export default function RegisterForm({
           <Typography className={styles.inputLabel}>Foto Tambahan</Typography>
           <UploadButton buttonText="Unggah Foto Tambahan" />
         </Box>
-        <Box className={styles.buttonBox}>
+        <Divider className={styles.divider2} />
+        <Box className={styles.buttonBox2}>
+          <Button className={styles.backButton} onClick={handleBack}>
+            Kembali
+          </Button>
           <Button
             className={styles.button}
             type="submit"
