@@ -4,6 +4,7 @@ import CompanyForm from "./CompanyForm";
 import UserForm from "./UserForm";
 import DisabilityForm from "./DisabilityForm";
 import { Box, Button, SelectChangeEvent } from "@mui/material";
+import { registerRecruiter, registerJobseeker } from "../../utils/fetchApi";
 
 // const steps = ["User Form", "Jobseeker Form", "Company Form"];
 
@@ -32,8 +33,6 @@ export default function RegisterForm() {
       setActiveStep(activeStep + 1);
     }
   };
-
-  console.log(activeStep);
 
   const handleBack = () => {
     if (role == "job seeker") {
@@ -104,21 +103,50 @@ export default function RegisterForm() {
   };
 
   const handleRegisterJobseeker = async () => {
-    //belum try catch, belum direfactor, belum hit 2 endpoint
-    const response = await fetch("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    try {
+      // const phoneNumber = "+62" + nomorTelepon;
+      const value = {
         email: email,
         password: password,
-        confirmPass: confirmPass,
         role: role,
-      }),
-    });
-    const data = await response.json();
-    console.log(data);
+        fullname: namaLengkap,
+        dob: dob,
+        gender: gender,
+        disability_id: disabilitas,
+      };
+      const response = await registerJobseeker(value);
+      if (response?.ok) {
+        alert("Register Berhasil, mengalikan ke dashboars");
+        window.location.href = "/dashboard"; //contoh
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Register Gagal, coba lagi");
+    }
+  };
+
+  const handleRegisterRecruiter = async () => {
+    try {
+      // const phoneNumber = "+62" + nomorTelepon;
+      const value = {
+        email: email,
+        password: password,
+        role: role,
+        name: namaLengkap,
+        city: kota,
+        about: deskripsi,
+        // logo: logo,
+        // picture: picture,
+      };
+      const response = await registerRecruiter(value);
+      if (response?.ok) {
+        alert("Register Berhasil, mengalikan ke dashboars");
+        window.location.href = "/dashboard"; //contoh
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Register Gagal, coba lagi");
+    }
   };
 
   function getStepContent(step: number) {
@@ -142,7 +170,7 @@ export default function RegisterForm() {
             kota={kota}
             deskripsi={deskripsi}
             handleInputChange={handleInputChange}
-            handleRegister={handleRegisterJobseeker}
+            handleRegister={handleRegisterRecruiter}
             handleBack={handleBack}
           /> //handleRegister belum diadjust
         );
