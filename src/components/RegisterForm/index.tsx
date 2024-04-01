@@ -18,6 +18,7 @@ export default function RegisterForm() {
   const [dob, setDob] = useState("");
   const [nomorTelepon, setNomorTelepon] = useState("");
   const [kota, setKota] = useState("");
+  const [deskripsi, setDeskripsi] = useState("");
 
   const handleNext = () => {
     if (role == "Job Seeker") {
@@ -58,6 +59,9 @@ export default function RegisterForm() {
         break;
       case "kota":
         setKota(value);
+        break;
+      case "deskripsi":
+        setDeskripsi(value);
         break;
     }
   };
@@ -110,12 +114,21 @@ export default function RegisterForm() {
             dob={dob}
             nomorTelepon={nomorTelepon}
             kota={kota}
+            handleInputChange={handleInputChange}
             handleGenderChange={handleGenderChange}
             handleRegister={handleRegisterJobseeker}
           />
         );
       case 2:
-        return <CompanyForm />;
+        return (
+          <CompanyForm
+            namaLengkap={namaLengkap}
+            kota={kota}
+            deskripsi={deskripsi}
+            handleInputChange={handleInputChange}
+            handleRegister={handleRegisterJobseeker}
+          />
+        );
       case 3:
         return (
           <GoogleForm

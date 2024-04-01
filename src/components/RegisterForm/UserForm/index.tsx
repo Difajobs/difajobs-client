@@ -139,7 +139,19 @@ export default function UserForm({
           </Select>
         </Box>
         <Box className={styles.buttonBox}>
-          <Button className={styles.button} onClick={handleNext}>
+          <Button
+            className={styles.button}
+            onClick={handleNext}
+            disabled={
+              !email ||
+              !password ||
+              !confirmPass ||
+              !role ||
+              Boolean(validateEmail(email)) ||
+              Boolean(validatePassword(password)) ||
+              Boolean(validateConfirmPass(confirmPass))
+            }
+          >
             Selanjutnya
           </Button>
           <Divider className={styles.divider} />
