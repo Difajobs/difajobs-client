@@ -12,6 +12,7 @@ import { SyntheticEvent, useState } from "react";
 
 interface DisabilityFormProps {
   handleNext: () => void;
+  handleBack: () => void;
 }
 
 const dummyData = {
@@ -84,7 +85,10 @@ const dummyData = {
   ],
 };
 
-export default function DisabilityForm({ handleNext }: DisabilityFormProps) {
+export default function DisabilityForm({
+  handleNext,
+  handleBack,
+}: DisabilityFormProps) {
   const [selectedDisabilities, setSelectedDisabilities] = useState<number[]>(
     []
   );
@@ -165,7 +169,10 @@ export default function DisabilityForm({ handleNext }: DisabilityFormProps) {
             </FormControl>
           </Box>
         </Box>
-        <Box className={styles.buttonBox}>
+        <Box className={styles.buttonBox2}>
+          <Button className={styles.backButton} onClick={handleBack}>
+            Kembali
+          </Button>
           <Button className={styles.button} type="submit" onClick={handleNext}>
             Daftar
           </Button>

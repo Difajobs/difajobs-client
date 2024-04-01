@@ -23,17 +23,27 @@ export default function RegisterForm() {
 
   const handleNext = () => {
     if (role == "job seeker") {
-      setActiveStep(activeStep + 1);
+      if (activeStep == 2) {
+        setActiveStep(activeStep + 1);
+      } else {
+        setActiveStep(activeStep + 2);
+      }
     } else {
-      setActiveStep(activeStep + 2);
+      setActiveStep(activeStep + 1);
     }
   };
 
+  console.log(activeStep);
+
   const handleBack = () => {
     if (role == "job seeker") {
-      setActiveStep(activeStep - 1);
+      if (activeStep == 3) {
+        setActiveStep(activeStep - 1);
+      } else {
+        setActiveStep(activeStep - 2);
+      }
     } else {
-      setActiveStep(activeStep - 2);
+      setActiveStep(activeStep - 1);
     }
   };
 
@@ -92,7 +102,6 @@ export default function RegisterForm() {
       );
     }
   };
-  console.log(disabilitas);
 
   const handleRegisterJobseeker = async () => {
     //belum try catch, belum direfactor, belum hit 2 endpoint
@@ -128,6 +137,17 @@ export default function RegisterForm() {
         ); //handleNext belum di adjust per-role
       case 1:
         return (
+          <CompanyForm
+            namaLengkap={namaLengkap}
+            kota={kota}
+            deskripsi={deskripsi}
+            handleInputChange={handleInputChange}
+            handleRegister={handleRegisterJobseeker}
+            handleBack={handleBack}
+          /> //handleRegister belum diadjust
+        );
+      case 2:
+        return (
           <JobseekerForm
             namaLengkap={namaLengkap}
             gender={gender}
@@ -138,23 +158,18 @@ export default function RegisterForm() {
             handleInputChange={handleInputChange}
             handleGenderChange={handleGenderChange}
             handleDisability={handleDisability}
-            handleRegister={handleRegisterJobseeker}
+            handleNext={handleNext}
             handleBack={handleBack}
           />
         );
-      case 2:
-        return (
-          <CompanyForm
-            namaLengkap={namaLengkap}
-            kota={kota}
-            deskripsi={deskripsi}
-            handleInputChange={handleInputChange}
-            handleRegister={handleRegisterJobseeker}
-            handleBack={handleBack}
-          /> //handleRegister belum diadjust
-        );
+
       case 3:
-        return <DisabilityForm handleNext={handleRegisterJobseeker} />;
+        return (
+          <DisabilityForm
+            handleNext={handleRegisterJobseeker}
+            handleBack={handleBack}
+          />
+        );
       default:
         throw new Error("Unknown step");
     }

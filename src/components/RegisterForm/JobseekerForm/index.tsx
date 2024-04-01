@@ -31,7 +31,7 @@ interface JobseekerFormProps {
   handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleGenderChange: (e: SelectChangeEvent) => void;
   handleDisability: (value: number, checked: boolean) => void;
-  handleRegister: () => void;
+  handleNext: () => void;
   handleBack: () => void;
 }
 
@@ -46,7 +46,7 @@ export default function JobseekerForm({
   handleInputChange,
   handleGenderChange,
   handleDisability,
-  handleRegister,
+  handleNext,
   handleBack,
 }: JobseekerFormProps) {
   const [clicked, setClicked] = useState(false);
@@ -274,7 +274,7 @@ export default function JobseekerForm({
           <Button
             className={styles.button}
             type="submit"
-            onClick={handleRegister}
+            onClick={handleNext}
             disabled={
               !namaLengkap ||
               !gender ||
@@ -284,7 +284,7 @@ export default function JobseekerForm({
               Boolean(validateDob(dob))
             }
           >
-            Daftar
+            Selanjutnya
           </Button>
         </Box>
       </Box>
