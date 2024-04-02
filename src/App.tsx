@@ -15,8 +15,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <Router>
           <Routes>
-            <Route path="/" element={<div>DIFAJOBS CLIENT</div>} />
-            <Route path="/login" element={<LoginPage />} />
+            <Route path="/" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/register-google" element={<GoogleRegisterPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />

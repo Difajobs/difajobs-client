@@ -1,8 +1,8 @@
 import { API_URL } from "./access";
 
 interface login {
-  value: string;
-  value2: string;
+  email: string;
+  password: string;
 }
 
 interface registerJobseeker {
@@ -28,20 +28,21 @@ interface registerRecruiter {
 
 export const login = async (value: login) => {
   try {
-    const response = await fetch(API_URL + "endpoint", {
+    const response = await fetch(API_URL + "/v1/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
       body: JSON.stringify(value),
     });
+    const data = await response.json();
+
     if (!response.ok) {
-      throw response;
+      throw new Error(data.message || response.statusText);
     }
-    return response;
+    return data;
   } catch (error) {
-    console.error("Error:", error);
+    throw new Error("An error occurred while logging in.");
   }
 };
 
