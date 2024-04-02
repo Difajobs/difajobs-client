@@ -18,8 +18,8 @@ export default function NotFoundPage() {
   }, []);
 
   useEffect(() => {
-    if (countdown === 0) {
-      navigate('/beranda');
+    if (countdown < 0) {
+      navigate('/dashboard');
     }
   }, [countdown, navigate]);
 
