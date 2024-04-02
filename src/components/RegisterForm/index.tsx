@@ -5,6 +5,7 @@ import UserForm from "./UserForm";
 import DisabilityForm from "./DisabilityForm";
 import { Box, Button, SelectChangeEvent } from "@mui/material";
 import { registerRecruiter, registerJobseeker } from "../../utils/fetchApi";
+import { useNavigate } from "react-router-dom";
 
 // const steps = ["User Form", "Jobseeker Form", "Company Form"];
 
@@ -21,6 +22,8 @@ export default function RegisterForm() {
   const [kota, setKota] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
   const [disabilitas, setDisabilitas] = useState<number[]>([]);
+
+  const navigate = useNavigate();
 
   const handleNext = () => {
     if (role == "job seeker") {
@@ -104,7 +107,7 @@ export default function RegisterForm() {
 
   const handleRegisterJobseeker = async () => {
     try {
-      // const phoneNumber = "+62" + nomorTelepon;
+      const phoneNumber = "+62" + nomorTelepon;
       const value = {
         email: email,
         password: password,
@@ -112,12 +115,17 @@ export default function RegisterForm() {
         fullname: namaLengkap,
         dob: dob,
         gender: gender,
+        phone_number: phoneNumber,
+        city: kota,
         disability_id: disabilitas,
+        description: deskripsi, //tambah input di hambatan form
       };
       const response = await registerJobseeker(value);
       if (response?.ok) {
-        alert("Register Berhasil, mengalikan ke dashboars");
-        window.location.href = "/dashboard"; //contoh
+        alert("Register Berhasil, mengalikan ke dashboard");
+        setTimeout(() => {
+          navigate("/dashboard", { replace: true });
+        }, 2000);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -127,7 +135,6 @@ export default function RegisterForm() {
 
   const handleRegisterRecruiter = async () => {
     try {
-      // const phoneNumber = "+62" + nomorTelepon;
       const value = {
         email: email,
         password: password,
@@ -140,8 +147,10 @@ export default function RegisterForm() {
       };
       const response = await registerRecruiter(value);
       if (response?.ok) {
-        alert("Register Berhasil, mengalikan ke dashboars");
-        window.location.href = "/dashboard"; //contoh
+        alert("Register Berhasil, mengalikan ke dashboard");
+        setTimeout(() => {
+          navigate("/dashboard", { replace: true });
+        }, 2000);
       }
     } catch (error) {
       console.error("Error:", error);

@@ -12,7 +12,10 @@ interface registerJobseeker {
   fullname: string;
   dob: string;
   gender: string;
+  phone_number?: string;
+  city?: string;
   disability_id: number[];
+  description?: string;
 }
 
 interface registerRecruiter {
@@ -48,12 +51,11 @@ export const login = async (value: login) => {
 
 export const registerJobseeker = async (value: registerJobseeker) => {
   try {
-    const response = await fetch(API_URL + "v1/auth/jobseeker-register", {
+    const response = await fetch(API_URL + "/v1/auth/jobseeker-register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
       body: JSON.stringify(value),
     });
     if (!response.ok) {
@@ -67,12 +69,11 @@ export const registerJobseeker = async (value: registerJobseeker) => {
 
 export const registerRecruiter = async (value: registerRecruiter) => {
   try {
-    const response = await fetch(API_URL + "v1/auth/jobseeker-register", {
+    const response = await fetch(API_URL + "/v1/auth/recruiter-register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
       body: JSON.stringify(value),
     });
     if (!response.ok) {
