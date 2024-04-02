@@ -2,6 +2,7 @@ $color1 : #166079;
 $hover1 : #104152;
 $color2 : #ffff;
 $color3: #9C9C9C;
+$error: #d32f2f;
 
 .loginContainer {
   display: flex;
@@ -35,17 +36,27 @@ $color3: #9C9C9C;
       margin: 100px 0px 60px 0px;
     }
 
-    .inputBox {
+    .inputForm {
       max-width: 350px;
       width: 100%;
 
-      .inputLabel {
-        margin-left: 6px;
-      }
+      .inputBox {
+        margin-bottom: 10px;
 
-      .inputField {
-        width: 100%;
-        margin-bottom: 15px;
+        .inputLabel {
+          margin-left: 6px;
+        }
+
+        .inputField {
+          width: 100%;
+          // margin-bottom: 15px;
+        }
+
+        .errorMsg {
+          margin-left: 10px;
+          color: $error;
+          font-size: 12px;
+        }
       }
     }
   }
