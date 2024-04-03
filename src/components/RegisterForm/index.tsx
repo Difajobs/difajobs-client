@@ -4,10 +4,14 @@ import CompanyForm from "./CompanyForm";
 import UserForm from "./UserForm";
 import DisabilityForm from "./DisabilityForm";
 import { Box, Button, SelectChangeEvent } from "@mui/material";
-import { registerRecruiter, registerJobseeker } from "../../utils/fetchApi";
+import {
+  registerRecruiter,
+  registerJobseeker,
+  getDisability,
+} from "../../utils/fetchApi";
 import { useNavigate } from "react-router-dom";
 
-// const steps = ["User Form", "Jobseeker Form", "Company Form"];
+// const steps = ["User Form", "Jobseeker Form", "Disability Form", "Company Form"];
 
 export default function RegisterForm() {
   const [activeStep, setActiveStep] = useState(0);
@@ -21,7 +25,10 @@ export default function RegisterForm() {
   const [nomorTelepon, setNomorTelepon] = useState("");
   const [kota, setKota] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
+  const [deskripsiList, setDeskripsiList] = useState("");
   const [disabilitas, setDisabilitas] = useState<number[]>([]);
+  const [disabilitasList, setDisabilitasList] = useState<number[]>([]);
+  const [disabilityData, setDisabilityData] = useState([]);
 
   const navigate = useNavigate();
 
@@ -84,6 +91,9 @@ export default function RegisterForm() {
       case "deskripsi":
         setDeskripsi(value);
         break;
+      case "deskripsiList":
+        setDeskripsiList(value);
+        break;
     }
   };
 
@@ -105,6 +115,34 @@ export default function RegisterForm() {
     }
   };
 
+  const handleDisabilityList = (id: number, checked: boolean) => {
+    if (checked) {
+      setDisabilitasList((prev) => [...prev, id]);
+    } else {
+      setDisabilitasList((prev) =>
+        prev.filter((disability) => disability !== id)
+      );
+    }
+  };
+
+  const handleGetDisability = async () => {
+    try {
+      const value = {
+        category_id: disabilitas,
+      };
+      const response = await getDisability(value);
+      const list = response.data;
+      setDisabilityData(list);
+    } catch (error) {
+      console.error("Error:", error);
+      alert("gagal mengontak endpoint");
+    } finally {
+      setTimeout(() => {
+        setActiveStep(activeStep + 1);
+      }, 2000);
+    }
+  };
+
   const handleRegisterJobseeker = async () => {
     try {
       const phoneNumber = "+62" + nomorTelepon;
@@ -117,9 +155,10 @@ export default function RegisterForm() {
         gender: gender,
         phone_number: phoneNumber,
         city: kota,
-        disability_id: disabilitas,
-        description: deskripsi, //tambah input di hambatan form
+        disability_id: disabilitasList,
+        description: deskripsiList,
       };
+      console.log(value);
       const response = await registerJobseeker(value);
       if (response?.ok) {
         alert("Register Berhasil, mengalikan ke dashboard");
@@ -195,7 +234,7 @@ export default function RegisterForm() {
             handleInputChange={handleInputChange}
             handleGenderChange={handleGenderChange}
             handleDisability={handleDisability}
-            handleNext={handleNext}
+            handleNext={handleGetDisability}
             handleBack={handleBack}
           />
         );
@@ -203,6 +242,11 @@ export default function RegisterForm() {
       case 3:
         return (
           <DisabilityForm
+            disabilitas={disabilitasList}
+            disabilityData={disabilityData}
+            deskripsiList={deskripsiList}
+            handleDisability={handleDisabilityList}
+            handleInputChange={handleInputChange}
             handleNext={handleRegisterJobseeker}
             handleBack={handleBack}
           />

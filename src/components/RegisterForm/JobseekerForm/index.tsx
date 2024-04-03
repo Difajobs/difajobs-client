@@ -42,6 +42,7 @@ export default function JobseekerForm({
   gender,
   dob,
   nomorTelepon,
+  disabilitas,
   kota,
   handleInputChange,
   handleGenderChange,
@@ -194,7 +195,6 @@ export default function JobseekerForm({
           <Typography className={styles.inputLabel}>
             Disabilitas (bisa memilih lebih dari 1)
           </Typography>
-          <Box className={styles.disabilityContainer}></Box>
           <FormControl component="fieldset">
             <FormGroup
               aria-label="kategori disabilitas"
@@ -204,7 +204,7 @@ export default function JobseekerForm({
               <FormControlLabel
                 className={styles.formBox}
                 name="kategori disabilitas"
-                value={1}
+                value={disabilitas}
                 control={
                   <Checkbox
                     onChange={(e) => handleDisability(1, e.target.checked)}
@@ -216,7 +216,7 @@ export default function JobseekerForm({
               <FormControlLabel
                 className={styles.formBox}
                 name="kategori disabilitas"
-                value={2}
+                value={disabilitas}
                 control={
                   <Checkbox
                     onChange={(e) => handleDisability(2, e.target.checked)}
@@ -228,7 +228,7 @@ export default function JobseekerForm({
               <FormControlLabel
                 className={styles.formBox}
                 name="kategori disabilitas"
-                value={3}
+                value={disabilitas}
                 control={
                   <Checkbox
                     onChange={(e) => handleDisability(3, e.target.checked)}
@@ -242,7 +242,7 @@ export default function JobseekerForm({
               <FormControlLabel
                 className={styles.formBox}
                 name="kategori disabilitas"
-                value={4}
+                value={disabilitas}
                 control={
                   <Checkbox
                     onChange={(e) => handleDisability(4, e.target.checked)}
@@ -254,7 +254,7 @@ export default function JobseekerForm({
               <FormControlLabel
                 className={styles.formBox}
                 name="kategori disabilitas"
-                value={5}
+                value={disabilitas}
                 control={
                   <Checkbox
                     onChange={(e) => handleDisability(5, e.target.checked)}

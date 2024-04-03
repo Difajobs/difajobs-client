@@ -29,6 +29,10 @@ interface registerRecruiter {
   picture?: string;
 }
 
+interface disabilityList {
+  category_id: number[];
+}
+
 export const login = async (value: login) => {
   try {
     const response = await fetch(API_URL + "/v1/auth/login", {
@@ -58,12 +62,15 @@ export const registerJobseeker = async (value: registerJobseeker) => {
       },
       body: JSON.stringify(value),
     });
+
+    const data = await response.json();
+
     if (!response.ok) {
-      throw response;
+      throw new Error(data.message || response.statusText);
     }
     return response;
   } catch (error) {
-    console.error("Error:", error);
+    throw new Error("An error occurred while registering.");
   }
 };
 
@@ -76,11 +83,33 @@ export const registerRecruiter = async (value: registerRecruiter) => {
       },
       body: JSON.stringify(value),
     });
+
+    const data = await response.json();
+
     if (!response.ok) {
-      throw response;
+      throw new Error(data.message || response.statusText);
     }
     return response;
   } catch (error) {
-    console.error("Error:", error);
+    throw new Error("An error occurred while registering.");
+  }
+};
+
+export const getDisability = async (value: disabilityList) => {
+  try {
+    const response = await fetch(API_URL + "/v1/disability", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(value),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to fetch disabilities: " + response.statusText);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error("An error occurred while retrieving category.");
   }
 };
