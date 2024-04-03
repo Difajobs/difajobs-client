@@ -167,7 +167,7 @@ export default function RegisterForm() {
         }, 2000);
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error(error);
       alert("Register Gagal, coba lagi");
     }
   };
@@ -192,7 +192,7 @@ export default function RegisterForm() {
         }, 2000);
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error(error);
       alert("Register Gagal, coba lagi");
     }
   };

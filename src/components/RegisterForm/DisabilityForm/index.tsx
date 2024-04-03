@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Checkbox,
+  Divider,
   FormControl,
   FormControlLabel,
   FormGroup,
@@ -60,6 +61,7 @@ export default function DisabilityForm({
                 {disabilityData.map((category) =>
                   category.disabilities.map((disability) => (
                     <FormControlLabel
+                      className={styles.formBox}
                       key={disability.id}
                       name="disabilitas"
                       value={disability.id}
@@ -79,6 +81,7 @@ export default function DisabilityForm({
                   ))
                 )}
                 <FormControlLabel
+                  className={styles.formBox}
                   name="disabilitas"
                   value={disabilitas}
                   label="lainnya"
@@ -110,6 +113,8 @@ export default function DisabilityForm({
             InputProps={{ style: { borderRadius: "20px", height: "52px" } }}
           />
         </Box>
+        <Divider className={styles.divider2} />
+
         <Box className={styles.buttonBox2}>
           <Button className={styles.backButton} onClick={handleBack}>
             Kembali

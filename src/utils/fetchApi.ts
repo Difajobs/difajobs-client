@@ -54,6 +54,7 @@ export const login = async (value: login) => {
 };
 
 export const registerJobseeker = async (value: registerJobseeker) => {
+  let data;
   try {
     const response = await fetch(API_URL + "/v1/auth/jobseeker-register", {
       method: "POST",
@@ -63,18 +64,21 @@ export const registerJobseeker = async (value: registerJobseeker) => {
       body: JSON.stringify(value),
     });
 
-    const data = await response.json();
+    data = await response.json();
 
     if (!response.ok) {
       throw new Error(data.message || response.statusText);
     }
     return response;
   } catch (error) {
-    throw new Error("An error occurred while registering.");
+    const errorMessage =
+      data && data.message ? data.message : (error as Error).message;
+    throw new Error("An error occurred while registering: " + errorMessage);
   }
 };
 
 export const registerRecruiter = async (value: registerRecruiter) => {
+  let data;
   try {
     const response = await fetch(API_URL + "/v1/auth/recruiter-register", {
       method: "POST",
@@ -84,18 +88,21 @@ export const registerRecruiter = async (value: registerRecruiter) => {
       body: JSON.stringify(value),
     });
 
-    const data = await response.json();
+    data = await response.json();
 
     if (!response.ok) {
       throw new Error(data.message || response.statusText);
     }
     return response;
   } catch (error) {
-    throw new Error("An error occurred while registering.");
+    const errorMessage =
+      data && data.message ? data.message : (error as Error).message;
+    throw new Error("An error occurred while registering: " + errorMessage);
   }
 };
 
 export const getDisability = async (value: disabilityList) => {
+  let data;
   try {
     const response = await fetch(API_URL + "/v1/disability", {
       method: "POST",
@@ -107,9 +114,13 @@ export const getDisability = async (value: disabilityList) => {
     if (!response.ok) {
       throw new Error("Failed to fetch disabilities: " + response.statusText);
     }
-    const data = await response.json();
+    data = await response.json();
     return data;
   } catch (error) {
-    throw new Error("An error occurred while retrieving category.");
+    const errorMessage =
+      data && data.message ? data.message : (error as Error).message;
+    throw new Error(
+      "An error occurred while retrieving category: " + errorMessage
+    );
   }
 };
