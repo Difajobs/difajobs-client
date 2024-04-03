@@ -5,10 +5,32 @@ interface login {
   password: string;
 }
 
-interface register {
-  value: string;
-  value2: string;
-  value3: string;
+interface registerJobseeker {
+  email: string;
+  password: string;
+  role: string;
+  fullname: string;
+  dob: string;
+  gender: string;
+  phone_number?: string;
+  city?: string;
+  disability_id: number[];
+  description?: string;
+}
+
+interface registerRecruiter {
+  email: string;
+  password: string;
+  role: string;
+  name: string;
+  city: string;
+  about: string;
+  logo?: string;
+  picture?: string;
+}
+
+interface disabilityList {
+  category_id: number[];
 }
 
 export const login = async (value: login) => {
@@ -31,21 +53,74 @@ export const login = async (value: login) => {
   }
 };
 
-export const register = async (value: register) => {
+export const registerJobseeker = async (value: registerJobseeker) => {
+  let data;
   try {
-    const response = await fetch(API_URL + "endpoint", {
+    const response = await fetch(API_URL + "/v1/auth/jobseeker-register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
       body: JSON.stringify(value),
     });
+
+    data = await response.json();
+
     if (!response.ok) {
-      throw response;
+      throw new Error(data.message || response.statusText);
     }
     return response;
   } catch (error) {
-    console.error("Error:", error);
+    const errorMessage =
+      data && data.message ? data.message : (error as Error).message;
+    throw new Error("An error occurred while registering: " + errorMessage);
+  }
+};
+
+export const registerRecruiter = async (value: registerRecruiter) => {
+  let data;
+  try {
+    const response = await fetch(API_URL + "/v1/auth/recruiter-register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(value),
+    });
+
+    data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || response.statusText);
+    }
+    return response;
+  } catch (error) {
+    const errorMessage =
+      data && data.message ? data.message : (error as Error).message;
+    throw new Error("An error occurred while registering: " + errorMessage);
+  }
+};
+
+export const getDisability = async (value: disabilityList) => {
+  let data;
+  try {
+    const response = await fetch(API_URL + "/v1/disability", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(value),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to fetch disabilities: " + response.statusText);
+    }
+    data = await response.json();
+    return data;
+  } catch (error) {
+    const errorMessage =
+      data && data.message ? data.message : (error as Error).message;
+    throw new Error(
+      "An error occurred while retrieving category: " + errorMessage
+    );
   }
 };
