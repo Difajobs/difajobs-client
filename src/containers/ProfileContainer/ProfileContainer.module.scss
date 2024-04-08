@@ -1,7 +1,7 @@
 $color1 : #F1F1F1;
 
-.root{
-    max-width: 800px;
+.avatar{
+    max-width: 900px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,8 +12,13 @@ $color1 : #F1F1F1;
     right: 0;
     margin: 0 auto 16px;
     background-color: $color1 ;
+    border-radius: 20px;
+}
+    .navbar{
+        padding-bottom: 20px;
+    }
 
     .profile{
-        
+        margin-top: 30px;
+        margin-bottom: 30px;
     }
-}

@@ -1,0 +1,35 @@
+$color1 : #ffffff;
+$color2 : #7D7D7D;
+
+.root {
+    padding: 50px;
+
+    .title{
+        font-size: 20px;
+        justify-content: right; 
+        align-items: right;
+        display: flex;
+        margin-bottom: 5px;
+        color: $color2;
+    }
+
+    .inputLabel {
+        font-size: 20px;
+        padding-bottom: 10px;
+    }
+
+    .ringkasanpribadi{
+        width: 100%;
+        border-radius: 10px;
+        height: 200px;
+        background-color: $color1;
+    }
+
+    .inputfield {
+        width: 100%;
+        border-radius: 10px;
+        height: 42px;
+        background-color: $color1;
+        margin-bottom: 27px;
+    }
+}
