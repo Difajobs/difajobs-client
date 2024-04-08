@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
 import theme from "./themes/CustomTheme";
-import { DashboardPage, NotFoundPage, ProfilePage, LoginPage } from "./pages";
+import { DashboardPage, LoginPage, NotFoundPage } from "./pages";
 
 function App() {
   return (
@@ -9,16 +9,16 @@ function App() {
       <ThemeProvider theme={theme}>
         <Router>
           <Routes>
-            <Route path="/" element={<div>DIFAJOBS CLIENT</div>} />
-            <Route path="/login" element={<LoginPage />} />
+            <Route path="/" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/register-google" element={<GoogleRegisterPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
             <Route path="*" element={< NotFoundPage />} />
           </Routes>
         </Router>
       </ThemeProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
