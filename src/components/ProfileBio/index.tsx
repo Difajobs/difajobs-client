@@ -8,17 +8,17 @@ export default function ProfileBio() {
   return (
     <>
       <Box>
-        <Grid xs={6} md={8}>
+        <Grid xs={6} md={4}>
           <Box className={styles.tentangsaya}>
            <TentangSaya />
           </Box>
         </Grid>
-        <Grid xs={6} md={8}>
+        <Grid xs={6} md={4}>
           <Box className={styles.keahlian}>
            <Keahlian />
           </Box>
         </Grid>
-        <Grid xs={6} md={8}>
+        <Grid xs={6} md={4}>
           <Box className={styles.disabilitas}>
            <Disabilitas />
           </Box>
