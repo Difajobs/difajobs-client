@@ -1,0 +1,31 @@
+$color1 : #F1F1F1;
+
+.avatar{
+    max-width: 900px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    right: 0;
+    margin: 0 auto 16px;
+    background-color: $color1 ;
+    border-radius: 20px;
+}
+    .navbar{
+        padding-bottom: 20px;
+    }
+
+    .tentangsaya{
+        max-width: 900px;
+        width: 100%;
+        margin: 0 auto 16px;
+        border-radius: 20px;
+    }
+
+    .profile{
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }

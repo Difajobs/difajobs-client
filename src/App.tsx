@@ -7,6 +7,7 @@ import {
   LoginPage,
   NotFoundPage,
   RegisterPage,
+  ProfilePage,
 } from "./pages";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/register-google" element={<GoogleRegisterPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Router>
