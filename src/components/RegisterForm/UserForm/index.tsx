@@ -170,7 +170,7 @@ export default function UserForm({
           </Button>
           <Typography className={styles.loginText}>
             Sudah punya akun?{" "}
-            <Link to="/login" className={styles.registerLink}>
+            <Link to="/" className={styles.registerLink}>
               Masuk disini
             </Link>
           </Typography>

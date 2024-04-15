@@ -37,7 +37,7 @@ export default function LoginContainer() {
   return (
     <Box className={styles.loginContainer}>
       <Box className={styles.logoBox}>
-        <Typography className={styles.logoText}>Difa Jobs</Typography>
+        <Typography className={styles.logoText}>DIFA JOBS</Typography>
       </Box>
       <Box className={styles.formContainer}>
         <img src={difaJobsLogo} alt="Difa Jobs Logo" className={styles.difaJobsLogo} />

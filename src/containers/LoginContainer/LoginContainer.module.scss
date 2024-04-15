@@ -10,14 +10,21 @@ $error: #d32f2f;
 
   .logoBox {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: start;
+    align-items: start;
     width: 100%;
-    background-color: $color1 ;
+    background-image: url('../../assets/images/hero1.webp');
+    background-position: center;
+    background-size: cover;
 
     .logoText {
-      font-size: 50px;
+      font-size: 30px;
       color: $color2;
+      display: flex;
+      position: relative;
+      left: 40px;
+      top: 20px;
+      color: #104152;
     }
   }
 

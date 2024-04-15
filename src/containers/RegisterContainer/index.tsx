@@ -8,7 +8,7 @@ export default function RegisterContainer() {
     <>
       <Box className={`${styles.registerContainer} ${styles.registerBox}`}>
         <Box className={styles.logoBox}>
-          <Typography className={styles.logoText}>Difa Jobs</Typography>
+          <Typography className={styles.logoText}>DIFA JOBS</Typography>
         </Box>
         <Box className={styles.formContainer}>
           <img
