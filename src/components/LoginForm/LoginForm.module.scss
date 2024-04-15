@@ -86,20 +86,21 @@ $error: #d32f2f;
     height: 50px;
     width: 100%;
   }
-}
 
-.registerText {
-  margin-top: 20px;
+  .registerText {
+    margin-top: 20px;
 
-  .registerLink {
-    text-decoration: none;
-    color: rgb(0, 75, 187);
+    .registerLink {
+      text-decoration: none;
+      color: rgb(0, 75, 187);
 
-    &:hover {
-      text-decoration: underline
+      &:hover {
+        text-decoration: underline
+      }
     }
   }
 }
+
 
 @media screen and (max-width:640px) {
   .loginContainer {
