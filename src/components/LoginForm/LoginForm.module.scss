@@ -1,0 +1,114 @@
+$color1 : #166079;
+$hover1 : #104152;
+$color2 : #ffff;
+$color3: #9C9C9C;
+$error: #d32f2f;
+
+.formContainer {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  min-width: 320px;
+  width: 40%;
+
+  .difaJobsLogo {
+    height: 120px;
+    width: auto;
+    margin: 100px 0px 60px 0px;
+  }
+
+  .inputForm {
+    max-width: 350px;
+    width: 100%;
+
+    .inputBox {
+      margin-bottom: 10px;
+
+      .inputLabel {
+        margin-left: 6px;
+      }
+
+      .inputField {
+        width: 100%;
+        // margin-bottom: 15px;
+      }
+
+      .errorMsg {
+        margin-left: 10px;
+        color: $error;
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.buttonBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 350px;
+  margin-top: 30px;
+
+  .button {
+    background-color: $color1;
+    color: $color2;
+    height: 50px;
+    width: 100%;
+    border-radius: 20px;
+    border: solid $color1 1px;
+
+    &:hover {
+      background-color: $hover1;
+    }
+  }
+
+  .googleLogo {
+    height: 25px;
+    margin-right: 6px;
+    width: auto;
+  }
+
+  .divider {
+    margin: 30px 0px;
+    font-size: 10px;
+    width: 70%;
+    border: 1px solid $color3;
+  }
+
+  .googleButton {
+    text-transform: none;
+    border: solid $color3 1px;
+    border-radius: 20px;
+    height: 50px;
+    width: 100%;
+  }
+}
+
+.registerText {
+  margin-top: 20px;
+
+  .registerLink {
+    text-decoration: none;
+    color: rgb(0, 75, 187);
+
+    &:hover {
+      text-decoration: underline
+    }
+  }
+}
+
+@media screen and (max-width:640px) {
+  .loginContainer {
+    .logoBox {
+      display: none;
+    }
+
+    .formContainer {
+      width: 100%;
+    }
+  }
+}
