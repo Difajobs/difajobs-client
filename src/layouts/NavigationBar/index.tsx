@@ -12,16 +12,20 @@ import {
   IconButton,
   AppBar,
   Typography,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import styles from './NavigationBar.module.scss';
 import difaJobsLogo from '../../assets/images/difajobs-light.webp'
+import { LogoutButton } from "../../components";
+import React from "react";
 
 export default function NavBar() {
   const small = useMediaQuery("(max-width:425px)");
   const full = useMediaQuery("(min-width:426px)");
-  const [open, setOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // Renamed to mobileMenuOpen
   const [activeSection, setActiveSection] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
@@ -33,8 +37,17 @@ export default function NavBar() {
     setActiveSection(section);
   }, [location]); // Re-run effect when location changes
 
-  const handleClick = () => {
-    setOpen(!open);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const menuOpen = Boolean(anchorEl); // Renamed to menuOpen
+  const handleClickMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+
+  const handleMobileMenuClick = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
   };
 
   const navigateTo = (section: string) => {
@@ -43,7 +56,7 @@ export default function NavBar() {
 
   const mobileNavigateTo = (section: string) => {
     navigate("/" + section);
-    setOpen(false);
+    setMobileMenuOpen(false);
   };
 
   return (
@@ -58,12 +71,12 @@ export default function NavBar() {
                   alt="Logo"
                   onClick={() => mobileNavigateTo('')}
                 />
-                <IconButton onClick={handleClick} aria-label={open ? "Collapse menu" : "Expand menu"}>
+                <IconButton onClick={handleMobileMenuClick} aria-label={mobileMenuOpen ? "Collapse menu" : "Expand menu"}>
                   <MenuIcon className={styles.burgerButton} />
-                  {open ? <ExpandLess className={styles.burgerButton} /> : <ExpandMore className={styles.burgerButton} />}
+                  {mobileMenuOpen ? <ExpandLess className={styles.burgerButton} /> : <ExpandMore className={styles.burgerButton} />}
                 </IconButton>
               </ListItem>
-              <Collapse in={open} timeout="auto" unmountOnExit className={styles.collapse}>
+              <Collapse in={mobileMenuOpen} timeout="auto" unmountOnExit className={styles.collapse}>
                 <List component="div" disablePadding>
                   <ListItem className={styles.listItem} onClick={() => mobileNavigateTo('dashboard')}>
                     <Typography className={styles.listItemText}>
@@ -74,6 +87,9 @@ export default function NavBar() {
                     <Typography className={styles.listItemText}>
                       Akun Saya {activeSection === 'profile' && <span className={styles.arrowIcon}> <ArrowLeftIcon />Anda disini </span>}
                     </Typography>
+                  </ListItem>
+                  <ListItem>
+                    <LogoutButton />
                   </ListItem>
                 </List>
               </Collapse>
@@ -89,9 +105,22 @@ export default function NavBar() {
                 <Typography className={styles.navbarText} onClick={() => navigateTo('dashboard')} style={{ fontWeight: 'bold' }}>
                   Beranda
                 </Typography>
-                <Typography className={styles.navbarText} onClick={() => navigateTo('profile')}>
+                <Typography className={styles.navbarText} onClick={handleClickMenu}>
                   Akun Saya
                 </Typography>
+                <Menu
+                  className={styles.menuAccount}
+                  anchorEl={anchorEl}
+                  open={menuOpen}
+                  onClose={handleCloseMenu}
+                >
+                  <MenuItem className={styles.menuItem} onClick={() => navigateTo('profile')}>
+                    Edit Profile
+                  </MenuItem>
+                  <MenuItem className={styles.menuItem}>
+                    <LogoutButton />
+                  </MenuItem>
+                </Menu>
                 <NotificationsIcon className={styles.navbarText} />
               </Box>
             </Box>

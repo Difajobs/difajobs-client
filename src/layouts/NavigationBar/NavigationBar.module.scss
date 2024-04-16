@@ -96,6 +96,7 @@ $color3: #c5c5c5;
       .navbarMenu {
         display: flex;
         justify-content: flex-end;
+        align-items: center;
         gap: 30px;
 
         .navbarText {
@@ -107,8 +108,14 @@ $color3: #c5c5c5;
           }
         }
       }
-
     }
   }
+}
 
+.menuAccount {
+  margin-top: 10px;
+
+  .menuItem {
+    padding: 10px 20px;
+  }
 }
