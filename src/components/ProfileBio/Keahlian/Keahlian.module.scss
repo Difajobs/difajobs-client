@@ -5,7 +5,7 @@ $color2 : #7D7D7D;
     padding: 50px;
 
     .title{
-        font-size: 20px;
+        font-size: 16px;
         justify-content: right; 
         align-items: right;
         display: flex;
@@ -14,7 +14,7 @@ $color2 : #7D7D7D;
     }
 
     .inputLabel {
-        font-size: 20px;
+        font-size: 16px;
         padding-bottom: 10px;
     }
 
@@ -23,7 +23,7 @@ $color2 : #7D7D7D;
         border-radius: 10px;
         height: 200px;
         background-color: $color1;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
     }
 
     .inputfield {
@@ -32,5 +32,23 @@ $color2 : #7D7D7D;
         height: 42px;
         background-color: $color1;
         margin-bottom: 27px;
+    }
+}
+
+@media (max-width: 600px) {
+    .root {
+        padding: 10px; 
+    }
+
+    .title {
+        font-size: 14px; 
+    }
+
+    .inputLabel {
+        font-size: 14px; 
+    }
+
+    .label {
+        font-size: 8px; 
     }
 }
