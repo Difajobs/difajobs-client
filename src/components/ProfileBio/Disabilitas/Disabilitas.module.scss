@@ -3,11 +3,11 @@ $color2 : #7D7D7D;
 $color3 : #000000;
 
 .root {
-    padding: 50px;
+    padding: 20px;
     margin-bottom: 50px;
 
     .title{
-        font-size: 20px;
+        font-size: 16px;
         justify-content: right; 
         align-items: right;
         display: flex;
@@ -16,25 +16,27 @@ $color3 : #000000;
     }
 
     .inputLabel {
-        font-size: 20px;
+        font-size: 16px;
         padding-bottom: 10px;
     }
 
     .ringkasanpribadi{
-        width: 100%;
+        width: 90%;
         border-radius: 10px;
-        height: 200px;
+        height: auto;
         background-color: $color1;
         justify-content:left; 
         align-items: left;
         display: flex;
         margin-bottom: 15px;
-        padding-top: 15px;
-        padding-left: 15px;
+    }
+
+    .checkbutton{
+        margin-left: 5px;
     }
 
     .label{
-        font-size: 12px;
+        font-size: 10px;
         color: $color3;
     }
 
@@ -44,5 +46,23 @@ $color3 : #000000;
         height: 42px;
         background-color: $color1;
         margin-bottom: 27px;
+    }
+}
+
+@media (max-width: 600px) {
+    .root {
+        padding: 10px; 
+    }
+
+    .title {
+        font-size: 14px; 
+    }
+
+    .inputLabel {
+        font-size: 14px; 
+    }
+
+    .label {
+        font-size: 8px; 
     }
 }
