@@ -1,13 +1,15 @@
 import { Box } from "@mui/material";
 import { ProfileContainer } from "../../containers";
 import styles from './ProfilePage.module.scss'
+import AuthChecker from "../../utils/authChecker";
 
 export default function ProfilePage() {
   return (
     <>
-      <Box className={styles.root}>
-        <ProfileContainer />
-      </Box>
+     <AuthChecker /> 
+        <Box className={styles.root}>
+          <ProfileContainer />
+        </Box>
     </>
   )
 }
