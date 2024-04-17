@@ -1,7 +1,7 @@
 import { Box, Grid } from "@mui/material";
 import styles from './ProfileContainer.module.scss'
 import { ProfileBio, ProfilePicture } from "../../components"
-import { NavBar } from "../../layouts";
+import { NavBar, Footer} from "../../layouts";
 
 export default function ProfileContainer() {
   return (
@@ -12,7 +12,7 @@ export default function ProfileContainer() {
            <NavBar />
           </Box>
         </Grid>
-          <Box style={{ maxHeight: '100vh', overflowY: 'auto', scrollbarWidth: 'none' }}>
+          <Box>
               <Grid xs={6} md={4} className={styles.avatar}> 
                     <Box className={styles.profile}>
                       <ProfilePicture 
@@ -27,7 +27,12 @@ export default function ProfileContainer() {
                     <ProfileBio/>
                 </Box>
               </Grid>
-          </Box>     
+          </Box>   
+          <Grid xs={6} md={8}>
+          <Box className={styles.footer}>
+           <Footer />
+          </Box>
+        </Grid>
       </Box>
     </>
   )
