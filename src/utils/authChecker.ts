@@ -10,8 +10,7 @@ const AuthChecker: React.FC = () => {
       if (!token) {
         navigate('/');
       } else {
-        // This is just a basic example, you should implement your own token validation logic
-        navigate('/dashboard');
+        // add logic
       }
     };
     checkTokenValidity();

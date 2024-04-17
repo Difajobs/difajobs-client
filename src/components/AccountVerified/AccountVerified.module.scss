@@ -4,35 +4,28 @@ $color2 : #ffff;
 $color3: #9C9C9C;
 $error: #d32f2f;
 
-
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
 
-  .logo {
+  img {
     width: 100px;
     height: 100px;
   }
 
-  .heading {
+  .successMessage {
     font-size: 1.5rem;
     margin-bottom: 10px;
     text-align: center;
   }
 
-  .text {
+  .congratsMessage {
     font-size: 1rem;
     margin-bottom: 20px;
     max-width: 600px;
     text-align: center;
-  }
-
-  .inputEmail {
-    margin: 20px 0px;
-    width: 100%;
-    max-width: 400px;
   }
 
   .button {
@@ -44,16 +37,6 @@ $error: #d32f2f;
 
     &:hover {
       background-color: $hover1;
-    }
-  }
-
-  .link {
-    color: #007bff;
-    text-decoration: none;
-    margin-top: 20px;
-
-    &:hover {
-      text-decoration: underline;
     }
   }
 }
