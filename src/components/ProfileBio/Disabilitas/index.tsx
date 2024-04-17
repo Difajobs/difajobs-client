@@ -16,7 +16,7 @@ const Disabilitas: React.FC = () => {
           </Typography>
         </Box>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <Box className={styles.keahlian}>
               <Box>
                   <Typography className={styles.inputLabel}>
@@ -30,7 +30,7 @@ const Disabilitas: React.FC = () => {
               </FormGroup>
             </Box>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <Box className={styles.keahlian}>
               <Typography className={styles.inputLabel}>
                 Hambatan
