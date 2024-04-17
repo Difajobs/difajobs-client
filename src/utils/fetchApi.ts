@@ -131,7 +131,7 @@ export const getDisability = async (value: disabilityList) => {
 
 export const sendVerification = async (value: verification) => {
   try {
-    const response = await fetch("http://localhost:3000/v1/auth/token-send", {
+    const response = await fetch(API_URL +"/v1/auth/token-send", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -151,7 +151,7 @@ export const sendVerification = async (value: verification) => {
 
 export const confirmVerification = async (email: string, token: string) => {
   try {
-    const response = await fetch(`http://localhost:3000/v1/auth/token-verify?email=${email}&token=${token}`, {
+    const response = await fetch(API_URL + `/v1/auth/token-verify?email=${email}&token=${token}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
