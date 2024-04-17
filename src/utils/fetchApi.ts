@@ -33,6 +33,10 @@ interface disabilityList {
   category_id: number[];
 }
 
+interface verification {
+  email: string;
+}
+
 export const login = async (value: login) => {
   try {
     const response = await fetch(API_URL + "/v1/auth/login", {
@@ -122,5 +126,44 @@ export const getDisability = async (value: disabilityList) => {
     throw new Error(
       "An error occurred while retrieving category: " + errorMessage
     );
+  }
+};
+
+export const sendVerification = async (value: verification) => {
+  try {
+    const response = await fetch("http://localhost:3000/v1/auth/token-send", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(value),
+    });
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || response.statusText);
+    }
+    return data;
+  } catch (error) {
+    throw new Error("An error occurred while verification.");
+  }
+};
+
+export const confirmVerification = async (email: string, token: string) => {
+  try {
+    const response = await fetch(`http://localhost:3000/v1/auth/token-verify?email=${email}&token=${token}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || response.statusText);
+    }
+    return data;
+  } catch (error) {
+    throw new Error("An error occurred while verification.");
   }
 };
