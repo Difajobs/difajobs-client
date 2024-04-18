@@ -167,3 +167,26 @@ export const confirmVerification = async (email: string, token: string) => {
     throw new Error("An error occurred while verification.");
   }
 };
+
+export const getUserProfile = async () => {
+  try {
+    const token = localStorage.getItem('token');
+    const response = await fetch(API_URL + "/v1/user/profile", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+    });
+    
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || response.statusText);
+    }
+    
+    return data;
+  } catch (error) {
+    throw new Error("An error occurred while fetching user profile.");
+  }
+};
