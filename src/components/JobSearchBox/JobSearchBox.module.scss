@@ -1,0 +1,22 @@
+$color1 : #166079;
+$hover1 : #104152;
+$color2 : #f5f5f5;
+$color3: #9C9C9C;
+$error: #d32f2f;
+
+.container {
+  margin: 30px 0px;
+  display: flex;
+
+  .textField {
+    background-color: $color2;
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media screen and (max-width:426px) {
+  .container {
+    flex-direction: column;
+  }
+}
