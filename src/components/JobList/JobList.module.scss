@@ -1,0 +1,128 @@
+$color1 : #166079;
+$hover1 : #104152;
+$color2 : #e2e2e2;
+$color3: #9C9C9C;
+$error: #d32f2f;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 20px;
+
+
+  .jobList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $color1;
+    border-radius: 10px;
+    max-width: 900px;
+    padding: 20px;
+    cursor: pointer;
+
+    .userInfo {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      width: 100%;
+
+      .avatarInfo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+
+        .avatar {
+          width: 50px;
+          height: 50px;
+        }
+
+        .userDetails {
+          .userName {
+            color: $color2;
+          }
+
+          .companyName {
+            color: $color2;
+          }
+        }
+      }
+
+      .iconsInfo {
+        display: flex;
+
+        .iconWrapper {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: end;
+          gap: 10px;
+
+          .genderIcons {
+            display: flex;
+            gap: 8px;
+            color: $color2;
+          }
+
+          .otherIcons {
+            display: flex;
+            gap: 8px;
+            color: $color2;
+          }
+        }
+
+        .divider {
+          border: solid 1px $color2;
+          margin: 0px 10px;
+        }
+
+        .addressWrapper {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: start;
+          gap: 10px;
+
+          .location {
+            color: $color2;
+          }
+
+          .time {
+            color: $color2;
+          }
+        }
+      }
+    }
+
+    .jobDescription {
+      color: $color2;
+      margin-top: 15px;
+      display: flex;
+      justify-content: start;
+      align-items: start;
+      width: 100%;
+    }
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: end;
+    margin: 10px 0px
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .userInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .iconsInfo {
+      border: 1px solid $color2;
+      border-radius: 8px;
+      padding: 8px 16px;
+    }
+  }
+}

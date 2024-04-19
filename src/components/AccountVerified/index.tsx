@@ -7,7 +7,7 @@ import { confirmVerification } from "../../utils/fetchApi";
 
 export default function AccountVerified() {
   const navigate = useNavigate();
-  const [countdown, setCountdown] = useState(5); // Assuming a 5-second countdown
+  const [countdown, setCountdown] = useState(10); // Assuming a 10-second countdown
 
   // Get the email and token values from the URL
   const url = window.location.href;
@@ -44,9 +44,6 @@ export default function AccountVerified() {
       <img src={difaJobsLogo} alt="Difa Jobs Logo" />
       <Typography variant="h4" className={styles.successMessage}>
         Great! Your account has been verified!
-      </Typography>
-      <Typography className={styles.congratsMessage}>
-        You can now access all the exclusive features and benefits available to verified members.
       </Typography>
       <Typography className={styles.congratsMessage}>
         Thank you for joining us. We wish you the best in your career journey!

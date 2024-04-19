@@ -37,10 +37,11 @@ $error: #d32f2f;
 
   .button {
     background-color: $color1;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+    color: $color2;
+    height: 50px;
+    width: 100%;
+    max-width: 200px;
+    border: solid $color1 1px;
 
     &:hover {
       background-color: $hover1;

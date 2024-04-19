@@ -4,10 +4,12 @@ import DifaJobsLogo from '../../assets/images/difajobs-dark.webp';
 import { Link } from "react-router-dom";
 import styles from './Verify.module.scss';
 import { sendVerification } from "../../utils/fetchApi";
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function Verify() {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleEmailChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setEmail(event.target.value);
@@ -19,12 +21,15 @@ export default function Verify() {
         setError('Please enter your email address.');
         return;
       }
+      setLoading(true); // Start loading
       await sendVerification({ email });
       setError('');
       console.log('Verification email sent successfully.');
     } catch (error) {
       setError('An error occurred while sending verification email.');
       console.error('Error sending verification email:', error);
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -52,7 +57,7 @@ export default function Verify() {
         }}
       />
       <Button className={styles.button} onClick={handleVerifyClick}>
-        Verify my email
+        {loading ? <CircularProgress size={24} /> : "Verify my email"}
       </Button>
       <Link to={"/"} className={styles.link}>
         Return to site
