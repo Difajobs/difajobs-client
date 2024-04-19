@@ -131,7 +131,7 @@ export const getDisability = async (value: disabilityList) => {
 
 export const sendVerification = async (value: verification) => {
   try {
-    const response = await fetch(API_URL +"/v1/auth/token-send", {
+    const response = await fetch(API_URL + "/v1/auth/token-send", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -151,18 +151,40 @@ export const sendVerification = async (value: verification) => {
 
 export const confirmVerification = async (email: string, token: string) => {
   try {
-    const response = await fetch(API_URL + `/v1/auth/token-verify?email=${email}&token=${token}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      API_URL + `/v1/auth/token-verify?email=${email}&token=${token}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    });
+    );
     const data = await response.json();
 
     if (!response.ok) {
       throw new Error(data.message || response.statusText);
     }
     return data;
+  } catch (error) {
+    throw new Error("An error occurred while verification.");
+  }
+};
+
+export const jobList = async () => {
+  try {
+    const response = await fetch(API_URL + "/v1/jobs", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || response.statusText);
+    }
+    return data.data;
   } catch (error) {
     throw new Error("An error occurred while verification.");
   }
