@@ -1,5 +1,5 @@
 $color1: #166079;
-$color2: #F1F1F1;
+$color2: #f1f1f1;
 
 .footerContainer {
   display: flex;
@@ -13,7 +13,7 @@ $color2: #F1F1F1;
     align-items: center;
     background-color: $color1;
     height: 110px;
-    width: 900px;
+    width: 85vw;
     margin: 0px 20px;
 
     .copyrightText {
@@ -33,7 +33,7 @@ $color2: #F1F1F1;
   }
 }
 
-@media screen and (max-width:'425px') {
+@media screen and (max-width: "425px") {
   .footerContainer {
     .footer {
       margin: 0px 0px 0px 10px;

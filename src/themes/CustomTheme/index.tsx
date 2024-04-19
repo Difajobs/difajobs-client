@@ -31,73 +31,72 @@ const theme = createTheme({
       fontFamily: "Inter, sans-serif",
       fontWeight: 700,
       color: "black",
-      '@media (max-width:600px)': {
-        fontSize: '2.5rem',
-      }
+      "@media (max-width:600px)": {
+        fontSize: "2.5rem",
+      },
     },
 
     h2: {
       fontFamily: "Inter, sans-serif",
       fontWeight: 700,
       color: "black",
-      '@media (max-width:600px)': {
-        fontSize: '2.2rem',
-      }
+      "@media (max-width:600px)": {
+        fontSize: "2.2rem",
+      },
     },
 
     h3: {
       fontFamily: "Inter, sans-serif",
       fontWeight: 700,
       color: "black",
-      '@media (max-width:600px)': {
-        fontSize: '1.6rem',
-      }
+      "@media (max-width:600px)": {
+        fontSize: "1.6rem",
+      },
     },
-
 
     h4: {
       fontFamily: "Inter, sans-serif",
       fontWeight: 400,
       color: "black",
-      '@media (max-width:600px)': {
-        fontSize: '1.2rem',
-      }
+      "@media (max-width:600px)": {
+        fontSize: "1.4rem",
+      },
     },
 
     h5: {
       fontFamily: "Inter, sans-serif",
       fontWeight: 400,
       color: "black",
-      '@media (max-width:600px)': {
-        fontSize: '1.2rem',
-      }
+      "@media (max-width:600px)": {
+        fontSize: "1.2rem",
+      },
     },
 
     h6: {
       fontFamily: "Inter, sans-serif",
       fontWeight: 200,
       color: "#fc801a",
-      '@media (max-width:600px)': {
-        fontSize: '1rem',
-      }
+      "@media (max-width:600px)": {
+        fontSize: "1rem",
+      },
     },
 
     body1: {
       fontFamily: "Inter, sans-serif",
       color: "black",
-      fontSize: '1rem',
-      '@media (max-width:600px)': {
-        fontSize: '0.9rem',
-      }
+      fontSize: "1rem",
+      "@media (max-width:600px)": {
+        fontSize: "0.9rem",
+      },
     },
 
     body2: {
       fontFamily: "Inter, sans-serif",
       color: "black",
-      fontSize: '12px',
-      '@media (max-width:600px)': {
-        fontSize: '14px',
-      }
+      fontSize: "12px",
+      "@media (max-width:600px)": {
+        fontSize: "14px",
+      },
     },
   },
 });

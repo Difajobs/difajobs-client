@@ -1,0 +1,82 @@
+$color1: #166079;
+$hover1: #104152;
+$color2: #ffff;
+$color3: #ededed;
+$error: #d32f2f;
+
+.container {
+  display: flex;
+  gap: 20px;
+
+  .card {
+    width: 280px;
+    height: 180px;
+    background: #166079;
+    padding: 20px;
+    border-radius: 15px;
+    overflow: hidden;
+
+    .company {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+
+      .companyDetail {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+
+        .role {
+          color: $color2;
+          font-weight: 600;
+        }
+
+        .name {
+          color: $color2;
+        }
+      }
+    }
+
+    .requirement {
+      display: flex;
+      padding-top: 10px;
+      justify-content: space-between;
+      align-items: center;
+
+      .jobInfo {
+        .location {
+          color: $color3;
+        }
+        .date {
+          color: $color3;
+        }
+      }
+
+      .jobReq {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        .gender {
+          color: $color3;
+        }
+        .divider {
+          border: 1px solid $color3;
+          height: 20px;
+        }
+        .ability {
+          color: $color3;
+        }
+      }
+    }
+
+    .description {
+      padding-top: 20px;
+      height: 75px;
+      overflow-y: hidden;
+
+      .jobDesc {
+        color: $color2;
+      }
+    }
+  }
+}
