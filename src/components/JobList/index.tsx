@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Avatar, Box, Divider, Typography } from "@mui/material";
 import HearingDisabledIcon from "@mui/icons-material/HearingDisabled";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -7,41 +7,67 @@ import PsychologyIcon from "@mui/icons-material/Psychology";
 import MaleIcon from '@mui/icons-material/Male';
 import FemaleIcon from '@mui/icons-material/Female';
 import styles from './JobList.module.scss';
-import dummyData from './dummyData';
+import { jobList } from '../../utils/fetchApi';
+import Pagination from '@mui/material/Pagination';
 
 interface Job {
-  name: string;
-  role: string;
-  company: string;
-  location: string;
-  time: string;
+  id: number;
+  company: {
+    name: string;
+    city: string;
+    logo: string;
+  };
+  title: string;
   description: string;
+  employment_type: string;
+  min_salary: string;
+  max_salary: string;
+  date_posted: string;
 }
 
-interface JobListComponentProps {
-  startIndex: number;
-  endIndex: number;
-}
-
-const JobListComponent: React.FC<JobListComponentProps> = ({ startIndex, endIndex }) => {
+const JobListComponent: React.FC = () => {
   const maxDescriptionLength = 220;
+  const itemsPerPage = 5; // Number of items per page
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await jobList();
+        setJobs(data.data);
+      } catch (error) {
+        console.error("Error fetching job list:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // Calculate the index range for the current page
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentJobs = jobs.slice(startIndex, endIndex);
+
+  const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
+    setCurrentPage(page);
+  };
   return (
     <>
       <Box className={styles.container}>
-        {dummyData.slice(startIndex, endIndex).map((job: Job, index: number) => (
+        {currentJobs.map((job: Job, index: number) => (
           <Box key={index} className={styles.jobList}>
             <Box className={styles.userInfo}>
               <Box className={styles.avatarInfo}>
                 <Avatar className={styles.avatar}>
-                  {job.name.charAt(0)}
+                  {job.company.name.charAt(0)}
                 </Avatar>
                 <Box className={styles.userDetails}>
                   <Typography className={styles.userName}>
-                    {job.name}
+                    {job.company.name}
                   </Typography>
                   <Typography className={styles.companyName}>
-                    {job.role} at {job.company}
+                    {job.title} at {job.company.name}
                   </Typography>
                 </Box>
               </Box>
@@ -61,10 +87,10 @@ const JobListComponent: React.FC<JobListComponentProps> = ({ startIndex, endInde
                 <Divider className={styles.divider} />
                 <Box className={styles.addressWrapper}>
                   <Typography className={styles.location}>
-                    {job.location}
+                    {job.company.city}
                   </Typography>
                   <Typography className={styles.time}>
-                    {job.time}
+                    {new Date(job.date_posted).toLocaleDateString()}
                   </Typography>
                 </Box>
               </Box>
@@ -77,6 +103,13 @@ const JobListComponent: React.FC<JobListComponentProps> = ({ startIndex, endInde
             </Typography>
           </Box>
         ))}
+        <Pagination
+          count={Math.ceil(jobs.length / itemsPerPage)} // Calculate the number of pages
+          page={currentPage}
+          onChange={handlePageChange}
+          variant="outlined"
+          color="primary"
+        />
       </Box>
     </>
   );
