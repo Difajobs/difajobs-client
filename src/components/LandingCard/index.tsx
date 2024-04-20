@@ -1,11 +1,11 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import { Avatar, Divider, Typography } from "@mui/material";
+import { Avatar, Divider, Grid, Typography } from "@mui/material";
 import MaleIcon from "@mui/icons-material/Male";
 import FemaleIcon from "@mui/icons-material/Female";
-import HearingDisabledIcon from "@mui/icons-material/HearingDisabled";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import AccessibleIcon from "@mui/icons-material/Accessible";
+import HearingIcon from "@mui/icons-material/Hearing";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import DirectionsWalkIcon from "@mui/icons-material/DirectionsWalk";
 import PsychologyIcon from "@mui/icons-material/Psychology";
 import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
 import { formatDistanceToNow } from "date-fns";
@@ -35,7 +35,7 @@ interface JobsProps {
 }
 
 const LandingCard: React.FC<JobsProps> = ({ jobs }) => {
-  const limitedJobs = jobs?.slice(0, 5);
+  const limitedJobs = jobs?.slice(0, 4);
 
   const formatDatePosted = (dateString: string) => {
     const date = new Date(dateString);
@@ -43,7 +43,7 @@ const LandingCard: React.FC<JobsProps> = ({ jobs }) => {
   };
 
   return (
-    <Box className={styles.container}>
+    <Grid container spacing={1} className={styles.container}>
       {limitedJobs?.map((job: Job) => (
         <Box key={job.id} className={styles.card}>
           <Box className={styles.company}>
@@ -94,18 +94,16 @@ const LandingCard: React.FC<JobsProps> = ({ jobs }) => {
                     switch (ability) {
                       case "mobilitas":
                         icon = (
-                          <AccessibleIcon key={index} sx={{ width: 20 }} />
+                          <DirectionsWalkIcon key={index} sx={{ width: 20 }} />
                         );
                         break;
                       case "penglihatan":
                         icon = (
-                          <VisibilityOffIcon key={index} sx={{ width: 20 }} />
+                          <VisibilityIcon key={index} sx={{ width: 20 }} />
                         );
                         break;
-                      case "pendegaran":
-                        icon = (
-                          <HearingDisabledIcon key={index} sx={{ width: 20 }} />
-                        );
+                      case "pendengaran":
+                        icon = <HearingIcon key={index} sx={{ width: 20 }} />;
                         break;
                       case "berbicara":
                         icon = (
@@ -132,7 +130,7 @@ const LandingCard: React.FC<JobsProps> = ({ jobs }) => {
           </Box>
         </Box>
       ))}
-    </Box>
+    </Grid>
   );
 };
 

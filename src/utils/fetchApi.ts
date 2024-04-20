@@ -185,7 +185,7 @@ export const jobList = async () => {
     if (!response.ok) {
       throw new Error(data.message || response.statusText);
     }
-    return data.data;
+    return data;
   } catch (error) {
     throw new Error("An error occurred while verification.");
   }

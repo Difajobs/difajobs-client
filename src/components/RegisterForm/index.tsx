@@ -3,7 +3,7 @@ import JobseekerForm from "./JobseekerForm";
 import CompanyForm from "./CompanyForm";
 import UserForm from "./UserForm";
 import DisabilityForm from "./DisabilityForm";
-import { Box, Button, SelectChangeEvent } from "@mui/material";
+import { Box, SelectChangeEvent } from "@mui/material";
 import {
   registerRecruiter,
   registerJobseeker,
@@ -56,13 +56,13 @@ export default function RegisterForm() {
     }
   };
 
-  const handleSelanjutnya = () => {
-    setActiveStep(activeStep + 1);
-  };
+  // const handleSelanjutnya = () => {
+  //   setActiveStep(activeStep + 1);
+  // };
 
-  const handleBack2 = () => {
-    setActiveStep(activeStep - 1);
-  };
+  // const handleBack2 = () => {
+  //   setActiveStep(activeStep - 1);
+  // };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -107,21 +107,17 @@ export default function RegisterForm() {
 
   const handleDisability = (value: number, checked: boolean) => {
     if (checked) {
-      setDisabilitas((prev) => [...prev, value]);
+      setDisabilitas(prev => [...prev, value]);
     } else {
-      setDisabilitas((prev) =>
-        prev.filter((disability) => disability !== value)
-      );
+      setDisabilitas(prev => prev.filter(disability => disability !== value));
     }
   };
 
   const handleDisabilityList = (id: number, checked: boolean) => {
     if (checked) {
-      setDisabilitasList((prev) => [...prev, id]);
+      setDisabilitasList(prev => [...prev, id]);
     } else {
-      setDisabilitasList((prev) =>
-        prev.filter((disability) => disability !== id)
-      );
+      setDisabilitasList(prev => prev.filter(disability => disability !== id));
     }
   };
 
@@ -260,8 +256,8 @@ export default function RegisterForm() {
       {getStepContent(activeStep)}
       <Box sx={{ display: "flex" }}>
         {/* temporary next and back button */}
-        <Button onClick={handleSelanjutnya}>Selanjutnya</Button>
-        <Button onClick={handleBack2}>Kembali</Button>
+        {/* <Button onClick={handleSelanjutnya}>Selanjutnya</Button>
+        <Button onClick={handleBack2}>Kembali</Button> */}
       </Box>
     </>
   );
