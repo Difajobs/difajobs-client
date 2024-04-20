@@ -1,6 +1,7 @@
 .dashboardContainer {
   height: 100%;
-  padding: 40px 20px 20px 20px;
+  min-height: 100vh;
+  padding: 0px 20px 20px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;

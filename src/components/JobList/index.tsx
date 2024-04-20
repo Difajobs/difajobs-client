@@ -35,7 +35,7 @@ const JobListComponent: React.FC = () => {
     const fetchData = async () => {
       try {
         const data = await jobList();
-        setJobs(data.data);
+        setJobs(data);
       } catch (error) {
         console.error("Error fetching job list:", error);
       }
@@ -44,7 +44,6 @@ const JobListComponent: React.FC = () => {
     fetchData();
   }, []);
 
-  // Calculate the index range for the current page
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentJobs = jobs.slice(startIndex, endIndex);
@@ -52,6 +51,7 @@ const JobListComponent: React.FC = () => {
   const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
     setCurrentPage(page);
   };
+
   return (
     <>
       <Box className={styles.container}>
@@ -60,7 +60,7 @@ const JobListComponent: React.FC = () => {
             <Box className={styles.userInfo}>
               <Box className={styles.avatarInfo}>
                 <Avatar className={styles.avatar}>
-                  {job.company.name.charAt(0)}
+                  {<img src={job.company.logo} width={50} />}
                 </Avatar>
                 <Box className={styles.userDetails}>
                   <Typography className={styles.userName}>
@@ -104,7 +104,8 @@ const JobListComponent: React.FC = () => {
           </Box>
         ))}
         <Pagination
-          count={Math.ceil(jobs.length / itemsPerPage)} // Calculate the number of pages
+          className={styles.pagination}
+          count={Math.ceil(jobs.length / itemsPerPage)}
           page={currentPage}
           onChange={handlePageChange}
           variant="outlined"

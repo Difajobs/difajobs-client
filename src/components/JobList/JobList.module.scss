@@ -105,6 +105,13 @@ $error: #d32f2f;
       width: 100%;
     }
   }
+
+  .pagination {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin: 5px 20px;
+  }
 }
 
 @media screen and (max-width: 768px) {

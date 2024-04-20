@@ -138,6 +138,7 @@ export const sendVerification = async (value: verification) => {
       },
       body: JSON.stringify(value),
     });
+
     const data = await response.json();
 
     if (!response.ok) {
@@ -174,6 +175,25 @@ export const confirmVerification = async (email: string, token: string) => {
 export const jobList = async () => {
   try {
     const response = await fetch(API_URL + "/v1/jobs", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || response.statusText);
+    }
+    return data.data;
+  } catch (error) {
+    throw new Error("An error occurred while verification.");
+  }
+};
+
+export const getUserProfile = async () => {
+  try {
+    const response = await fetch(API_URL + "/v1/user", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
