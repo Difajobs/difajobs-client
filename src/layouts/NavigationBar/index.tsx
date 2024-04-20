@@ -16,7 +16,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
-import NotificationsIcon from "@mui/icons-material/Notifications";
+// import NotificationsIcon from "@mui/icons-material/Notifications";
 import styles from "./NavigationBar.module.scss";
 import difaJobsLogo from "../../assets/images/difajobs-light.webp";
 import { LogoutButton } from "../../components";
@@ -169,7 +169,7 @@ export default function NavBar() {
                     <LogoutButton />
                   </MenuItem>
                 </Menu>
-                <NotificationsIcon className={styles.navbarText} />
+                {/* <NotificationsIcon className={styles.navbarText} /> */}
               </Box>
             </Box>
           </Box>

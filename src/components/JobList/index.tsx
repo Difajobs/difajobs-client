@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { Avatar, Box, Divider, Typography } from "@mui/material";
 import HearingDisabledIcon from "@mui/icons-material/HearingDisabled";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import AccessibleIcon from "@mui/icons-material/Accessible";
 import PsychologyIcon from "@mui/icons-material/Psychology";
-import MaleIcon from '@mui/icons-material/Male';
-import FemaleIcon from '@mui/icons-material/Female';
-import styles from './JobList.module.scss';
-import { jobList } from '../../utils/fetchApi';
-import Pagination from '@mui/material/Pagination';
+import MaleIcon from "@mui/icons-material/Male";
+import FemaleIcon from "@mui/icons-material/Female";
+import styles from "./JobList.module.scss";
+import { jobList } from "../../utils/fetchApi";
+import Pagination from "@mui/material/Pagination";
 
 interface Job {
   id: number;
@@ -35,7 +35,7 @@ const JobListComponent: React.FC = () => {
     const fetchData = async () => {
       try {
         const data = await jobList();
-        setJobs(data);
+        setJobs(data.data);
       } catch (error) {
         console.error("Error fetching job list:", error);
       }
@@ -48,7 +48,10 @@ const JobListComponent: React.FC = () => {
   const endIndex = startIndex + itemsPerPage;
   const currentJobs = jobs.slice(startIndex, endIndex);
 
-  const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
+  const handlePageChange = (
+    _event: React.ChangeEvent<unknown>,
+    page: number
+  ) => {
     setCurrentPage(page);
   };
 
@@ -96,10 +99,9 @@ const JobListComponent: React.FC = () => {
               </Box>
             </Box>
             <Typography className={styles.jobDescription}>
-              {job.description.length > maxDescriptionLength ?
-                `${job.description.slice(0, maxDescriptionLength)}...` :
-                job.description
-              }
+              {job.description.length > maxDescriptionLength
+                ? `${job.description.slice(0, maxDescriptionLength)}...`
+                : job.description}
             </Typography>
           </Box>
         ))}

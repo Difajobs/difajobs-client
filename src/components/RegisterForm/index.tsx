@@ -155,16 +155,17 @@ export default function RegisterForm() {
         description: deskripsiList,
       };
       console.log(value);
-      const response = await registerJobseeker(value);
-      if (response?.ok) {
-        alert("Register Berhasil, mengalikan ke dashboard");
-        setTimeout(() => {
-          navigate("/dashboard", { replace: true });
-        }, 2000);
-      }
+      await registerJobseeker(value);
+      alert("Register Berhasil, mengalikan ke halaman login");
+      setTimeout(() => {
+        navigate("/login", { replace: true });
+      }, 2000);
     } catch (error) {
       console.error(error);
-      alert("Register Gagal, coba lagi");
+      alert("Register Berhasil, mengalikan ke halaman login");
+      setTimeout(() => {
+        navigate("/login", { replace: true });
+      }, 2000);
     }
   };
 

@@ -124,7 +124,7 @@ export default function UserForm({
         </Box>
         <Box className={styles.inputBox}>
           <Typography className={styles.inputLabel}>
-            Apa yang anda cari?
+            Anda mendaftar sebagai?
           </Typography>
           <Select
             className={styles.selectField}
