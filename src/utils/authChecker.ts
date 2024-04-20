@@ -8,7 +8,7 @@ const AuthChecker: React.FC = () => {
     const checkTokenValidity = () => {
       const token = localStorage.getItem("token");
       if (!token) {
-        navigate("/");
+        navigate("/login");
       }
     };
     checkTokenValidity();

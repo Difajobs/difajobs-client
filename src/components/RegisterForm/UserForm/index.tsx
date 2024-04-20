@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import styles from "../RegisterForm.module.scss";
-import googleLogo from "../../../assets/images/google.svg";
+// import googleLogo from "../../../assets/images/google.svg";
 import { ChangeEvent, useState } from "react";
 
 interface UserFormProps {
@@ -134,7 +134,7 @@ export default function UserForm({
             id="role"
             required
           >
-            {roles.map((role) => (
+            {roles.map(role => (
               <MenuItem key={role.key} value={role.value}>
                 {role.key}
               </MenuItem>
@@ -158,7 +158,7 @@ export default function UserForm({
             Selanjutnya
           </Button>
           <Divider className={styles.divider} />
-          <Button className={styles.googleButton}>
+          {/* <Button className={styles.googleButton}>
             <img
               src={googleLogo}
               alt="Google Logo"
@@ -167,10 +167,10 @@ export default function UserForm({
             <Typography className={styles.googleText}>
               Daftar dengan Google
             </Typography>
-          </Button>
+          </Button> */}
           <Typography className={styles.loginText}>
             Sudah punya akun?{" "}
-            <Link to="/" className={styles.registerLink}>
+            <Link to="/login" className={styles.registerLink}>
               Masuk disini
             </Link>
           </Typography>

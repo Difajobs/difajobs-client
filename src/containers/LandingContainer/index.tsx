@@ -1,20 +1,36 @@
 import Box from "@mui/material/Box";
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import hero from "../../assets/images/landing-hero.webp";
 import styles from "./landingContainer.module.scss";
-import { LandingCard } from "../../components";
+import { LandingCard, SkeletonComponent } from "../../components";
 import { useEffect, useState } from "react";
 import { jobList } from "../../utils/fetchApi";
+import { useNavigate } from "react-router-dom";
 
 export default function LandingContainer() {
   const [jobs, setJobs] = useState<[] | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
   useEffect(() => {
     const fecthJobs = async () => {
-      const joblisting = await jobList();
-      setJobs(joblisting);
+      try {
+        const response = await jobList();
+        if (response.success) {
+          setJobs(response.data);
+        } else {
+          console.error("Failed to fetch jobs:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching jobs:", error);
+      } finally {
+        setIsLoading(false);
+      }
     };
     fecthJobs();
   }, []);
+  const handleLogin = () => {
+    navigate("/login");
+  };
   return (
     <Box className={styles.container}>
       <Box className={styles.about}>
@@ -41,8 +57,20 @@ export default function LandingContainer() {
           Lowongan Terbaru :
         </Typography>
         <Box className={styles.joblist}>
-          <LandingCard jobs={jobs} />
+          {isLoading ? <SkeletonComponent /> : <LandingCard jobs={jobs} />}
         </Box>
+        <Button
+          variant="contained"
+          sx={{
+            bgcolor: "#104152",
+            width: "300px",
+            alignSelf: "center",
+            marginTop: "30px",
+          }}
+          onClick={handleLogin}
+        >
+          Masuk untuk melamar
+        </Button>
       </Box>
     </Box>
   );

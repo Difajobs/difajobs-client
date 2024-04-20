@@ -128,7 +128,7 @@ export default function JobseekerForm({
                 id="gender"
                 error={!!validateGender(gender)}
               >
-                {genders.map((gender) => (
+                {genders.map(gender => (
                   <MenuItem key={gender.value} value={gender.value}>
                     {gender.value}
                   </MenuItem>
@@ -207,7 +207,7 @@ export default function JobseekerForm({
                 value={disabilitas}
                 control={
                   <Checkbox
-                    onChange={(e) => handleDisability(1, e.target.checked)}
+                    onChange={e => handleDisability(1, e.target.checked)}
                   />
                 }
                 label={<AccessibleIcon className={styles.disabilityIcon} />}
@@ -219,7 +219,7 @@ export default function JobseekerForm({
                 value={disabilitas}
                 control={
                   <Checkbox
-                    onChange={(e) => handleDisability(2, e.target.checked)}
+                    onChange={e => handleDisability(2, e.target.checked)}
                   />
                 }
                 label={<VisibilityOffIcon className={styles.disabilityIcon} />}
@@ -231,7 +231,7 @@ export default function JobseekerForm({
                 value={disabilitas}
                 control={
                   <Checkbox
-                    onChange={(e) => handleDisability(3, e.target.checked)}
+                    onChange={e => handleDisability(3, e.target.checked)}
                   />
                 }
                 label={
@@ -245,13 +245,13 @@ export default function JobseekerForm({
                 value={disabilitas}
                 control={
                   <Checkbox
-                    onChange={(e) => handleDisability(4, e.target.checked)}
+                    onChange={e => handleDisability(4, e.target.checked)}
                   />
                 }
                 label={<PsychologyIcon className={styles.disabilityIcon} />}
                 labelPlacement="top"
               />
-              <FormControlLabel
+              {/* <FormControlLabel
                 className={styles.formBox}
                 name="kategori disabilitas"
                 value={disabilitas}
@@ -262,7 +262,7 @@ export default function JobseekerForm({
                 }
                 label={<PsychologyIcon className={styles.disabilityIcon} />}
                 labelPlacement="top"
-              />
+              /> */}
             </FormGroup>
           </FormControl>
         </Box>

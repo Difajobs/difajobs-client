@@ -15,10 +15,10 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
-import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import styles from './NavigationBar.module.scss';
-import difaJobsLogo from '../../assets/images/difajobs-light.webp'
+import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import styles from "./NavigationBar.module.scss";
+import difaJobsLogo from "../../assets/images/difajobs-light.webp";
 import { LogoutButton } from "../../components";
 import React from "react";
 
@@ -26,7 +26,7 @@ export default function NavBar() {
   const small = useMediaQuery("(max-width:425px)");
   const full = useMediaQuery("(min-width:426px)");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // Renamed to mobileMenuOpen
-  const [activeSection, setActiveSection] = useState('');
+  const [activeSection, setActiveSection] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -66,26 +66,59 @@ export default function NavBar() {
           <Box className={styles.navbarMobileContainer}>
             <List className={styles.navbarListContainer}>
               <ListItem className={styles.navbarListItem}>
-                <img src={difaJobsLogo}
+                <img
+                  src={difaJobsLogo}
                   className={styles.mobileLogo}
                   alt="Logo"
-                  onClick={() => mobileNavigateTo('')}
+                  onClick={() => mobileNavigateTo("")}
                 />
-                <IconButton onClick={handleMobileMenuClick} aria-label={mobileMenuOpen ? "Collapse menu" : "Expand menu"}>
+                <IconButton
+                  onClick={handleMobileMenuClick}
+                  aria-label={mobileMenuOpen ? "Collapse menu" : "Expand menu"}
+                >
                   <MenuIcon className={styles.burgerButton} />
-                  {mobileMenuOpen ? <ExpandLess className={styles.burgerButton} /> : <ExpandMore className={styles.burgerButton} />}
+                  {mobileMenuOpen ? (
+                    <ExpandLess className={styles.burgerButton} />
+                  ) : (
+                    <ExpandMore className={styles.burgerButton} />
+                  )}
                 </IconButton>
               </ListItem>
-              <Collapse in={mobileMenuOpen} timeout="auto" unmountOnExit className={styles.collapse}>
+              <Collapse
+                in={mobileMenuOpen}
+                timeout="auto"
+                unmountOnExit
+                className={styles.collapse}
+              >
                 <List component="div" disablePadding>
-                  <ListItem className={styles.listItem} onClick={() => mobileNavigateTo('dashboard')}>
+                  <ListItem
+                    className={styles.listItem}
+                    onClick={() => mobileNavigateTo("dashboard")}
+                  >
                     <Typography className={styles.listItemText}>
-                      Beranda {activeSection === 'dashboard' && <span className={styles.arrowIcon}> <ArrowLeftIcon />Anda disini </span>}
+                      Beranda{" "}
+                      {activeSection === "dashboard" && (
+                        <span className={styles.arrowIcon}>
+                          {" "}
+                          <ArrowLeftIcon />
+                          Anda disini{" "}
+                        </span>
+                      )}
                     </Typography>
                   </ListItem>
-                  <ListItem className={styles.listItem} onClick={() => mobileNavigateTo('profile')}>
+                  <ListItem
+                    className={styles.listItem}
+                    onClick={() => mobileNavigateTo("profile")}
+                  >
                     <Typography className={styles.listItemText}>
-                      Akun Saya {activeSection === 'profile' && <span className={styles.arrowIcon}> <ArrowLeftIcon />Anda disini </span>}
+                      Akun Saya{" "}
+                      {activeSection === "profile" && (
+                        <span className={styles.arrowIcon}>
+                          {" "}
+                          <ArrowLeftIcon />
+                          Anda disini{" "}
+                        </span>
+                      )}
                     </Typography>
                   </ListItem>
                   <ListItem>
@@ -100,12 +133,24 @@ export default function NavBar() {
         {full && (
           <Box className={styles.navbarDesktopContainer}>
             <Box className={styles.navbarDesktop}>
-              <img className={styles.desktopLogo} src={difaJobsLogo} alt="Logo" onClick={() => navigateTo('dashboard')} />
+              <img
+                className={styles.desktopLogo}
+                src={difaJobsLogo}
+                alt="Logo"
+                onClick={() => navigateTo("/")}
+              />
               <Box className={styles.navbarMenu}>
-                <Typography className={styles.navbarText} onClick={() => navigateTo('dashboard')} style={{ fontWeight: 'bold' }}>
+                <Typography
+                  className={styles.navbarText}
+                  onClick={() => navigateTo("dashboard")}
+                  style={{ fontWeight: "bold" }}
+                >
                   Beranda
                 </Typography>
-                <Typography className={styles.navbarText} onClick={handleClickMenu}>
+                <Typography
+                  className={styles.navbarText}
+                  onClick={handleClickMenu}
+                >
                   Akun Saya
                 </Typography>
                 <Menu
@@ -114,7 +159,10 @@ export default function NavBar() {
                   open={menuOpen}
                   onClose={handleCloseMenu}
                 >
-                  <MenuItem className={styles.menuItem} onClick={() => navigateTo('profile')}>
+                  <MenuItem
+                    className={styles.menuItem}
+                    onClick={() => navigateTo("profile")}
+                  >
                     Edit Profile
                   </MenuItem>
                   <MenuItem className={styles.menuItem}>
