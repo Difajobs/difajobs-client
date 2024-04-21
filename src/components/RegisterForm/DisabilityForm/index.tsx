@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Checkbox,
-  Divider,
   FormControl,
   FormControlLabel,
   FormGroup,
@@ -113,7 +112,7 @@ export default function DisabilityForm({
             InputProps={{ style: { borderRadius: "20px", height: "52px" } }}
           />
         </Box>
-        <Divider className={styles.divider2} />
+        {/* <Divider className={styles.divider2} /> */}
 
         <Box className={styles.buttonBox2}>
           <Button className={styles.backButton} onClick={handleBack}>

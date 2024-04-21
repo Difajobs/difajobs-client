@@ -50,6 +50,13 @@ export default function LandingContainer() {
             penyandang cacat/disabilitas untuk menemukan pekerjaan yang sesuai
             dengan kemampuan dan keinginan mereka.
           </Typography>
+          <Button
+            className={styles.buttonLogin}
+            variant="contained"
+            onClick={handleLogin}
+          >
+            Masuk untuk melamar
+          </Button>
         </Box>
       </Box>
       <Box className={styles.jobs}>
@@ -59,18 +66,6 @@ export default function LandingContainer() {
         <Box className={styles.joblist}>
           {isLoading ? <SkeletonComponent /> : <LandingCard jobs={jobs} />}
         </Box>
-        <Button
-          variant="contained"
-          sx={{
-            bgcolor: "#104152",
-            width: "300px",
-            alignSelf: "center",
-            marginTop: "30px",
-          }}
-          onClick={handleLogin}
-        >
-          Masuk untuk melamar
-        </Button>
       </Box>
     </Box>
   );

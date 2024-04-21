@@ -1,6 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import { Avatar, Divider, Grid, Typography } from "@mui/material";
+import { Avatar, Grid, Typography } from "@mui/material";
 import MaleIcon from "@mui/icons-material/Male";
 import FemaleIcon from "@mui/icons-material/Female";
 import HearingIcon from "@mui/icons-material/Hearing";
@@ -35,7 +35,7 @@ interface JobsProps {
 }
 
 const LandingCard: React.FC<JobsProps> = ({ jobs }) => {
-  const limitedJobs = jobs?.slice(0, 4);
+  const limitedJobs = jobs?.slice(0, 5);
 
   const formatDatePosted = (dateString: string) => {
     const date = new Date(dateString);
@@ -86,7 +86,7 @@ const LandingCard: React.FC<JobsProps> = ({ jobs }) => {
                   </>
                 )}
               </Typography>
-              <Divider className={styles.divider} />
+              {/* <Divider className={styles.divider} /> */}
               <Typography className={styles.ability}>
                 {job.list_ability.length > 0 &&
                   job.list_ability.map((ability: string, index: number) => {

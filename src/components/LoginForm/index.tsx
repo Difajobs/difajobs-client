@@ -1,4 +1,4 @@
-import { Box, Button, Divider, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
@@ -100,7 +100,7 @@ export default function LoginForm() {
               "Masuk"
             )}
           </Button>
-          <Divider className={styles.divider} />
+          {/* <Divider className={styles.divider} /> */}
           {/* <Button className={styles.googleButton}>
             <img src={googleLogo} alt="Google Logo" className={styles.googleLogo} />
             <Typography className={styles.googleText}>Masuk dengan Google</Typography>

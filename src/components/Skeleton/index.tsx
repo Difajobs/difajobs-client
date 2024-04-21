@@ -13,7 +13,7 @@ export default function SkeletonComponent() {
       }}
     >
       <Grid container spacing={1} className={styles.container}>
-        {[1, 2, 3, 4].map(index => (
+        {[1, 2, 3, 4, 5].map(index => (
           <Skeleton
             key={index}
             sx={{ bgcolor: "grey.900" }}

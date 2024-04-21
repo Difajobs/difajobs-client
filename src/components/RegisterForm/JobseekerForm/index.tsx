@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Checkbox,
-  Divider,
   FormControl,
   FormControlLabel,
   FormGroup,
@@ -266,7 +265,7 @@ export default function JobseekerForm({
             </FormGroup>
           </FormControl>
         </Box>
-        <Divider className={styles.divider2} />
+        {/* <Divider className={styles.divider2} /> */}
         <Box className={styles.buttonBox2}>
           <Button className={styles.backButton} onClick={handleBack}>
             Kembali

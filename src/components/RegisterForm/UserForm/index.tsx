@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Divider,
   MenuItem,
   Select,
   SelectChangeEvent,
@@ -157,7 +156,7 @@ export default function UserForm({
           >
             Selanjutnya
           </Button>
-          <Divider className={styles.divider} />
+          {/* <Divider className={styles.divider} /> */}
           {/* <Button className={styles.googleButton}>
             <img
               src={googleLogo}

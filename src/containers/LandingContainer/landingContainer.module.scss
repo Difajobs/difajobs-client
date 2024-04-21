@@ -5,6 +5,7 @@ $color3: #f1f1f1;
 
 .container {
   min-height: 100vh;
+
   .about {
     display: flex;
     justify-content: center;
@@ -21,8 +22,23 @@ $color3: #f1f1f1;
         font-weight: 700;
         margin-bottom: 20px;
       }
+
       .detail {
         text-align: justify;
+      }
+
+      .buttonLogin {
+        background-color: $color1;
+        color: $color2;
+        height: 45px;
+        width: 100%;
+        max-width: 250px;
+        margin-top: 15px;
+
+        &:hover {
+          background-color: $hover1;
+        }
+
       }
     }
   }
@@ -49,6 +65,7 @@ $color3: #f1f1f1;
     .about {
       padding: 20px 8vw 10px 8vw;
       gap: 30px;
+
       .hero {
         width: 600px;
       }
@@ -75,6 +92,7 @@ $color3: #f1f1f1;
       .hero {
         width: 300px;
       }
+
       .description {
         padding: 2vw;
       }
