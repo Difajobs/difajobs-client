@@ -183,9 +183,9 @@ export default function RegisterForm() {
       };
       const response = await registerRecruiter(value);
       if (response?.ok) {
-        alert("Register Berhasil, mengalikan ke dashboard");
+        alert("Register Berhasil, mengalikan ke Login Page");
         setTimeout(() => {
-          navigate("/dashboard", { replace: true });
+          navigate("/login", { replace: true });
         }, 2000);
       }
     } catch (error) {
