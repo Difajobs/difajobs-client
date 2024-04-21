@@ -90,13 +90,14 @@ $error: #d32f2f;
   .registerText {
     margin-top: 20px;
 
-    .registerLink {
-      text-decoration: none;
-      color: rgb(0, 75, 187);
+  }
 
-      &:hover {
-        text-decoration: underline
-      }
+  .registerLink {
+    text-decoration: none;
+    color: rgb(0, 75, 187);
+
+    &:hover {
+      text-decoration: underline
     }
   }
 }

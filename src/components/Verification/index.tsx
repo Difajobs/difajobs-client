@@ -59,7 +59,7 @@ export default function Verify() {
       <Button className={styles.button} onClick={handleVerifyClick}>
         {loading ? <CircularProgress size={24} /> : "Verify my email"}
       </Button>
-      <Link to={"/"} className={styles.link}>
+      <Link to={"/login"} className={styles.link}>
         Return to site
       </Link>
     </Box>

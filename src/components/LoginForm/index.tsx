@@ -111,6 +111,12 @@ export default function LoginForm() {
               Daftar disini
             </Link>
           </Typography>
+          <Typography className={styles.registerText}>
+            Akun anda belum terverifikasi?
+          </Typography>
+          <Link to="/verification" className={styles.registerLink}>
+            Verifikasi disini
+          </Link>
         </Box>
       </form>
     </Box>
