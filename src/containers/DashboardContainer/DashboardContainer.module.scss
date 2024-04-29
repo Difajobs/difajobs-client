@@ -1,14 +1,15 @@
 .dashboardContainer {
   height: 100%;
-  padding: 40px 20px 20px 20px;
+  min-height: 100vh;
+  padding: 0px 20px 20px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
 
-  .divider {
-    border: 1px solid rgb(212, 212, 212);
-    width: 100%;
-    max-width: 700px;
-  }
+.divider {
+  border: 1px solid rgb(212, 212, 212);
+  width: 100%;
+  max-width: 700px;
 }

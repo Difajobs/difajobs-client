@@ -7,17 +7,13 @@ import { getUserProfile } from '../../utils/fetchApi';
 
 export default function ProfileContainer() {
 
-  const [userProfile, setUserProfile] = useState<{ name: string; email: string; location: string } | null>(null);
-
+  const [userProfile, setUserProfile] = useState<{ fullname: string; email: string; city: string } | null>(null);
+  console.log (userProfile)
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const name = "John Doe";
-        const email = "john@example.com";
-        const location = "New York";
-  
-        const profileData = await getUserProfile(name, email, location);
-        setUserProfile(profileData);
+        const profileData = await getUserProfile();
+        setUserProfile(profileData.data);
       } catch (error) {
         console.error("Error fetching user profile:", error);
       }
@@ -41,9 +37,9 @@ export default function ProfileContainer() {
                 <Box className={styles.profile}>
                   {userProfile ? (
                     <ProfilePicture
-                    name={userProfile?.name || ""}
+                    name={userProfile?.fullname || ""}
                     email={userProfile?.email || ""}
-                    location={userProfile?.location || ""}
+                    location={userProfile?.city || ""}
                     />
                   ) : (
                     <p>Loading...</p>

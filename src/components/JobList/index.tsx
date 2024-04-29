@@ -1,42 +1,76 @@
+import React, { useEffect, useState } from "react";
 import { Avatar, Box, Divider, Typography } from "@mui/material";
 import HearingDisabledIcon from "@mui/icons-material/HearingDisabled";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import AccessibleIcon from "@mui/icons-material/Accessible";
 import PsychologyIcon from "@mui/icons-material/Psychology";
-import MaleIcon from '@mui/icons-material/Male';
-import FemaleIcon from '@mui/icons-material/Female';
-import styles from './JobList.module.scss';
-import Pagination from '@mui/material/Pagination';
-import React, { useState } from 'react';
+import MaleIcon from "@mui/icons-material/Male";
+import FemaleIcon from "@mui/icons-material/Female";
+import styles from "./JobList.module.scss";
+import { jobList } from "../../utils/fetchApi";
+import Pagination from "@mui/material/Pagination";
 
-export default function JobListComponent() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5; // Change this value to adjust the number of items per page
-  const maxDescriptionLength = 220;
-
-  const handleChangePage = (_event: React.ChangeEvent<unknown>, newPage: number) => {
-    setCurrentPage(newPage);
+interface Job {
+  id: number;
+  company: {
+    name: string;
+    city: string;
+    logo: string;
   };
+  title: string;
+  description: string;
+  employment_type: string;
+  min_salary: string;
+  max_salary: string;
+  date_posted: string;
+}
+
+const JobListComponent: React.FC = () => {
+  const maxDescriptionLength = 220;
+  const itemsPerPage = 5; // Number of items per page
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await jobList();
+        setJobs(data.data);
+      } catch (error) {
+        console.error("Error fetching job list:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
+  const currentJobs = jobs.slice(startIndex, endIndex);
+
+  const handlePageChange = (
+    _event: React.ChangeEvent<unknown>,
+    page: number
+  ) => {
+    setCurrentPage(page);
+  };
 
   return (
     <>
       <Box className={styles.container}>
-        {dummyData.slice(startIndex, endIndex).map((job, index) => (
+        {currentJobs.map((job: Job, index: number) => (
           <Box key={index} className={styles.jobList}>
             <Box className={styles.userInfo}>
               <Box className={styles.avatarInfo}>
                 <Avatar className={styles.avatar}>
-                  {job.name.charAt(0)}
+                  {<img src={job.company.logo} width={50} />}
                 </Avatar>
                 <Box className={styles.userDetails}>
                   <Typography className={styles.userName}>
-                    {job.name}
+                    {job.company.name}
                   </Typography>
                   <Typography className={styles.companyName}>
-                    {job.role} at {job.company}
+                    {job.title} at {job.company.name}
                   </Typography>
                 </Box>
               </Box>
@@ -56,105 +90,32 @@ export default function JobListComponent() {
                 <Divider className={styles.divider} />
                 <Box className={styles.addressWrapper}>
                   <Typography className={styles.location}>
-                    {job.location}
+                    {job.company.city}
                   </Typography>
                   <Typography className={styles.time}>
-                    {job.time}
+                    {new Date(job.date_posted).toLocaleDateString()}
                   </Typography>
                 </Box>
               </Box>
             </Box>
             <Typography className={styles.jobDescription}>
-              {job.description.length > maxDescriptionLength ?
-                `${job.description.slice(0, maxDescriptionLength)}...` :
-                job.description
-              }
+              {job.description.length > maxDescriptionLength
+                ? `${job.description.slice(0, maxDescriptionLength)}...`
+                : job.description}
             </Typography>
           </Box>
         ))}
         <Pagination
           className={styles.pagination}
-          count={Math.ceil(dummyData.length / itemsPerPage)}
+          count={Math.ceil(jobs.length / itemsPerPage)}
           page={currentPage}
-          onChange={handleChangePage}
+          onChange={handlePageChange}
+          variant="outlined"
+          color="primary"
         />
       </Box>
     </>
-  )
-}
+  );
+};
 
-// Dummy data
-const dummyData = [
-  {
-    name: "John Doe",
-    role: "Software Engineer",
-    company: "ABC Company",
-    location: "New York",
-    time: "2 days ago",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  },
-  {
-    name: "Jane Smith",
-    role: "UI/UX Designer",
-    company: "XYZ Inc.",
-    location: "San Francisco",
-    time: "1 week ago",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  },
-  {
-    name: "Jane Smith",
-    role: "UI/UX Designer",
-    company: "XYZ Inc.",
-    location: "San Francisco",
-    time: "1 week ago",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  },
-  {
-    name: "Jane Smith",
-    role: "UI/UX Designer",
-    company: "XYZ Inc.",
-    location: "San Francisco",
-    time: "1 week ago",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  },
-  {
-    name: "Jane Smith",
-    role: "UI/UX Designer",
-    company: "XYZ Inc.",
-    location: "San Francisco",
-    time: "1 week ago",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  },
-  {
-    name: "Jane Smith",
-    role: "UI/UX Designer",
-    company: "XYZ Inc.",
-    location: "San Francisco",
-    time: "1 week ago",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  },
-  {
-    name: "Jane Smith",
-    role: "UI/UX Designer",
-    company: "XYZ Inc.",
-    location: "San Francisco",
-    time: "1 week ago",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  },
-  {
-    name: "Jane Smith",
-    role: "UI/UX Designer",
-    company: "XYZ Inc.",
-    location: "San Francisco",
-    time: "1 week ago",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  },
-  {
-    name: "Jane Smith",
-    role: "UI/UX Designer",
-    company: "XYZ Inc.",
-    location: "San Francisco",
-    time: "1 week ago",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  },
-];
+export default JobListComponent;

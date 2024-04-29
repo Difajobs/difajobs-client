@@ -1,5 +1,5 @@
 $color1: #166079;
-$color2: #F1F1F1;
+$color2: #f1f1f1;
 $color3: #c5c5c5;
 
 .navbar {
@@ -45,7 +45,6 @@ $color3: #c5c5c5;
         box-shadow: -4px 6px 10px rgba(0, 0, 0, 0.2);
 
         .listItem {
-
           .listItemText {
             display: flex;
             justify-content: center;
@@ -68,7 +67,6 @@ $color3: #c5c5c5;
           }
         }
       }
-
     }
   }
 
@@ -85,7 +83,7 @@ $color3: #c5c5c5;
       justify-content: space-between;
       align-items: center;
       background-color: $color1;
-      width: 900px;
+      width: 85vw;
       margin: 0px 20px;
 
       .desktopLogo {

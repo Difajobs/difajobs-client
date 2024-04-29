@@ -6,3 +6,4 @@ export { default as NotFoundPage } from "./NotFoundPage";
 export { default as ProfilePage } from "./ProfilePage";
 export { default as VerificationPage } from "./VerificationPage";
 export { default as VerifiedPage } from "./VerifiedPage";
+export { default as LandingPage } from "./LandingPage";
