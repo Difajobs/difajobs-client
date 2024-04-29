@@ -12,48 +12,55 @@ export default function ProfileContainer() {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const profileData = await getUserProfile();
+        const name = "John Doe";
+        const email = "john@example.com";
+        const location = "New York";
+  
+        const profileData = await getUserProfile(name, email, location);
         setUserProfile(profileData);
       } catch (error) {
         console.error("Error fetching user profile:", error);
       }
     };
-
+  
     fetchUserProfile();
   }, []);
 
   return (
     <>
       <Box>
-        <Grid xs={6} md={8}>
+
+        <Grid xs={12} md={8}>
           <Box className={styles.navbar}>
            <NavBar />
           </Box>
         </Grid>
           <Box>
+          <Grid item xs={12} md={4}>
               <Grid xs={6} md={4} className={styles.avatar}> 
-              <Box className={styles.profile}>
-                {userProfile ? (
-                  <ProfilePicture
-                    name={userProfile.name}
-                    email={userProfile.email}
-                    location={userProfile.location}
-                  />
-                ) : (
-                  <p>Loading...</p>
-                )}
-              </Box>
+                <Box className={styles.profile}>
+                  {userProfile ? (
+                    <ProfilePicture
+                    name={userProfile?.name || ""}
+                    email={userProfile?.email || ""}
+                    location={userProfile?.location || ""}
+                    />
+                  ) : (
+                    <p>Loading...</p>
+                  )}
+                </Box>
               </Grid>
               <Grid xs={6} md={4}> 
                 <Box className={styles.tentangsaya}>
                     <ProfileBio/>
                 </Box>
               </Grid>
+            </Grid>
           </Box>   
-          <Grid xs={6} md={8}>
-          <Box className={styles.footer}>
-           <Footer />
-          </Box>
+          <Grid xs={12} md={8}>
+                <Box className={styles.footer}>
+                    <Footer />
+                </Box>
         </Grid>
       </Box>
     </>

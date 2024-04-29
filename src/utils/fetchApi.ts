@@ -171,7 +171,7 @@ export const confirmVerification = async (email: string, token: string) => {
 export const getUserProfile = async () => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(API_URL + "/v1/user/profile", {
+    const response = await fetch(`${API_URL}/v1/user`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
