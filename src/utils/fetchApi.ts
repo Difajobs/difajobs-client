@@ -193,19 +193,23 @@ export const jobList = async () => {
 
 export const getUserProfile = async () => {
   try {
-    const response = await fetch(API_URL + "/v1/user", {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${API_URL}/v1/user`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
       },
     });
+    
     const data = await response.json();
 
     if (!response.ok) {
       throw new Error(data.message || response.statusText);
     }
-    return data.data;
+    
+    return data;
   } catch (error) {
-    throw new Error("An error occurred while verification.");
+    throw new Error("An error occurred while fetching user profile.");
   }
 };
