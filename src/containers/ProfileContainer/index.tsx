@@ -38,7 +38,7 @@ export default function ProfileContainer() {
                   {userProfile ? (
                     <ProfilePicture
                     name={userProfile?.fullname || ""}
-                    email={userProfile?.email || ""}
+                    email={userProfile?.user.email || ""}
                     location={userProfile?.city || ""}
                     />
                   ) : (
