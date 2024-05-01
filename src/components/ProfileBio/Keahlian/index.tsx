@@ -14,7 +14,7 @@ const Keahlian: React.FC = () => {
         <Grid item xs={12} md={6}>
             <Box className={styles.keahlian}>
               <Typography className={styles.inputLabel}>
-                Ringkasan Pribadi
+                Keahlian
               </Typography>
               <TextField
                 className={styles.ringkasanpribadi}
