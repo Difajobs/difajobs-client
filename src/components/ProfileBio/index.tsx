@@ -4,13 +4,31 @@ import Keahlian from "./Keahlian";
 import Disabilitas from "./Disabilitas";
 import styles from './ProfileBio.module.scss';
 
-export default function ProfileBio() {
+interface ProfileBioProps {
+  namaLengkap: string;
+  nomorTelepon: string;
+  kotaKabupaten: string;
+  ttl: string;
+  jenisKelamin: string;
+  ringkasanPribadi: string;
+}
+
+export default function ProfileBio(props: ProfileBioProps) {
+  const { namaLengkap, nomorTelepon, kotaKabupaten, ttl, jenisKelamin, ringkasanPribadi } = props;
+  
   return (
     <>
       <Box>
         <Grid xs={6} md={4}>
           <Box className={styles.tentangsaya}>
-           <TentangSaya />
+           <TentangSaya 
+             namaLengkap={namaLengkap} 
+             nomorTelepon={nomorTelepon} 
+             kotaKabupaten={kotaKabupaten} 
+             ttl={ttl} 
+             jenisKelamin={jenisKelamin} 
+             ringkasanPribadi={ringkasanPribadi} 
+           />
           </Box>
         </Grid>
         <Grid xs={6} md={4}>

@@ -7,7 +7,14 @@ import { getUserProfile } from '../../utils/fetchApi';
 
 export default function ProfileContainer() {
   const [userProfile, setUserProfile] = useState<{
-    userEmail: string; fullname: string; email: string; city: string 
+    userEmail: string; 
+    name: string; 
+    email: string; 
+    city: string; 
+    phone: string;
+    gender: string;
+    description: string;
+    dob: string;
   } | null>(null);
 
   useEffect(() => {
@@ -17,9 +24,13 @@ export default function ProfileContainer() {
         const userEmail = profileData.data.user?.email || "";
         setUserProfile({ 
           userEmail,
-          fullname: profileData.data.fullname,
+          name: profileData.data.fullname,
           email: profileData.data.email,
-          city: profileData.data.city
+          city: profileData.data.city,
+          phone: profileData.data.phone_number,
+          gender: profileData.data.gender,
+          description: profileData.data.description,
+          dob: profileData.data.dob,
         });
       } catch (error) {
         console.error("Error fetching user profile:", error);
@@ -42,7 +53,7 @@ export default function ProfileContainer() {
             <Box className={styles.profile}>
               {userProfile ? (
                 <ProfilePicture
-                  name={userProfile?.fullname || ""}
+                  name={userProfile?.name || ""}
                   email={userProfile?.userEmail || ""}
                   location={userProfile?.city || ""}
                 />
@@ -53,7 +64,18 @@ export default function ProfileContainer() {
           </Grid>
           <Grid xs={6} md={4}> 
             <Box className={styles.tentangsaya}>
-              <ProfileBio/>
+              {userProfile ? (
+                <ProfileBio
+                  namaLengkap={userProfile.name} 
+                  nomorTelepon={userProfile.phone} 
+                  kotaKabupaten={userProfile?.city || ""}
+                  ttl={userProfile.dob}  
+                  jenisKelamin={userProfile.gender}  
+                  ringkasanPribadi={userProfile.description}                
+                  />
+              ) : (
+                <p>Loading...</p>
+              )}
             </Box>
           </Grid>
         </Grid>
