@@ -104,13 +104,8 @@ $error: #d32f2f;
 
 
 @media screen and (max-width:640px) {
-  .loginContainer {
-    .logoBox {
-      display: none;
-    }
-
-    .formContainer {
-      width: 100%;
-    }
+  .formContainer {
+    width: 100%;
+    min-width: 280px;
   }
 }

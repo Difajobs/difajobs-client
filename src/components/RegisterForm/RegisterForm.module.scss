@@ -47,6 +47,7 @@ $color3: #9c9c9c;
         justify-content: space-between;
         margin: 0 10px;
       }
+
       .disabilityIcon {
         font-size: 2rem;
       }
@@ -236,5 +237,6 @@ $color3: #9c9c9c;
 @media screen and (max-width: 640px) {
   .formContainer {
     width: 100%;
+    min-width: 280px;
   }
 }

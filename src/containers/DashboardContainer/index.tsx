@@ -4,7 +4,7 @@ import {
   JobSearchBox,
   // ProfileDashboard,
 } from "../../components";
-import { Box, Divider } from "@mui/material";
+import { Box } from "@mui/material";
 import styles from "./DashboardContainer.module.scss";
 
 const JobListContainer: React.FC = () => {
@@ -12,7 +12,7 @@ const JobListContainer: React.FC = () => {
     <>
       <Box className={styles.dashboardContainer}>
         {/* <ProfileDashboard /> */}
-        <Divider className={styles.divider} />
+        {/* <Divider className={styles.divider} /> */}
         <JobSearchBox />
         <JobListComponent />
       </Box>

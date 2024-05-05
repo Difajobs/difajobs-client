@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import ExpandLess from "@mui/icons-material/ExpandLess";
@@ -14,34 +14,46 @@ import {
   Typography,
   Menu,
   MenuItem,
+  Divider,
 } from "@mui/material";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
-// import NotificationsIcon from "@mui/icons-material/Notifications";
-import styles from "./NavigationBar.module.scss";
 import difaJobsLogo from "../../assets/images/difajobs-light.webp";
-import { LogoutButton } from "../../components";
-import React from "react";
+import LogoutButton from "../../components/LogoutButton";
+import styles from "./NavigationBar.module.scss";
 
-export default function NavBar() {
+interface NavBarProps {
+  // 
+}
+
+const NavBar: React.FC<NavBarProps> = () => {
   const small = useMediaQuery("(max-width:425px)");
   const full = useMediaQuery("(min-width:426px)");
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // Renamed to mobileMenuOpen
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    // Update active section when location changes
     const path = location.pathname;
-    const section = path.substring(1); // Assuming paths start with "/"
+    const section = path.substring(1);
     setActiveSection(section);
-  }, [location]); // Re-run effect when location changes
 
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const menuOpen = Boolean(anchorEl); // Renamed to menuOpen
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [location]);
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const menuOpen = Boolean(anchorEl);
+
   const handleClickMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleCloseMenu = () => {
     setAnchorEl(null);
   };
@@ -57,6 +69,25 @@ export default function NavBar() {
   const mobileNavigateTo = (section: string) => {
     navigate("/" + section);
     setMobileMenuOpen(false);
+  };
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+    navigate("/login");
+  };
+
+  const handleRegister = () => {
+    navigate("/register");
+  };
+
+  const handleVerification = () => {
+    navigate("/verification");
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem("token");
+    navigate("/");
   };
 
   return (
@@ -93,11 +124,11 @@ export default function NavBar() {
                 <List component="div" disablePadding>
                   <ListItem
                     className={styles.listItem}
-                    onClick={() => mobileNavigateTo("dashboard")}
+                    onClick={() => mobileNavigateTo("")}
                   >
                     <Typography className={styles.listItemText}>
                       Beranda{" "}
-                      {activeSection === "dashboard" && (
+                      {activeSection === "" && (
                         <span className={styles.arrowIcon}>
                           {" "}
                           <ArrowLeftIcon />
@@ -106,24 +137,81 @@ export default function NavBar() {
                       )}
                     </Typography>
                   </ListItem>
-                  <ListItem
-                    className={styles.listItem}
-                    onClick={() => mobileNavigateTo("profile")}
-                  >
-                    <Typography className={styles.listItemText}>
-                      Akun Saya{" "}
-                      {activeSection === "profile" && (
-                        <span className={styles.arrowIcon}>
-                          {" "}
-                          <ArrowLeftIcon />
-                          Anda disini{" "}
-                        </span>
-                      )}
-                    </Typography>
-                  </ListItem>
-                  <ListItem>
-                    <LogoutButton />
-                  </ListItem>
+                  {isLoggedIn && (
+                    <ListItem
+                      className={styles.listItem}
+                      onClick={() => mobileNavigateTo("dashboard")}
+                    >
+                      <Typography className={styles.listItemText}>
+                        Lowongan Pekerjaan{" "}
+                        {activeSection === "dashboard" && (
+                          <span className={styles.arrowIcon}>
+                            {" "}
+                            <ArrowLeftIcon />
+                            Anda disini{" "}
+                          </span>
+                        )}
+                      </Typography>
+                    </ListItem>
+                  )}
+                  {isLoggedIn ? (
+                    <>
+                      <ListItem className={styles.listItem} onClick={() => mobileNavigateTo('profile')}>
+                        <Typography className={styles.listItemText}>
+                          Akun Saya{' '}
+                          {activeSection === 'profile' && (
+                            <span className={styles.arrowIcon}>
+                              {' '}
+                              <ArrowLeftIcon />
+                              Anda disini{' '}
+                            </span>
+                          )}
+                        </Typography>
+                      </ListItem>
+                      <ListItem>
+                        <LogoutButton onLogout={handleLogout} />
+                      </ListItem>
+                    </>
+                  ) : (
+                    <>
+                      <ListItem className={styles.listItem} onClick={() => mobileNavigateTo('login')}>
+                        <Typography className={styles.listItemText}>
+                          Masuk{' '}
+                          {activeSection === 'login' && (
+                            <span className={styles.arrowIcon}>
+                              {' '}
+                              <ArrowLeftIcon />
+                              Anda disini{' '}
+                            </span>
+                          )}
+                        </Typography>
+                      </ListItem>
+                      <ListItem className={styles.listItem} onClick={() => mobileNavigateTo('register')}>
+                        <Typography className={styles.listItemText}>
+                          Daftar{' '}
+                          {activeSection === 'register' && (
+                            <span className={styles.arrowIcon}>
+                              {' '}
+                              <ArrowLeftIcon />
+                              Anda disini{' '}
+                            </span>
+                          )}
+                        </Typography>
+                      </ListItem>
+                      <ListItem className={styles.listItem} onClick={() => mobileNavigateTo('verification')}>
+                        <Typography className={styles.listItemText}>
+                          Verifikasi Akun{' '}
+                          {activeSection === 'verification' && (
+                            <span className={styles.arrowIcon}>
+                              {' '}
+                              <ArrowLeftIcon />
+                              Anda disini{' '}
+                            </span>
+                          )}
+                        </Typography>
+                      </ListItem>
+                    </>
+                  )}
                 </List>
               </Collapse>
             </List>
@@ -137,16 +225,24 @@ export default function NavBar() {
                 className={styles.desktopLogo}
                 src={difaJobsLogo}
                 alt="Logo"
-                onClick={() => navigateTo("/")}
+                onClick={() => navigateTo("")}
               />
               <Box className={styles.navbarMenu}>
                 <Typography
                   className={styles.navbarText}
-                  onClick={() => navigateTo("dashboard")}
+                  onClick={() => navigateTo("")}
                   style={{ fontWeight: "bold" }}
                 >
                   Beranda
                 </Typography>
+                {isLoggedIn && (
+                  <Typography
+                    className={styles.navbarText}
+                    onClick={() => navigateTo("dashboard")}
+                  >
+                    Lowongan Pekerjaan
+                  </Typography>
+                )}
                 <Typography
                   className={styles.navbarText}
                   onClick={handleClickMenu}
@@ -159,17 +255,36 @@ export default function NavBar() {
                   open={menuOpen}
                   onClose={handleCloseMenu}
                 >
-                  <MenuItem
-                    className={styles.menuItem}
-                    onClick={() => navigateTo("profile")}
-                  >
-                    Edit Profile
-                  </MenuItem>
-                  <MenuItem className={styles.menuItem}>
-                    <LogoutButton />
-                  </MenuItem>
+                  {isLoggedIn ? (
+                    // Jika sudah login, tampilkan opsi Edit Profile dan Logout
+                    <>
+                      <MenuItem
+                        className={styles.menuItem}
+                        onClick={() => navigateTo("profile")}
+                      >
+                        Edit Profile
+                      </MenuItem>
+                      <MenuItem>
+                        <LogoutButton onLogout={handleLogout} />
+                      </MenuItem>
+                    </>
+                  ) : (
+                    // Jika belum login, tampilkan tombol Login
+                    <>
+                      <MenuItem onClick={handleLogin}>
+                        Masuk
+                      </MenuItem>
+                      <Divider />
+                      <MenuItem onClick={handleRegister}>
+                        Daftar
+                      </MenuItem>
+                      <Divider />
+                      <MenuItem onClick={handleVerification}>
+                        Verifikasi Akun
+                      </MenuItem>
+                    </>
+                  )}
                 </Menu>
-                {/* <NotificationsIcon className={styles.navbarText} /> */}
               </Box>
             </Box>
           </Box>
@@ -177,4 +292,6 @@ export default function NavBar() {
       </AppBar>
     </>
   );
-}
+};
+
+export default NavBar;
