@@ -9,6 +9,7 @@ import FemaleIcon from "@mui/icons-material/Female";
 import styles from "./JobList.module.scss";
 import { jobList } from "../../utils/fetchApi";
 import Pagination from "@mui/material/Pagination";
+import DashboardSkeleton from "./DashboardSkeleton/index";
 
 interface Job {
   id: number;
@@ -27,15 +28,17 @@ interface Job {
 
 const JobListComponent: React.FC = () => {
   const maxDescriptionLength = 220;
-  const itemsPerPage = 5; // Number of items per page
+  const itemsPerPage = 5;
   const [jobs, setJobs] = useState<Job[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await jobList();
         setJobs(data.data);
+        setIsLoading(false); // Set loading to false once data is fetched
       } catch (error) {
         console.error("Error fetching job list:", error);
       }
@@ -57,63 +60,67 @@ const JobListComponent: React.FC = () => {
 
   return (
     <>
-      <Box className={styles.container}>
-        {currentJobs.map((job: Job, index: number) => (
-          <Box key={index} className={styles.jobList}>
-            <Box className={styles.userInfo}>
-              <Box className={styles.avatarInfo}>
-                <Avatar className={styles.avatar}>
-                  {<img src={job.company.logo} width={50} />}
-                </Avatar>
-                <Box className={styles.userDetails}>
-                  <Typography className={styles.userName}>
-                    {job.company.name}
-                  </Typography>
-                  <Typography className={styles.companyName}>
-                    {job.title} at {job.company.name}
-                  </Typography>
-                </Box>
-              </Box>
-              <Box className={styles.iconsInfo}>
-                <Box className={styles.iconWrapper}>
-                  <Box className={styles.genderIcons}>
-                    <MaleIcon />
-                    <FemaleIcon />
-                  </Box>
-                  <Box className={styles.otherIcons}>
-                    <HearingDisabledIcon />
-                    <VisibilityOffIcon />
-                    <AccessibleIcon />
-                    <PsychologyIcon />
+      {isLoading ? (
+        <DashboardSkeleton />
+      ) : (
+        <Box className={styles.container}>
+          {currentJobs.map((job: Job, index: number) => (
+            <Box key={index} className={styles.jobList}>
+              <Box className={styles.userInfo}>
+                <Box className={styles.avatarInfo}>
+                  <Avatar className={styles.avatar}>
+                    {<img src={job.company.logo} width={50} />}
+                  </Avatar>
+                  <Box className={styles.userDetails}>
+                    <Typography className={styles.userName}>
+                      {job.company.name}
+                    </Typography>
+                    <Typography className={styles.companyName}>
+                      {job.title} at {job.company.name}
+                    </Typography>
                   </Box>
                 </Box>
-                <Divider className={styles.divider} />
-                <Box className={styles.addressWrapper}>
-                  <Typography className={styles.location}>
-                    {job.company.city}
-                  </Typography>
-                  <Typography className={styles.time}>
-                    {new Date(job.date_posted).toLocaleDateString()}
-                  </Typography>
+                <Box className={styles.iconsInfo}>
+                  <Box className={styles.iconWrapper}>
+                    <Box className={styles.genderIcons}>
+                      <MaleIcon />
+                      <FemaleIcon />
+                    </Box>
+                    <Box className={styles.otherIcons}>
+                      <HearingDisabledIcon />
+                      <VisibilityOffIcon />
+                      <AccessibleIcon />
+                      <PsychologyIcon />
+                    </Box>
+                  </Box>
+                  <Divider className={styles.divider} />
+                  <Box className={styles.addressWrapper}>
+                    <Typography className={styles.location}>
+                      {job.company.city}
+                    </Typography>
+                    <Typography className={styles.time}>
+                      {new Date(job.date_posted).toLocaleDateString()}
+                    </Typography>
+                  </Box>
                 </Box>
               </Box>
+              <Typography className={styles.jobDescription}>
+                {job.description.length > maxDescriptionLength
+                  ? `${job.description.slice(0, maxDescriptionLength)}...`
+                  : job.description}
+              </Typography>
             </Box>
-            <Typography className={styles.jobDescription}>
-              {job.description.length > maxDescriptionLength
-                ? `${job.description.slice(0, maxDescriptionLength)}...`
-                : job.description}
-            </Typography>
-          </Box>
-        ))}
-        <Pagination
-          className={styles.pagination}
-          count={Math.ceil(jobs.length / itemsPerPage)}
-          page={currentPage}
-          onChange={handlePageChange}
-          variant="outlined"
-          color="primary"
-        />
-      </Box>
+          ))}
+          <Pagination
+            className={styles.pagination}
+            count={Math.ceil(jobs.length / itemsPerPage)}
+            page={currentPage}
+            onChange={handlePageChange}
+            variant="outlined"
+            color="primary"
+          />
+        </Box>
+      )}
     </>
   );
 };
