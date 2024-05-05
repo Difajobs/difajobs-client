@@ -4,6 +4,10 @@ import styles from "./LogoutButton.module.scss";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+interface LogoutButtonProps {
+  onLogout: () => void;
+}
+
 const style = {
   position: "absolute",
   display: "flex",
@@ -19,14 +23,17 @@ const style = {
   p: 4,
 };
 
-export default function LogoutButton() {
+const LogoutButton: React.FC<LogoutButtonProps> = ({ onLogout }) => {
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const removeToken = () => {
+
+  const handleLogout = () => {
     localStorage.removeItem("token");
     handleClose();
+    onLogout();
     navigate("/");
   };
 
@@ -53,7 +60,7 @@ export default function LogoutButton() {
                 color: "white",
                 "&:hover": { backgroundColor: "rgb(114, 11, 11)" },
               }}
-              onClick={removeToken}
+              onClick={handleLogout}
             >
               Keluar
             </Button>
@@ -70,4 +77,6 @@ export default function LogoutButton() {
       </Modal>
     </>
   );
-}
+};
+
+export default LogoutButton;
