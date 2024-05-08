@@ -33,3 +33,10 @@ $color1 : #F1F1F1;
     .footer {
         flex-shrink: 0;
       }
+
+      .loading {
+        display: flex;
+        justify-content: center;
+        margin-top: 20%;
+        margin-bottom: 100%;
+      }

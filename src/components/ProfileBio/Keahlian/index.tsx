@@ -2,7 +2,15 @@ import React from 'react';
 import { Box, Grid, TextField, Typography } from '@mui/material';
 import styles from './Keahlian.module.scss';
 
-const Keahlian: React.FC = () => {
+interface KeahlianProps {
+  keahlian: string;
+  sertifikat: string;
+}
+
+const Keahlian: React.FC<KeahlianProps> = ({
+  keahlian,
+  sertifikat,
+}) => { 
   return (
     <Box className={styles.root}>
       <Box className={styles.formContainer}>
@@ -20,6 +28,8 @@ const Keahlian: React.FC = () => {
                 className={styles.ringkasanpribadi}
                 variant="outlined"
                 InputProps={{ style: { borderRadius: '10px', height: '200px' } }}
+                value={keahlian}
+                disabled
               />
             </Box>
           </Grid>
@@ -32,6 +42,8 @@ const Keahlian: React.FC = () => {
                 className={styles.ringkasanpribadi}
                 variant="outlined"
                 InputProps={{ style: { borderRadius: '10px', height: '200px' } }}
+                value={sertifikat}
+                disabled
               />
             </Box>
           </Grid>

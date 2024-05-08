@@ -11,10 +11,22 @@ interface ProfileBioProps {
   ttl: string;
   jenisKelamin: string;
   ringkasanPribadi: string;
+  keahlian: string;
+  sertifikat: string;
 }
 
 export default function ProfileBio(props: ProfileBioProps) {
-  const { namaLengkap, nomorTelepon, kotaKabupaten, ttl, jenisKelamin, ringkasanPribadi } = props;
+  const { 
+    namaLengkap, 
+    nomorTelepon, 
+    kotaKabupaten, 
+    ttl, 
+    jenisKelamin, 
+    ringkasanPribadi, 
+    keahlian,
+    sertifikat
+   } 
+    = props;
   
   return (
     <>
@@ -33,7 +45,10 @@ export default function ProfileBio(props: ProfileBioProps) {
         </Grid>
         <Grid xs={6} md={4}>
           <Box className={styles.keahlian}>
-           <Keahlian />
+           <Keahlian 
+           keahlian={keahlian} 
+           sertifikat={sertifikat} 
+           />
           </Box>
         </Grid>
         <Grid xs={6} md={4}>
