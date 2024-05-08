@@ -20,7 +20,7 @@ interface Props {
 const ProfilePicture: React.FC<Props> = ({ name, email, location }) => {
   return (
     <Box className={styles.root}>
-      <Image className={styles.avatar} src="https://i.ibb.co/5js0nqy/print-1.png" alt="Profile" />
+      <Image className={styles.avatar} src="https://iili.io/Jrg0dgV.md.png" alt="Profile" />
       <Typography className={styles.profile} variant="h5">{name}</Typography>
       <Typography className={styles.profile} variant="body1">{email}</Typography>
       <Typography className={styles.profile} variant="body1">{location}</Typography>
