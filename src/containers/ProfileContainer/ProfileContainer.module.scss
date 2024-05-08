@@ -40,3 +40,22 @@ $color1 : #F1F1F1;
         margin-top: 20%;
         margin-bottom: 100%;
       }
+
+      @media screen and (max-width: "425px") {
+
+        .footer {
+            flex-shrink: 0;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+          }
+
+        .tentangsaya{
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto 160px;
+            border-radius: 20px;
+        }
+      }
