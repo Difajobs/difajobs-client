@@ -19,6 +19,8 @@ const TentangSaya: React.FC<TentangSayaProps> = ({
   jenisKelamin,
   ringkasanPribadi,
 }) => {
+  const formattedTTL = new Date(ttl).toLocaleDateString('id-ID');
+
   return (
     <Box className={styles.root}>
       <Box className={styles.formContainer}>
@@ -72,13 +74,13 @@ const TentangSaya: React.FC<TentangSayaProps> = ({
           <Grid item xs={12} md={6}>
             <Box className={styles.tentangsaya}>
               <Typography className={styles.inputLabel}>
-                Tempat, Tanggal Lahir
+                Tanggal Lahir
               </Typography>
               <TextField 
                 className={styles.inputfield}
                 variant="outlined"
                 InputProps={{ style: { borderRadius: '10px', height: '42px' } }}
-                value={ttl}
+                value={formattedTTL}
                 disabled
               />
             </Box>
