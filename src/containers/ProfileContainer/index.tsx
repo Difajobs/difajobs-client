@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Grid } from "@mui/material";
 import styles from './ProfileContainer.module.scss';
 import { ProfileBio, ProfilePicture } from "../../components";

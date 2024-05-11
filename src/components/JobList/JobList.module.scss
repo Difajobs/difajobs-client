@@ -91,6 +91,11 @@ $error: #d32f2f;
 
           .time {
             color: $color2;
+            max-width: 120px;
+
+            @media screen and (max-width: 768px) {
+              max-width: 300px;
+            }
           }
         }
       }

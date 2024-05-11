@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Avatar, Box, Divider, Typography } from "@mui/material";
-import HearingDisabledIcon from "@mui/icons-material/HearingDisabled";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import AccessibleIcon from "@mui/icons-material/Accessible";
-import PsychologyIcon from "@mui/icons-material/Psychology";
 import MaleIcon from "@mui/icons-material/Male";
 import FemaleIcon from "@mui/icons-material/Female";
+import HearingIcon from "@mui/icons-material/Hearing";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import DirectionsWalkIcon from "@mui/icons-material/DirectionsWalk";
+import PsychologyIcon from "@mui/icons-material/Psychology";
+import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
+import Pagination from "@mui/material/Pagination";
+import { formatDistanceToNow } from "date-fns";
+import { id } from "date-fns/locale";
+
+import DashboardSkeleton from "./DashboardSkeleton/index";
 import styles from "./JobList.module.scss";
 import { jobList } from "../../utils/fetchApi";
-import Pagination from "@mui/material/Pagination";
-import DashboardSkeleton from "./DashboardSkeleton/index";
 
 interface Job {
   id: number;
@@ -24,6 +28,9 @@ interface Job {
   min_salary: string;
   max_salary: string;
   date_posted: string;
+  gender: string;
+  list_ability: string[];
+  required_skills: string[];
 }
 
 const JobListComponent: React.FC = () => {
@@ -58,6 +65,11 @@ const JobListComponent: React.FC = () => {
     setCurrentPage(page);
   };
 
+  const formatDatePosted = (dateString: string) => {
+    const date = new Date(dateString);
+    return formatDistanceToNow(date, { addSuffix: true, locale: id });
+  };
+
   return (
     <>
       {isLoading ? (
@@ -83,14 +95,54 @@ const JobListComponent: React.FC = () => {
                 <Box className={styles.iconsInfo}>
                   <Box className={styles.iconWrapper}>
                     <Box className={styles.genderIcons}>
-                      <MaleIcon />
-                      <FemaleIcon />
+                      {job.gender === null ? (
+                        <>
+                          <MaleIcon sx={{ width: 20 }} />
+                          <FemaleIcon sx={{ width: 20 }} />
+                        </>
+                      ) : job.gender === "laki-laki" ? (
+                        <>
+                          <MaleIcon sx={{ width: 20 }} />
+                        </>
+                      ) : (
+                        <>
+                          <FemaleIcon sx={{ width: 20 }} />
+                        </>
+                      )}
                     </Box>
                     <Box className={styles.otherIcons}>
-                      <HearingDisabledIcon />
-                      <VisibilityOffIcon />
-                      <AccessibleIcon />
-                      <PsychologyIcon />
+                      {job.list_ability.length > 0 &&
+                        job.list_ability.map((ability: string, index: number) => {
+                          let icon;
+                          switch (ability) {
+                            case "mobilitas":
+                              icon = (
+                                <DirectionsWalkIcon key={index} sx={{ width: 20 }} />
+                              );
+                              break;
+                            case "penglihatan":
+                              icon = (
+                                <VisibilityIcon key={index} sx={{ width: 20 }} />
+                              );
+                              break;
+                            case "pendengaran":
+                              icon = <HearingIcon key={index} sx={{ width: 20 }} />;
+                              break;
+                            case "berbicara":
+                              icon = (
+                                <RecordVoiceOverIcon key={index} sx={{ width: 20 }} />
+                              );
+                              break;
+                            case "kesehatan rohani":
+                              icon = (
+                                <PsychologyIcon key={index} sx={{ width: 20 }} />
+                              );
+                              break;
+                            default:
+                              icon = null;
+                          }
+                          return icon;
+                        })}
                     </Box>
                   </Box>
                   <Divider className={styles.divider} />
@@ -99,7 +151,7 @@ const JobListComponent: React.FC = () => {
                       {job.company.city}
                     </Typography>
                     <Typography className={styles.time}>
-                      {new Date(job.date_posted).toLocaleDateString()}
+                      {formatDatePosted(job.date_posted)}
                     </Typography>
                   </Box>
                 </Box>
