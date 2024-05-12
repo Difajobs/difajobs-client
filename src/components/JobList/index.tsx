@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Avatar, Typography, Divider } from "@mui/material";
 import {
   Male as MaleIcon,
@@ -13,24 +13,8 @@ import { formatDistanceToNow } from "date-fns";
 import { id } from "date-fns/locale";
 import Pagination from "@mui/material/Pagination";
 import styles from "./JobList.module.scss";
-
-interface Job {
-  id: number;
-  company: {
-    name: string;
-    city: string;
-    logo: string;
-  };
-  title: string;
-  description: string;
-  employment_type: string;
-  min_salary: string;
-  max_salary: string;
-  date_posted: string;
-  gender: string;
-  list_ability: string[];
-  required_skills: string[];
-}
+import { Job } from "../../utils/type";
+import JobDetailModal from "../JobDetailModal";
 
 interface JobListComponentProps {
   jobs: Job[];
@@ -39,7 +23,8 @@ interface JobListComponentProps {
 const JobListComponent: React.FC<JobListComponentProps> = ({ jobs }) => {
   const maxDescriptionLength = 220;
   const itemsPerPage = 5;
-  const [currentPage, setCurrentPage] = React.useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [selectedJob, setSelectedJob] = useState<Job | null>(null);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -57,6 +42,14 @@ const JobListComponent: React.FC<JobListComponentProps> = ({ jobs }) => {
     return formatDistanceToNow(date, { addSuffix: true, locale: id });
   };
 
+  const handleJobClick = (job: Job) => {
+    setSelectedJob(job);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedJob(null);
+  };
+
   return (
     <>
       {jobs.length === 0 ? (
@@ -66,7 +59,7 @@ const JobListComponent: React.FC<JobListComponentProps> = ({ jobs }) => {
       ) : (
         <Box className={styles.container}>
           {currentJobs.map((job: Job, index: number) => (
-            <Box key={index} className={styles.jobList}>
+            <Box key={index} className={styles.jobList} onClick={() => handleJobClick(job)}>
               <Box className={styles.userInfo}>
                 <Box className={styles.avatarInfo}>
                   <Avatar className={styles.avatar}>
@@ -86,7 +79,7 @@ const JobListComponent: React.FC<JobListComponentProps> = ({ jobs }) => {
                     <Box className={styles.genderIcons}>
                       {job.gender === "laki-laki" ? (
                         <MaleIcon sx={{ width: 20 }} />
-                      ) : job.gender === "perempuan" ? (
+                      ) : job.gender === "perempuan" || job.gender === "wanita" ? (
                         <FemaleIcon sx={{ width: 20 }} />
                       ) : null}
                     </Box>
@@ -142,6 +135,8 @@ const JobListComponent: React.FC<JobListComponentProps> = ({ jobs }) => {
             variant="outlined"
             color="primary"
           />
+          {/* Job Detail Modal */}
+          <JobDetailModal job={selectedJob} open={selectedJob !== null} onClose={handleCloseModal} />
         </Box>
       )}
     </>

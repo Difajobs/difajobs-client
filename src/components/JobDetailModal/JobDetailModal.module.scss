@@ -1,0 +1,27 @@
+$color1 : #166079;
+$hover1 : #104152;
+$color2 : #e2e2e2;
+$color3: #9C9C9C;
+$error: #d32f2f;
+
+.jobDetailContainer {
+  .title {
+    color: $color1;
+    font-weight: 550;
+  }
+
+  .textBody {
+    background-color: $color1;
+  }
+
+  .button {
+    background-color: $color1;
+    color: white;
+    margin-right: 8px;
+
+    &:hover {
+      background-color: $hover1;
+      color: white;
+    }
+  }
+}

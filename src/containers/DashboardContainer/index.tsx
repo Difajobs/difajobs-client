@@ -5,24 +5,7 @@ import { jobList } from "../../utils/fetchApi";
 import { JobListComponent } from "../../components";
 import DashboardSkeleton from "../../components/JobList/DashboardSkeleton";
 import styles from './DashboardContainer.module.scss'
-
-interface Job {
-  id: number;
-  company: {
-    name: string;
-    city: string;
-    logo: string;
-  };
-  title: string;
-  description: string;
-  employment_type: string;
-  min_salary: string;
-  max_salary: string;
-  date_posted: string;
-  gender: string;
-  list_ability: string[];
-  required_skills: string[];
-}
+import { Job } from "../../utils/type";
 
 const DashboardContainer: React.FC = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -35,10 +18,10 @@ const DashboardContainer: React.FC = () => {
         const data = await jobList();
         setJobs(data.data);
         setFilteredJobs(data.data);
-        setLoading(false); // Set loading to false when data is fetched
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching job list:", error);
-        setLoading(false); // Also set loading to false on error
+        setLoading(false);
       }
     };
 
@@ -67,7 +50,7 @@ const DashboardContainer: React.FC = () => {
     <Box className={styles.dashboardContainer}>
       <JobSearchBox onSearch={handleSearch} />
       {loading ? (
-        <DashboardSkeleton /> // Render skeleton while loading
+        <DashboardSkeleton />
       ) : (
         <JobListComponent jobs={filteredJobs} />
       )}
