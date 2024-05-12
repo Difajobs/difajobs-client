@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Avatar, Box, Divider, Typography } from "@mui/material";
-import MaleIcon from "@mui/icons-material/Male";
-import FemaleIcon from "@mui/icons-material/Female";
-import HearingIcon from "@mui/icons-material/Hearing";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import DirectionsWalkIcon from "@mui/icons-material/DirectionsWalk";
-import PsychologyIcon from "@mui/icons-material/Psychology";
-import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
-import Pagination from "@mui/material/Pagination";
+import React from "react";
+import { Box, Avatar, Typography, Divider } from "@mui/material";
+import {
+  Male as MaleIcon,
+  Female as FemaleIcon,
+  Hearing as HearingIcon,
+  Visibility as VisibilityIcon,
+  DirectionsWalk as DirectionsWalkIcon,
+  Psychology as PsychologyIcon,
+  RecordVoiceOver as RecordVoiceOverIcon
+} from "@mui/icons-material";
 import { formatDistanceToNow } from "date-fns";
 import { id } from "date-fns/locale";
-
-import DashboardSkeleton from "./DashboardSkeleton/index";
+import Pagination from "@mui/material/Pagination";
 import styles from "./JobList.module.scss";
-import { jobList } from "../../utils/fetchApi";
 
 interface Job {
   id: number;
@@ -33,26 +32,14 @@ interface Job {
   required_skills: string[];
 }
 
-const JobListComponent: React.FC = () => {
+interface JobListComponentProps {
+  jobs: Job[];
+}
+
+const JobListComponent: React.FC<JobListComponentProps> = ({ jobs }) => {
   const maxDescriptionLength = 220;
   const itemsPerPage = 5;
-  const [jobs, setJobs] = useState<Job[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await jobList();
-        setJobs(data.data);
-        setIsLoading(false); // Set loading to false once data is fetched
-      } catch (error) {
-        console.error("Error fetching job list:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const [currentPage, setCurrentPage] = React.useState(1);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -72,8 +59,10 @@ const JobListComponent: React.FC = () => {
 
   return (
     <>
-      {isLoading ? (
-        <DashboardSkeleton />
+      {jobs.length === 0 ? (
+        <Typography>
+          Tidak Ada Lowongan Pekerjaan
+        </Typography>
       ) : (
         <Box className={styles.container}>
           {currentJobs.map((job: Job, index: number) => (
@@ -81,7 +70,7 @@ const JobListComponent: React.FC = () => {
               <Box className={styles.userInfo}>
                 <Box className={styles.avatarInfo}>
                   <Avatar className={styles.avatar}>
-                    {<img src={job.company.logo} width={50} />}
+                    <img src={job.company.logo} alt="Company Logo" width={50} />
                   </Avatar>
                   <Box className={styles.userDetails}>
                     <Typography className={styles.userName}>
@@ -95,54 +84,36 @@ const JobListComponent: React.FC = () => {
                 <Box className={styles.iconsInfo}>
                   <Box className={styles.iconWrapper}>
                     <Box className={styles.genderIcons}>
-                      {job.gender === null ? (
-                        <>
-                          <MaleIcon sx={{ width: 20 }} />
-                          <FemaleIcon sx={{ width: 20 }} />
-                        </>
-                      ) : job.gender === "laki-laki" ? (
-                        <>
-                          <MaleIcon sx={{ width: 20 }} />
-                        </>
-                      ) : (
-                        <>
-                          <FemaleIcon sx={{ width: 20 }} />
-                        </>
-                      )}
+                      {job.gender === "laki-laki" ? (
+                        <MaleIcon sx={{ width: 20 }} />
+                      ) : job.gender === "perempuan" ? (
+                        <FemaleIcon sx={{ width: 20 }} />
+                      ) : null}
                     </Box>
                     <Box className={styles.otherIcons}>
-                      {job.list_ability.length > 0 &&
-                        job.list_ability.map((ability: string, index: number) => {
-                          let icon;
-                          switch (ability) {
-                            case "mobilitas":
-                              icon = (
-                                <DirectionsWalkIcon key={index} sx={{ width: 20 }} />
-                              );
-                              break;
-                            case "penglihatan":
-                              icon = (
-                                <VisibilityIcon key={index} sx={{ width: 20 }} />
-                              );
-                              break;
-                            case "pendengaran":
-                              icon = <HearingIcon key={index} sx={{ width: 20 }} />;
-                              break;
-                            case "berbicara":
-                              icon = (
-                                <RecordVoiceOverIcon key={index} sx={{ width: 20 }} />
-                              );
-                              break;
-                            case "kesehatan rohani":
-                              icon = (
-                                <PsychologyIcon key={index} sx={{ width: 20 }} />
-                              );
-                              break;
-                            default:
-                              icon = null;
-                          }
-                          return icon;
-                        })}
+                      {job.list_ability.map((ability: string, index: number) => {
+                        let icon = null;
+                        switch (ability) {
+                          case "mobilitas":
+                            icon = <DirectionsWalkIcon key={index} sx={{ width: 20 }} />;
+                            break;
+                          case "penglihatan":
+                            icon = <VisibilityIcon key={index} sx={{ width: 20 }} />;
+                            break;
+                          case "pendengaran":
+                            icon = <HearingIcon key={index} sx={{ width: 20 }} />;
+                            break;
+                          case "berbicara":
+                            icon = <RecordVoiceOverIcon key={index} sx={{ width: 20 }} />;
+                            break;
+                          case "kesehatan rohani":
+                            icon = <PsychologyIcon key={index} sx={{ width: 20 }} />;
+                            break;
+                          default:
+                            break;
+                        }
+                        return icon;
+                      })}
                     </Box>
                   </Box>
                   <Divider className={styles.divider} />
