@@ -19,6 +19,7 @@ export default function ProfileContainer() {
     dob: string;
     keahlian: string;
     sertifikat: string;
+    disabilities: string;
   } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -27,6 +28,10 @@ export default function ProfileContainer() {
       try {
         const profileData = await getUserProfile();
         const userEmail = profileData.data.user?.email || "";
+        const disabilities = profileData.data.disabilities.map((disability: string) => `- ${disability}`).join('\n');
+        const keahlian = profileData.data.job_seeker_skills.map((job_seeker_skills: string) => `- ${job_seeker_skills}`).join('\n');
+        const sertifikat = profileData.data.certificates.map((cert: { name: string }) => `- ${cert.name}`).join('\n');
+
         setUserProfile({ 
           userEmail,
           name: profileData.data.fullname,
@@ -36,8 +41,9 @@ export default function ProfileContainer() {
           gender: profileData.data.gender,
           description: profileData.data.description,
           dob: profileData.data.dob,
-          keahlian : profileData.data.job_seeker_skills,
-          sertifikat: profileData.data.certificates.map((cert: { name: string }) => `${cert.name}`).join(", ")
+          keahlian,
+          sertifikat,
+          disabilities
         });
         setIsLoading(false);
       } catch (error) {
@@ -86,6 +92,7 @@ export default function ProfileContainer() {
                     ringkasanPribadi={userProfile.description}      
                     keahlian={userProfile.keahlian}
                     sertifikat={userProfile.sertifikat}
+                    disabilities={userProfile.disabilities}
                   />
                 )}
               </Box>

@@ -6,7 +6,7 @@ $color3 : #000000;
     padding: 20px;
     margin-bottom: 50px;
 
-    .title{
+    .title {
         font-size: 16px;
         justify-content: right; 
         align-items: right;
@@ -20,24 +20,12 @@ $color3 : #000000;
         padding-bottom: 10px;
     }
 
-    .ringkasanpribadi{
-        width: 90%;
+    .ringkasanpribadi {
+        width: 100%;
         border-radius: 10px;
-        height: auto;
+        height: 200px;
         background-color: $color1;
-        justify-content:left; 
-        align-items: left;
-        display: flex;
         margin-bottom: 15px;
-    }
-
-    .checkbutton{
-        margin-left: 5px;
-    }
-
-    .label{
-        font-size: 10px;
-        color: $color3;
     }
 
     .inputfield {
