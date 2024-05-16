@@ -60,27 +60,28 @@ export default function ProfileContainer() {
     if (!userProfile) return;
   
     const updatedProfile = {
-      fullname: userProfile.name,
-      dob: userProfile.dob,
-      gender: userProfile.gender,
       phone_number: userProfile.phone,
       city: userProfile.city,
-      description: userProfile.description,
-      disability_id: userProfile.disabilities.split('\n').map((d: string) => parseInt(d.replace('- ', ''), 10)),
+      description: userProfile.description
     };
   
     try {
       const response = await updateUserProfile(updatedProfile);
-      console.log(response);
-      alert('Profile updated successfully!');
-      setIsEditing(false);
+  
+      if (response.ok) {
+        console.log(response.data);
+        alert('Profile updated successfully!');
+        setIsEditing(false);
+      } else {
+        console.error("Server error response:", response.statusText);
+        alert('Failed to update profile. Server error.');
+      }
     } catch (error) {
-      console.error("Error updating user profile:", error);
-      alert('Failed to update profile.');
+      console.error("Error updating user profile:", error.message);
+      alert('Failed to update profile. Please try again later.');
     }
   };
-  
-  
+
 
   return (
     <Box>
@@ -146,39 +147,7 @@ export default function ProfileContainer() {
                                       multiline
                                       onChange={(e) => setUserProfile({ ...userProfile, description: e.target.value })}
                                     />
-                                    <Typography className={styles.inputLabel}>
-                                      Keahlian
-                                    </Typography>
-                                    <TextField
-                                      className={styles.inputfield}
-                                      variant="outlined"
-                                      InputProps={{ style: { borderRadius: '10px', height: '200px' } }}
-                                      value={userProfile.keahlian}
-                                      multiline
-                                      onChange={(e) => setUserProfile({ ...userProfile, keahlian: e.target.value })}
-                                    />
-                                    <Typography className={styles.inputLabel}>
-                                      Sertifikat
-                                    </Typography>
-                                    <TextField
-                                      className={styles.inputfield}
-                                      variant="outlined"
-                                      InputProps={{ style: { borderRadius: '10px', height: '200px' } }}
-                                      value={userProfile.sertifikat}
-                                      multiline
-                                      onChange={(e) => setUserProfile({ ...userProfile, sertifikat: e.target.value })}
-                                    />
-                                    <Typography className={styles.inputLabel}>
-                                      Disabilitas
-                                    </Typography>
-                                    <TextField
-                                      className={styles.inputfield}
-                                      variant="outlined"
-                                      InputProps={{ style: { borderRadius: '10px', height: '200px' } }}
-                                      value={userProfile.disabilities}
-                                      multiline
-                                      onChange={(e) => setUserProfile({ ...userProfile, disabilities: e.target.value })}
-                                    />
+
                                 </Box>
                           </Grid>
                         </Box>
