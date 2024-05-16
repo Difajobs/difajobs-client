@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Button, TextField, Typography } from "@mui/material";
 import styles from './ProfileContainer.module.scss';
 import { ProfileBio, ProfilePicture } from "../../components";
 import { NavBar, Footer} from "../../layouts";
 import CircularProgress from '@mui/material/CircularProgress';
-import { getUserProfile } from '../../utils/fetchApi';
+import { getUserProfile, updateUserProfile } from '../../utils/fetchApi';
 
 export default function ProfileContainer() {
   const [userProfile, setUserProfile] = useState<{
@@ -22,6 +22,7 @@ export default function ProfileContainer() {
     disabilities: string;
   } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -55,6 +56,32 @@ export default function ProfileContainer() {
     fetchUserProfile();
   }, []);
 
+  const handleUpdateProfile = async () => {
+    if (!userProfile) return;
+  
+    const updatedProfile = {
+      fullname: userProfile.name,
+      dob: userProfile.dob,
+      gender: userProfile.gender,
+      phone_number: userProfile.phone,
+      city: userProfile.city,
+      description: userProfile.description,
+      disability_id: userProfile.disabilities.split('\n').map((d: string) => parseInt(d.replace('- ', ''), 10)),
+    };
+  
+    try {
+      const response = await updateUserProfile(updatedProfile);
+      console.log(response);
+      alert('Profile updated successfully!');
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Error updating user profile:", error);
+      alert('Failed to update profile.');
+    }
+  };
+  
+  
+
   return (
     <Box>
       <Grid xs={12} md={8}>
@@ -82,24 +109,113 @@ export default function ProfileContainer() {
             </Grid>
             <Grid xs={6} md={4}> 
               <Box className={styles.tentangsaya}>
-                {userProfile && ( 
-                  <ProfileBio
-                    namaLengkap={userProfile.name} 
-                    nomorTelepon={userProfile.phone} 
-                    kotaKabupaten={userProfile.city}
-                    ttl={userProfile.dob}  
-                    jenisKelamin={userProfile.gender}  
-                    ringkasanPribadi={userProfile.description}      
-                    keahlian={userProfile.keahlian}
-                    sertifikat={userProfile.sertifikat}
-                    disabilities={userProfile.disabilities}
-                  />
+                {userProfile && (
+                  isEditing ? (
+                    <Box>
+                        <Box className={styles.tentangsaya2}>
+                          <Grid item xs={12} md={6}>
+                                <Box className={styles.tentangsaya}>
+                                    <Typography className={styles.inputLabel}>
+                                      Nomor Telfon
+                                    </Typography>
+                                    <TextField
+                                      className={styles.inputfield}
+                                      variant="outlined"
+                                      InputProps={{ style: { borderRadius: '10px', height: '42px' } }}
+                                      value={userProfile.phone}
+                                      onChange={(e) => setUserProfile({ ...userProfile, phone: e.target.value })}
+                                    />
+                                    <Typography className={styles.inputLabel}>
+                                      Kota / Kabupaten
+                                    </Typography>
+                                    <TextField
+                                      className={styles.inputfield}
+                                      variant="outlined"
+                                      InputProps={{ style: { borderRadius: '10px', height: '42px' } }}
+                                      value={userProfile.city}
+                                      onChange={(e) => setUserProfile({ ...userProfile, city: e.target.value })}
+                                    />
+                                    <Typography className={styles.inputLabel}>
+                                      Ringkasan Pribadi
+                                    </Typography>
+                                    <TextField
+                                      className={styles.inputfield}
+                                      variant="outlined"
+                                      InputProps={{ style: { borderRadius: '10px', height: '42px' } }}
+                                      value={userProfile.description}
+                                      multiline
+                                      onChange={(e) => setUserProfile({ ...userProfile, description: e.target.value })}
+                                    />
+                                    <Typography className={styles.inputLabel}>
+                                      Keahlian
+                                    </Typography>
+                                    <TextField
+                                      className={styles.inputfield}
+                                      variant="outlined"
+                                      InputProps={{ style: { borderRadius: '10px', height: '200px' } }}
+                                      value={userProfile.keahlian}
+                                      multiline
+                                      onChange={(e) => setUserProfile({ ...userProfile, keahlian: e.target.value })}
+                                    />
+                                    <Typography className={styles.inputLabel}>
+                                      Sertifikat
+                                    </Typography>
+                                    <TextField
+                                      className={styles.inputfield}
+                                      variant="outlined"
+                                      InputProps={{ style: { borderRadius: '10px', height: '200px' } }}
+                                      value={userProfile.sertifikat}
+                                      multiline
+                                      onChange={(e) => setUserProfile({ ...userProfile, sertifikat: e.target.value })}
+                                    />
+                                    <Typography className={styles.inputLabel}>
+                                      Disabilitas
+                                    </Typography>
+                                    <TextField
+                                      className={styles.inputfield}
+                                      variant="outlined"
+                                      InputProps={{ style: { borderRadius: '10px', height: '200px' } }}
+                                      value={userProfile.disabilities}
+                                      multiline
+                                      onChange={(e) => setUserProfile({ ...userProfile, disabilities: e.target.value })}
+                                    />
+                                </Box>
+                          </Grid>
+                        </Box>
+                      <Grid xs={12} md={8}>
+                      <Button onClick={handleUpdateProfile}>Save</Button>
+                      </Grid>
+                    </Box>
+                  ) : (
+                    <ProfileBio
+                      namaLengkap={userProfile.name} 
+                      nomorTelepon={userProfile.phone} 
+                      kotaKabupaten={userProfile.city}
+                      ttl={userProfile.dob}  
+                      jenisKelamin={userProfile.gender}  
+                      ringkasanPribadi={userProfile.description}      
+                      keahlian={userProfile.keahlian}
+                      sertifikat={userProfile.sertifikat}
+                      disabilities={userProfile.disabilities}
+                    />
+                  )
                 )}
               </Box>
             </Grid>
           </Grid>
         )}
       </Box>   
+      <Grid xs={12} md={8}>
+        <Box className={styles.UpdateButton}>
+          <Button
+            className={styles.Button}
+            variant="contained"
+            onClick={() => setIsEditing(!isEditing)}
+          >
+            {isEditing ? 'BACK' : 'Update Profile'}
+          </Button>
+        </Box>
+      </Grid>
       <Grid xs={12} md={8}>
         <Box className={styles.footer}>
           <Footer />
