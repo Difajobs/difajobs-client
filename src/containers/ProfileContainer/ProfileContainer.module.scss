@@ -54,28 +54,26 @@ $color4 : #7D7D7D;
         border-radius: 20px;
       }
 
-        .inputfield {
-          width: 90%;
-          border-radius: 10px;
-          height: 42px;
-          margin-bottom: 27px;
-        }
+      .inputfield {
+        width: 90%;
+        border-radius: 10px;
+        height: 42px;
+        margin-bottom: 27px;
+       }
 
-        .tentangsaya2{
-          max-width: 900px;
-          width: 100%;
-          margin: 0 auto 16px;
-          border-radius: 20px;
-          padding: 20px;
-        }
-
-        .inputLabel {
-          font-size: 16px;
-          padding-bottom: 10px;
-          padding-top: 20px;
+      .tentangsaya2{
+        margin: 0 auto 16px;
+        border-radius: 20px;
+        padding: 20px;
       }
 
-      @media screen and (max-width: "425px") {
+      .inputLabel {
+        font-size: 16px;
+        padding-bottom: 10px;
+        padding-top: 20px;
+      }
+
+      @media screen and (max-width: "295px") {
 
         .footer {
             flex-shrink: 0;
