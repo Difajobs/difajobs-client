@@ -201,13 +201,13 @@ export const getUserProfile = async () => {
         "Authorization": `Bearer ${token}`
       },
     });
-    
+
     const data = await response.json();
 
     if (!response.ok) {
       throw new Error(data.message || response.statusText);
     }
-    
+
     return data;
   } catch (error) {
     throw new Error("An error occurred while fetching user profile.");

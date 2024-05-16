@@ -5,12 +5,15 @@ import styles from "./landingContainer.module.scss";
 import { LandingCard, SkeletonComponent } from "../../components";
 import { useEffect, useState } from "react";
 import { jobList } from "../../utils/fetchApi";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function LandingContainer() {
   const [jobs, setJobs] = useState<[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
   useEffect(() => {
     const fecthJobs = async () => {
       try {
@@ -28,9 +31,16 @@ export default function LandingContainer() {
     };
     fecthJobs();
   }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token); // Update isLoggedIn based on token existence
+  }, [location]);
+
   const handleLogin = () => {
     navigate("/login");
   };
+
   return (
     <Box className={styles.container}>
       <Box className={styles.about}>
@@ -50,13 +60,15 @@ export default function LandingContainer() {
             penyandang cacat/disabilitas untuk menemukan pekerjaan yang sesuai
             dengan kemampuan dan keinginan mereka.
           </Typography>
-          <Button
-            className={styles.buttonLogin}
-            variant="contained"
-            onClick={handleLogin}
-          >
-            Masuk untuk melamar
-          </Button>
+          {!isLoggedIn && (
+            <Button
+              className={styles.buttonLogin}
+              variant="contained"
+              onClick={handleLogin}
+            >
+              Masuk untuk melamar
+            </Button>
+          )}
         </Box>
       </Box>
       <Box className={styles.jobs}>
@@ -67,6 +79,6 @@ export default function LandingContainer() {
           {isLoading ? <SkeletonComponent /> : <LandingCard jobs={jobs} />}
         </Box>
       </Box>
-    </Box>
+    </Box >
   );
 }
