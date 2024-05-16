@@ -1,4 +1,6 @@
 $color1 : #F1F1F1;
+$color2 : #166079;
+$color4 : #7D7D7D;
 
 .avatar{
     max-width: 900px;
@@ -41,6 +43,38 @@ $color1 : #F1F1F1;
         margin-bottom: 100%;
       }
 
+      .UpdateButton{
+        justify-content: center;
+        display: flex;
+        margin-bottom: 50px;
+      }
+
+      .Button{
+        background-color: $color2 !important;
+        border-radius: 20px;
+      }
+
+        .inputfield {
+          width: 90%;
+          border-radius: 10px;
+          height: 42px;
+          margin-bottom: 27px;
+        }
+
+        .tentangsaya2{
+          max-width: 900px;
+          width: 100%;
+          margin: 0 auto 16px;
+          border-radius: 20px;
+          padding: 20px;
+        }
+
+        .inputLabel {
+          font-size: 16px;
+          padding-bottom: 10px;
+          padding-top: 20px;
+      }
+
       @media screen and (max-width: "425px") {
 
         .footer {
@@ -57,5 +91,16 @@ $color1 : #F1F1F1;
             width: 100%;
             margin: 0 auto 160px;
             border-radius: 20px;
+        }
+
+        .UpdateButton{
+          justify-content: center;
+          display: flex;
+          margin-bottom: 50px;
+        }
+  
+        .Button{
+          background-color: $color2 !important;
+          border-radius: 20px;
         }
       }

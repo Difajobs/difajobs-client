@@ -13,6 +13,7 @@ interface ProfileBioProps {
   ringkasanPribadi: string;
   keahlian: string;
   sertifikat: string;
+  disabilities: string;
 }
 
 export default function ProfileBio(props: ProfileBioProps) {
@@ -24,7 +25,8 @@ export default function ProfileBio(props: ProfileBioProps) {
     jenisKelamin, 
     ringkasanPribadi, 
     keahlian,
-    sertifikat
+    sertifikat,
+    disabilities
    } 
     = props;
   
@@ -53,7 +55,8 @@ export default function ProfileBio(props: ProfileBioProps) {
         </Grid>
         <Grid xs={6} md={4}>
           <Box className={styles.disabilitas}>
-           <Disabilitas />
+           <Disabilitas 
+           disabilitas={disabilities}  />
           </Box>
         </Grid>
       </Box>
