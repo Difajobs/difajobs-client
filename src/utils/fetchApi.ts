@@ -214,6 +214,39 @@ export const getUserProfile = async () => {
   }
 };
 
+export const updateUserProfile = async (updatedProfile: {
+  phone?: string;
+  city?: string;
+  description?: string;
+  keahlian?: string;
+  sertifikat?: string;
+  disabilitas?: string;
+}) => {
+  try {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${API_URL}/v1/user/personal`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify(updatedProfile),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Server error response:", errorText);
+      throw new Error(`Error ${response.status}: ${errorText}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error: unknown) {  
+    console.error("Detailed error:", error);
+    throw new Error("An error occurred while updating the user profile.");
+  }
+};
+
 export const JobSeekerApply = async (job_id: number, value: { cover_letter: string }) => {
   try {
     const token = localStorage.getItem('token');
