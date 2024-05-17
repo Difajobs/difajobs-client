@@ -6,3 +6,4 @@ export { default as GoogleRegisterContainer } from "./GoogleRegisterContainer";
 export { default as ProfileContainer } from "./ProfileContainer";
 export { default as VerificationContainer } from "./VerificationContainer";
 export { default as LandingContainer } from "./LandingContainer";
+export { default as JobSeekerApplicationContainer } from "./JobSeekerApplicationContainer";

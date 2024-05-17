@@ -1,0 +1,70 @@
+$color1 : #166079;
+$hover1 : #104152;
+$color2 : #e2e2e2;
+$color3: #9C9C9C;
+$error: #d32f2f;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  padding: 10px;
+
+  .title {
+    font-size: 20px;
+    margin: 15px 0px;
+  }
+
+  .containerItemList {
+    max-width: 600px !important;
+    width: 100% !important;
+
+    .itemList {
+      padding: 15px;
+      margin-bottom: 20px;
+      border: 1px solid rgb(221, 221, 221);
+
+      .companyTitle {
+        color: $color1;
+        font: 16px;
+        font-weight: 550;
+      }
+    }
+
+    .itemStatus {
+      .status {
+        color: white;
+        background-color: $color1;
+        border-radius: 8px;
+        padding: 2px 6px;
+      }
+    }
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0px 24px 0px;
+}
+
+.loadingContainer {
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.errorStatus {
+  background-color: $color1;
+  border-radius: 8px;
+  padding: 15px;
+  color: white !important;
+  font-size: 26px !important;
+
+  @media screen and (max-width: 768px) {
+    font-size: 14px !important;
+  }
+}

@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+// JobDetailModal.tsx
+import React, { useEffect, useState } from "react";
 import { Dialog, DialogTitle, DialogContent, Typography, Box, Button } from "@mui/material";
-import { Job } from "../../utils/type";
 import { formatDistanceToNow } from "date-fns";
 import { id } from "date-fns/locale";
 import styles from './JobDetailModal.module.scss';
 import ApplyJobComponent from "../ApplyJobComponent";
+import { decodeToken } from "../../utils/jwtUtils";
+import { Job } from "../../utils/type";
 
 interface JobDetailModalProps {
   job: Job | null;
   open: boolean;
   onClose: () => void;
+  token: string | null; // Adjusted type to accept null
 }
 
 const formatSalaryToIDR = (amount: number | null): string => {
@@ -28,6 +31,25 @@ const formatSalaryToIDR = (amount: number | null): string => {
 
 const JobDetailModal: React.FC<JobDetailModalProps> = ({ job, open, onClose }) => {
   const [isApplying, setIsApplying] = useState(false);
+  const [userRole, setUserRole] = useState<string | null>(null);
+
+  useEffect(() => {
+    try {
+      const token = localStorage.getItem("token");
+      if (token) {
+        const decodedToken = decodeToken(token);
+        if (decodedToken) {
+          const role = decodedToken.role;
+          setUserRole(role);
+        } else {
+          console.error('Invalid token');
+        }
+      }
+    } catch (error) {
+      console.error('Error decoding token:', error);
+    }
+  }, []);
+
 
   const handleApplyClick = () => {
     setIsApplying(true);
@@ -82,15 +104,18 @@ const JobDetailModal: React.FC<JobDetailModalProps> = ({ job, open, onClose }) =
                 ))}
               </ul>
             </Box>
-            <Button className={styles.button} onClick={handleApplyClick}>
-              Lamar Pekerjaan
-            </Button>
+            {userRole === "job seeker" && (
+              <Button className={styles.button} onClick={handleApplyClick}>
+                Lamar Pekerjaan
+              </Button>
+            )}
             <Button className={styles.button} onClick={handleClose}>
               Kembali
             </Button>
           </DialogContent>
         </>
       )}
+
       <ApplyJobComponent job_id={job?.id || 0} open={isApplying} onClose={handleApplicationClose} />
     </Dialog>
   );
