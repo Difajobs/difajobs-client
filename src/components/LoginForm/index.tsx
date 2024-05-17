@@ -5,7 +5,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import styles from "./LoginForm.module.scss";
 import difaJobsLogo from "../../assets/images/difajobs-dark.webp";
-// import googleLogo from "../../assets/images/google.svg";
 import { login } from "../../utils/fetchApi";
 
 export default function LoginForm() {
@@ -100,11 +99,6 @@ export default function LoginForm() {
               "Masuk"
             )}
           </Button>
-          {/* <Divider className={styles.divider} /> */}
-          {/* <Button className={styles.googleButton}>
-            <img src={googleLogo} alt="Google Logo" className={styles.googleLogo} />
-            <Typography className={styles.googleText}>Masuk dengan Google</Typography>
-          </Button> */}
           <Typography className={styles.registerText}>
             Belum punya akun?{" "}
             <Link to="/register" className={styles.registerLink}>

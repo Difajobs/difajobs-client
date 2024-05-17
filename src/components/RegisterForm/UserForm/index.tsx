@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import styles from "../RegisterForm.module.scss";
-// import googleLogo from "../../../assets/images/google.svg";
 import { ChangeEvent, useState } from "react";
 
 interface UserFormProps {
@@ -156,17 +155,6 @@ export default function UserForm({
           >
             Selanjutnya
           </Button>
-          {/* <Divider className={styles.divider} /> */}
-          {/* <Button className={styles.googleButton}>
-            <img
-              src={googleLogo}
-              alt="Google Logo"
-              className={styles.googleLogo}
-            />
-            <Typography className={styles.googleText}>
-              Daftar dengan Google
-            </Typography>
-          </Button> */}
           <Typography className={styles.loginText}>
             Sudah punya akun?{" "}
             <Link to="/login" className={styles.registerLink}>
