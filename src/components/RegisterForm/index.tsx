@@ -156,16 +156,13 @@ export default function RegisterForm() {
       };
       console.log(value);
       await registerJobseeker(value);
-      alert("Register Berhasil, mengalikan ke halaman login");
+      alert("Register Berhasil, mengalikan ke halaman verifikasi email");
       setTimeout(() => {
-        navigate("/login", { replace: true });
+        navigate("/verification", { replace: true });
       }, 2000);
     } catch (error) {
       console.error(error);
-      alert("Register Berhasil, mengalikan ke halaman login");
-      setTimeout(() => {
-        navigate("/login", { replace: true });
-      }, 2000);
+      alert("Register Gagal, coba lagi");
     }
   };
 
@@ -183,9 +180,9 @@ export default function RegisterForm() {
       };
       const response = await registerRecruiter(value);
       if (response?.ok) {
-        alert("Register Berhasil, mengalikan ke Login Page");
+        alert("Register Berhasil, mengalikan ke halaman verifikasi email");
         setTimeout(() => {
-          navigate("/login", { replace: true });
+          navigate("/verification", { replace: true });
         }, 2000);
       }
     } catch (error) {
