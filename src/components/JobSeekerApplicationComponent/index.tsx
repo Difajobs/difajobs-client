@@ -19,7 +19,7 @@ export default function JobSeekerApplicationComponent() {
         setLoading(false);
       } catch (error) {
         console.error("Failed to fetch job seeker applications:", error);
-        setError("Failed to fetch job seeker applications. Please refresh the page.");
+        setError("Lamaran pekerjaan tidak ditemukan, silahkan melamar.");
         setLoading(false);
       }
     };
@@ -56,7 +56,7 @@ export default function JobSeekerApplicationComponent() {
   }
 
   if (error) {
-    return <Typography variant="h6" color="error">{error}</Typography>;
+    return <Typography className={styles.errorStatus}>{error}</Typography>;
   }
 
   return (

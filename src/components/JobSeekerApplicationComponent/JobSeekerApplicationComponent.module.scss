@@ -56,3 +56,12 @@ $error: #d32f2f;
   justify-content: center;
   align-items: center;
 }
+
+.errorStatus {
+  background-color: $color1;
+  border-radius: 8px;
+  margin: 60px;
+  padding: 15px;
+  color: white !important;
+  font-size: 26px !important;
+}

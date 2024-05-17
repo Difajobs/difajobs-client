@@ -163,6 +163,40 @@ const NavBar: React.FC<NavBarProps> = () => {
                       </Typography>
                     </ListItem>
                   )}
+                  {isLoggedIn && userRole === "job seeker" && (
+                    <ListItem
+                      className={styles.listItem}
+                      onClick={() => mobileNavigateTo("job-seeker-application")}
+                    >
+                      <Typography className={styles.listItemText}>
+                        Lamaran Pekerjaan{" "}
+                        {activeSection === "job-seeker-application" && (
+                          <span className={styles.arrowIcon}>
+                            {" "}
+                            <ArrowLeftIcon />
+                            Anda disini{" "}
+                          </span>
+                        )}
+                      </Typography>
+                    </ListItem>
+                  )}
+                  {isLoggedIn && userRole === "recruiter" && (
+                    <ListItem
+                      className={styles.listItem}
+                      onClick={() => mobileNavigateTo("job-seeker-list")}
+                    >
+                      <Typography className={styles.listItemText}>
+                        Daftar Pelamar{" "}
+                        {activeSection === "job-seeker-list" && (
+                          <span className={styles.arrowIcon}>
+                            {" "}
+                            <ArrowLeftIcon />
+                            Anda disini{" "}
+                          </span>
+                        )}
+                      </Typography>
+                    </ListItem>
+                  )}
                   {isLoggedIn ? (
                     <>
                       <ListItem className={styles.listItem} onClick={() => mobileNavigateTo('profile')}>
