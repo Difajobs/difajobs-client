@@ -20,17 +20,19 @@ import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import difaJobsLogo from "../../assets/images/difajobs-light.webp";
 import LogoutButton from "../../components/LogoutButton";
 import styles from "./NavigationBar.module.scss";
+import { decodeToken } from "../../utils/jwtUtils";
 
 interface NavBarProps {
   // 
 }
 
 const NavBar: React.FC<NavBarProps> = () => {
-  const small = useMediaQuery("(max-width:425px)");
-  const full = useMediaQuery("(min-width:426px)");
+  const small = useMediaQuery("(max-width:768px)");
+  const full = useMediaQuery("(min-width:769px)");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userRole, setUserRole] = useState<string | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -42,8 +44,15 @@ const NavBar: React.FC<NavBarProps> = () => {
     const token = localStorage.getItem("token");
     if (token) {
       setIsLoggedIn(true);
+      // Decode the token to get user's role
+      const decodedToken = decodeToken(token);
+      if (decodedToken) {
+        const role = decodedToken.role;
+        setUserRole(role);
+      }
     } else {
       setIsLoggedIn(false);
+      setUserRole(null); // Reset user's role if not logged in
     }
   }, [location]);
 
@@ -241,6 +250,22 @@ const NavBar: React.FC<NavBarProps> = () => {
                     onClick={() => navigateTo("dashboard")}
                   >
                     Lowongan Pekerjaan
+                  </Typography>
+                )}
+                {isLoggedIn && userRole === "job seeker" && (
+                  <Typography
+                    className={styles.navbarText}
+                    onClick={() => navigateTo("job-seeker-application")}
+                  >
+                    Lamaran Pekerjaan
+                  </Typography>
+                )}
+                {isLoggedIn && userRole === "recruiter" && (
+                  <Typography
+                    className={styles.navbarText}
+                    onClick={() => navigateTo("job-seeker-list")}
+                  >
+                    Daftar Pelamar
                   </Typography>
                 )}
                 <Typography
