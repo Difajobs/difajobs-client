@@ -88,6 +88,7 @@ export default function GoogleRegisterForm() {
       }),
     });
     const data = await response.json();
+    console.log(data);
   };
 
   function getStepContent(step: number) {
