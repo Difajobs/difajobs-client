@@ -61,7 +61,7 @@ export default function JobSeekerApplicationComponent() {
 
   return (
     <Box className={styles.container}>
-      <Typography className={styles.title}>
+      <Typography className={styles.title}> 
         Daftar Lamaran Pekerjaan
       </Typography>
       {applications.length === 0 ? (

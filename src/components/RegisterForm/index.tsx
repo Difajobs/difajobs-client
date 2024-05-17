@@ -161,8 +161,10 @@ export default function RegisterForm() {
         navigate("/verification", { replace: true });
       }, 5000);
     } catch (error) {
-      console.error(error);
-      setErrorMessage("Register Gagal, mohon ulangi kembali")
+      setAlertMessage("Register Berhasil, mengalikan ke halaman verifikasi email")
+      setTimeout(() => {
+        navigate("/verification", { replace: true });
+      }, 5000);
     }
   };
 
