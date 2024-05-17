@@ -37,10 +37,10 @@ export default function Verify() {
     <Box className={styles.container}>
       <img src={DifaJobsLogo} alt="Difa Jobs Logo" className={styles.logo} />
       <Typography className={styles.heading}>
-        Verify your email address
+        Verifikasi Email Anda
       </Typography>
       <Typography className={styles.text}>
-        Please confirm that you want to use this as your Difa Jobs account email address. Once it's done you will be able to start login!
+        Satu langkah lagi dan akun anda dapat segera digunakan untuk login di website Difa Jobs.
       </Typography>
       <TextField
         className={styles.inputEmail}
@@ -57,10 +57,10 @@ export default function Verify() {
         }}
       />
       <Button className={styles.button} onClick={handleVerifyClick}>
-        {loading ? <CircularProgress size={24} /> : "Verify my email"}
+        {loading ? <CircularProgress size={24} /> : "Kirim verifikasi email"}
       </Button>
       <Link to={"/login"} className={styles.link}>
-        Return to site
+        Kembali ke website
       </Link>
     </Box>
   )
