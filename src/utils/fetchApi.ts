@@ -215,12 +215,9 @@ export const getUserProfile = async () => {
 };
 
 export const updateUserProfile = async (updatedProfile: {
-  phone?: string;
+  phone_number?: string;
   city?: string;
   description?: string;
-  keahlian?: string;
-  sertifikat?: string;
-  disabilitas?: string;
 }) => {
   try {
     const token = localStorage.getItem('token');
@@ -233,14 +230,9 @@ export const updateUserProfile = async (updatedProfile: {
       body: JSON.stringify(updatedProfile),
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Server error response:", errorText);
-      throw new Error(`Error ${response.status}: ${errorText}`);
-    }
-
     const data = await response.json();
-    return data;
+
+    return { ok: response.ok, data };
   } catch (error: unknown) {  
     console.error("Detailed error:", error);
     throw new Error("An error occurred while updating the user profile.");
