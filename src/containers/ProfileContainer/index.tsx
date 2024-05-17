@@ -62,7 +62,7 @@ export default function ProfileContainer() {
     const updatedProfile = {
       phone_number: userProfile.phone,
       city: userProfile.city,
-      description: userProfile.description
+      description: userProfile.description,
     };
   
     try {
@@ -73,16 +73,21 @@ export default function ProfileContainer() {
         alert('Profile updated successfully!');
         setIsEditing(false);
       } else {
-        console.error("Server error response:", response.statusText);
+        console.error("Server error response:", response.data);
         alert('Failed to update profile. Server error.');
       }
     } catch (error) {
-      console.error("Error updating user profile:", error.message);
-      alert('Failed to update profile. Please try again later.');
+      if (error instanceof Error) {
+        console.error("Error updating user profile:", error.message);
+        alert('Failed to update profile. Please try again later.');
+      } else {
+        console.error("Unknown error:", error);
+        alert('An unknown error occurred. Please try again later.');
+      }
     }
   };
-
-
+  
+  
   return (
     <Box>
       <Grid xs={12} md={8}>
@@ -192,4 +197,4 @@ export default function ProfileContainer() {
       </Grid>
     </Box>
   );
-}
+  }
