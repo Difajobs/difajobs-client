@@ -29,22 +29,27 @@ const formatSalaryToIDR = (amount: number | null): string => {
   return formatter.format(amount);
 };
 
-const JobDetailModal: React.FC<JobDetailModalProps> = ({ token, job, open, onClose }) => {
+const JobDetailModal: React.FC<JobDetailModalProps> = ({ job, open, onClose }) => {
   const [isApplying, setIsApplying] = useState(false);
   const [userRole, setUserRole] = useState<string | null>(null);
 
   useEffect(() => {
-    if (token) {
-      const decodedToken = decodeToken(token);
-      if (decodedToken) {
-        const role = decodedToken.role;
-        setUserRole(role);
-      } else {
-        // Invalid token feedback
-        console.error('Invalid token');
+    try {
+      const token = localStorage.getItem("token");
+      if (token) {
+        const decodedToken = decodeToken(token);
+        if (decodedToken) {
+          const role = decodedToken.role;
+          setUserRole(role);
+        } else {
+          console.error('Invalid token');
+        }
       }
+    } catch (error) {
+      console.error('Error decoding token:', error);
     }
-  }, [token]);
+  }, []);
+
 
   const handleApplyClick = () => {
     setIsApplying(true);
