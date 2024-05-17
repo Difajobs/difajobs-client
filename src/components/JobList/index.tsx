@@ -136,7 +136,7 @@ const JobListComponent: React.FC<JobListComponentProps> = ({ jobs }) => {
             color="primary"
           />
           {/* Job Detail Modal */}
-          <JobDetailModal job={selectedJob} open={selectedJob !== null} onClose={handleCloseModal} />
+          <JobDetailModal job={selectedJob} open={selectedJob !== null} onClose={handleCloseModal} token={null} />
         </Box>
       )}
     </>

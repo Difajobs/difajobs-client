@@ -9,3 +9,4 @@ export { default as ProfileDashboard } from "./ProfileDashboard";
 export { default as Joblist } from "./JobList";
 export { default as LandingCard } from "./LandingCard";
 export { default as SkeletonComponent } from "./Skeleton";
+export { default as ApplyJobComponent } from "./ApplyJobComponent";
