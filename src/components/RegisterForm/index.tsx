@@ -1,17 +1,15 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import JobseekerForm from "./JobseekerForm";
 import CompanyForm from "./CompanyForm";
 import UserForm from "./UserForm";
 import DisabilityForm from "./DisabilityForm";
-import { Box, SelectChangeEvent } from "@mui/material";
+import { Box, SelectChangeEvent, Alert, Stack } from "@mui/material";
 import {
   registerRecruiter,
   registerJobseeker,
   getDisability,
 } from "../../utils/fetchApi";
 import { useNavigate } from "react-router-dom";
-
-// const steps = ["User Form", "Jobseeker Form", "Disability Form", "Company Form"];
 
 export default function RegisterForm() {
   const [activeStep, setActiveStep] = useState(0);
@@ -29,9 +27,20 @@ export default function RegisterForm() {
   const [disabilitas, setDisabilitas] = useState<number[]>([]);
   const [disabilitasList, setDisabilitasList] = useState<number[]>([]);
   const [disabilityData, setDisabilityData] = useState([]);
+  const [alertMessage, setAlertMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const navigate = useNavigate();
+  useEffect(() => {
+    if (alertMessage || errorMessage) {
+      const timer = setTimeout(() => {
+        setAlertMessage(null);
+        setErrorMessage(null);
+      }, 5000);
 
+      return () => clearTimeout(timer);
+    }
+  }, [alertMessage, errorMessage]);
   const handleNext = () => {
     if (role == "job seeker") {
       if (activeStep == 2) {
@@ -55,14 +64,6 @@ export default function RegisterForm() {
       setActiveStep(activeStep - 1);
     }
   };
-
-  // const handleSelanjutnya = () => {
-  //   setActiveStep(activeStep + 1);
-  // };
-
-  // const handleBack2 = () => {
-  //   setActiveStep(activeStep - 1);
-  // };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -154,15 +155,14 @@ export default function RegisterForm() {
         disability_id: disabilitasList,
         description: deskripsiList,
       };
-      console.log(value);
       await registerJobseeker(value);
-      alert("Register Berhasil, mengalikan ke halaman verifikasi email");
+      setAlertMessage("Register Berhasil, mengalikan ke halaman verifikasi email")
       setTimeout(() => {
         navigate("/verification", { replace: true });
-      }, 2000);
+      }, 5000);
     } catch (error) {
       console.error(error);
-      alert("Register Gagal, coba lagi");
+      setErrorMessage("Register Gagal, mohon ulangi kembali")
     }
   };
 
@@ -180,14 +180,14 @@ export default function RegisterForm() {
       };
       const response = await registerRecruiter(value);
       if (response?.ok) {
-        alert("Register Berhasil, mengalikan ke halaman verifikasi email");
+        setAlertMessage("Register Berhasil, mengalikan ke halaman verifikasi email")
         setTimeout(() => {
           navigate("/verification", { replace: true });
-        }, 2000);
+        }, 5000);
       }
     } catch (error) {
       console.error(error);
-      alert("Register Gagal, coba lagi");
+      setErrorMessage("Register Gagal, mohon ulangi kembali")
     }
   };
 
@@ -253,10 +253,19 @@ export default function RegisterForm() {
     <>
       {getStepContent(activeStep)}
       <Box sx={{ display: "flex" }}>
-        {/* temporary next and back button */}
-        {/* <Button onClick={handleSelanjutnya}>Selanjutnya</Button>
-        <Button onClick={handleBack2}>Kembali</Button> */}
       </Box>
+      <Stack>
+        {alertMessage && (
+          <Alert variant="outlined" severity="success">
+            {alertMessage}
+          </Alert>
+        )}
+        {errorMessage && (
+          <Alert variant="outlined" severity="error">
+            {errorMessage}
+          </Alert>
+        )}
+      </Stack>
     </>
   );
 }
