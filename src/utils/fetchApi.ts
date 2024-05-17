@@ -239,23 +239,26 @@ export const JobSeekerApply = async (job_id: number, value: { cover_letter: stri
   }
 };
 
+export const getJobSeekerApplication = async () => {
+  try {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${API_URL}/v1/job-application/by-jobseeker/all`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+    });
 
+    if (!response.ok) {
+      const data = await response.json();
+      throw new Error(data.message || 'Failed to retrieve job applications.');
+    }
 
-// export const getJobSeekerApplication = async () => {
-//   try {
-//     const response = await fetch(API_URL + "/v1/job-application/by-jobseeker/all", {
-//       method: "GET",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     });
-//     const data = await response.json();
-
-//     if (!response.ok) {
-//       throw new Error(data.message || response.statusText);
-//     }
-//     return data;
-//   } catch (error) {
-//     throw new Error("An error occurred while verification.");
-//   }
-// };
+    const responseData = await response.json(); // Assuming the whole response is needed
+    return responseData; // Assuming the whole response is needed
+  } catch (error) {
+    console.error("An error occurred while fetching job applications:", error);
+    throw new Error("Failed to fetch job seeker applications.");
+  }
+};
