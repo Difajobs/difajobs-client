@@ -43,6 +43,9 @@ npm install
 
 4. Open your browser and navigate to http://localhost:5173 to view the application.
 
+## Deployment Link
+Front End: https://difajobs.web.app/
+
 ## Contributing
 Contributions to the Difa Jobs Client project are welcome! If you find any bugs, issues, or have feature requests, please open an issue on this repository. Additionally, if you'd like to contribute code, feel free to fork the repository and submit a pull request with your changes.
 
